@@ -82,6 +82,9 @@
             }
 
             for(var i = 0; i < jsonitem_u.length; i++){
+                if (jsonitem_l[i].id.videoId == jsonitem_u[i].id.videoId) {
+                    continue;
+                }
                 var ID = jsonitem_u[i].id.videoId;
                 $("#youtubeList_u").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
             }
