@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>KON-LAYLA</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+    </head>
+
+    <body>
+        <div class="hwrapper">
+            <div class="header">
+            <center>
+              <h1 class="header_title">こんレイラ〜！</h1>
+            </center>
+            </div>
+        </div>
+        <div class="titleScripts">
+            <h1>ライブリスト</h1>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(function() {
+            const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=AIzaSyDHHcO1rMsZJXcc5t-oJwlGGHBeNs3nf7U';
+
+            const promiseFunc = (value,value2) => {
+            return new Promise((resolve, reject) => {
+                console.log(value + value2);
+                $.ajax({
+                type: 'GET',
+                url: value + value2,
+                datatype: 'json',
+                success: function(json){
+                    resolve(json.items);
+                },
+                error: function(){
+                    reject();
+                }
+                });
+            });
+            };
+
+            // 非同期関数
+            async function asyncFunc() {
+            // 並行して処理が実行され、全ての処理が終わるまで待機
+            const values_upcoming = await Promise.all([
+                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=upcoming'),
+            ]);
+
+            const values_live = await Promise.all([
+                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=live'),
+            ]);
+
+            const values_completed = await Promise.all([
+                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
+            ]);
+
+            const jsonitem_u = values_upcoming.flat();
+            const jsonitem_l = values_live.flat();
+            const jsonitem_c = values_completed.flat();
+            if (jsonitem_l.length < 1) {
+                document.getElementById("youtubeList_l").style.visibility = "hidden";
+            } else {
+                $("#youtubeList_u").append('<h2>配信中🎥</h2>');
+                for(var i = 0; i < jsonitem_l.length; i++){
+                var ID = jsonitem_l[i].id.videoId;
+                $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+            }
+            }
+
+            for(var i = 0; i < jsonitem_u.length; i++){
+                var ID = jsonitem_u[i].id.videoId;
+                $("#youtubeList_u").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+            }
+
+            for(var i = 0; i < jsonitem_c.length; i++){
+                var ID = jsonitem_c[i].id.videoId;
+                $("#youtubeList_c").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+            }
+            }
+
+            asyncFunc();
+        });
+
+        </script>
+        <div class="contents-wapper2"> 
+            <div id="youtubeList_l">
+            </div>
+            <div id="youtubeList_u">
+                <h2>配信予定</h2>
+            </div>
+            <div id="youtubeList_c">
+                <h2>過去の配信</h2>
+            </div>
+        </div>
+        
+    </body>
+</html>
