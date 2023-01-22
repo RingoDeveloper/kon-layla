@@ -74,7 +74,7 @@
             if (jsonitem_l.length < 1) {
                 document.getElementById("youtubeList_l").style.visibility = "hidden";
             } else {
-                $("#youtubeList_u").append('<h2>配信中🎥</h2>');
+                $("#youtubeList_l").append('<h2>配信中🎥</h2>');
                 for(var i = 0; i < jsonitem_l.length; i++){
                 var ID = jsonitem_l[i].id.videoId;
                 $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
