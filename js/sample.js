@@ -19,7 +19,7 @@ function convert() {
 
 function check_localStorage() {
     let result = localStorage.getItem('showed-result');
-    console.log(result);
+    //console.log(result);
     if (result == 'true') {
         setpage_2();
     }
