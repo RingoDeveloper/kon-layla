@@ -33,7 +33,8 @@
         <div class="button" id="button_sch">
             <a onclick="show_sch()">スケジュールはこちら</a>
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script type="text/javascript">
         const K_LIST = [
             'AIzaSyAqE2ofLvBx0i8EVlPfbWVef14K_mfM5kE',
@@ -71,6 +72,12 @@
                 },
                 error: function(){
                     reject();
+                    Swal.fire({
+                        type: "warning",
+                        title: "読み込みエラー",
+                        html: "ページの読み込みに失敗しました。<br>恐れ入りますが再読み込みをお試しください。<br><br>解決しない場合はお手数ですが、下記リンクよりお問合せください。",
+                        footer: '<a href="https://twitter.com/_ringodev_/status/1617468992071008258" target="_blank">エラーを報告する</a>',
+                    });
                 }
                 });
             });
@@ -94,6 +101,7 @@
             const jsonitem_u = values_upcoming.flat();
             const jsonitem_l = values_live.flat();
             const jsonitem_c = values_completed.flat();
+            
             if (jsonitem_l.length < 1) {
                 document.getElementById("youtubeList_l").style.visibility = "hidden";
             } else {
