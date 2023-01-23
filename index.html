@@ -11,15 +11,17 @@
         <div class="hwrapper">
             <div class="header">
             <center>
-              <h1 class="header_title">こんレイラ〜！</h1>
+              <h1 class="header_title">Layla Magnolia</h1>
             </center>
             </div>
         </div>
         <div class="link">
-            <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
         </div>
+        <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <div class="titleScripts">
-            <h1>LIVE LIST</h1>
+            <h1>LIVE STREAM LIST</h1>
         </div>
         
         
@@ -29,7 +31,7 @@
             <li><a href="https://www.youtube.com"></a></li>
         </ul-->
         <div class="button" id="button_sch">
-            <a onclick="show_sch()">配信スケジュール↗️</a>
+            <a onclick="show_sch()">スケジュールはこちら</a>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script type="text/javascript">
@@ -47,10 +49,10 @@
             return Math.floor(Math.random() * max);
         }
         $(function() {
-            //const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=AIzaSyAYsMs4n8gIpWGZChEZq2xp-dnNo-L1gsY'; //debug
+            const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=AIzaSyC_tpHp8ICWcgeyDKJx06TjsT-4b4--l7A'; //debug
             /* 本番環境 */
             let keyindex = getRandomInt();
-            const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + K_LIST[keyindex];
+            //const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + K_LIST[keyindex];
             //console.log(keyindex);
             //console.log(base_youtube_url);
 
