@@ -23,7 +23,7 @@ body {
 
 .header_title{
     color: antiquewhite;
-    font-family: "HuiFontP109";
+    font-family: 'HuiFontP109', sans-serif;
 }
 .hwrapper{
    width: 100%;
