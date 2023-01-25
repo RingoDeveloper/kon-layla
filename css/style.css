@@ -9,16 +9,14 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
-@font-face {
-    font-family: 'HuiFontP109';
-    src:url('/fonts/public/HuiFont/HuiFontP109.eot');
-    src:url('/fonts/public/HuiFont/HuiFontP109.eot?#iefix') format('embedded-opentype'), 
-    url('/fonts/public/HuiFont/HuiFontP109.woff')format('woff'), 
-    url('/fonts/public/HuiFont/HuiFontP109.ttf')format('truetype'), 
-    url('/fonts/public/HuiFont/HuiFontP109.svg#HuiFontP109') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+@font-face{
+    font-family:'HuiFontP109';
+    src:url('https://dl.dropboxusercontent.com/s/6snqvg654tirsyv/HuiFontP109.eot');
+    src:url('https://dl.dropboxusercontent.com/s/6snqvg654tirsyv/HuiFontP109.eot?#iefix') format('embedded-opentype'),
+    url('https://dl.dropboxusercontent.com/s/7pscemjdvt0wyiq/HuiFontP109.woff') format('woff'),
+    url('https://dl.dropboxusercontent.com/s/0w9uuopxrns8ehi/HuiFontP109.ttf') format('truetype'),
+    url('https://dl.dropboxusercontent.com/s/xnnsbxtz8o6d98i/HuiFontP109.svg#HuiFontP109') format('svg');
+    }
 
 
 .header_title{
