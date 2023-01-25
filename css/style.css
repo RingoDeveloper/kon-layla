@@ -9,10 +9,21 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
+@font-face {
+    font-family: 'HuiFontP109';
+    src:url('/fonts/public/HuiFont/HuiFontP109.eot');
+    src:url('/fonts/public/HuiFont/HuiFontP109.eot?#iefix') format('embedded-opentype'), 
+    url('/fonts/public/HuiFont/HuiFontP109.woff')format('woff'), 
+    url('/fonts/public/HuiFont/HuiFontP109.ttf')format('truetype'), 
+    url('/fonts/public/HuiFont/HuiFontP109.svg#HuiFontP109') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 .header_title{
     color: antiquewhite;
-    font-family: 'Caveat', cursive;
+    font-family: "HuiFontP109";
 }
 .hwrapper{
    width: 100%;
