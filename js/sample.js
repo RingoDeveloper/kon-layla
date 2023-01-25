@@ -1,4 +1,4 @@
-function convert() {
+/*function convert() {
     let srcElm = document.getElementById("sorce");
     let time_hElm = document.getElementById("timecode_h");
     let time_mElm = document.getElementById("timecode_m");
@@ -62,7 +62,7 @@ function show_result() {
         block: "center"
     });
     localStorage.setItem('showed-result', 'true');
-}
+}*/
 
 function show_sch() {
     window.open("https://www.youtube.com/@LaylaMagnolia/community");
