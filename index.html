@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="icon" type="image/x-icon" href="./layla_twitter_icon.jpg">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJHHNYD65"></script>
@@ -21,7 +22,8 @@
         <div class="hwrapper">
             <div class="header">
             <center>
-              <h1 class="header_title">[非公式]レイラ・マグノリア 配信スケジュール</h1>
+              <p class="header_title">レイラ・マグノリア</p>
+              <p class="header_title">配信スケジュール [非公式]</p>
             </center>
             </div>
         </div>
@@ -31,7 +33,7 @@
         <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <div class="titleScripts">
-            <h1>LIVE STREAM LIST</h1>
+            <h1>こんレイラ！</h1>
         </div>
         
         
@@ -47,17 +49,18 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script type="text/javascript">
         const K_LIST = [
-            'AIzaSyAqE2ofLvBx0i8EVlPfbWVef14K_mfM5kE', //key-001
+            'AIzaSyAqE2ofLvBx0i8EVlPfbWVef14K_mfM5kE', //1
+            'AIzaSyDoqPOXaPjbH0MUhxA-mcNTXE42iGSLbXQ', //2
         ]; //キーを編集
         const max = K_LIST.length;
         function getRandomInt() {
             return Math.floor(Math.random() * max);
         }
         $(function() {
-            //const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=AIzaSyC_tpHp8ICWcgeyDKJx06TjsT-4b4--l7A'; //debug
+            //const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=AIzaSyAYsMs4n8gIpWGZChEZq2xp-dnNo-L1gsY'; //debug
             /* 本番環境 */
             let keyindex = getRandomInt();
-            const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + K_LIST[keyindex];
+            //const base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + K_LIST[keyindex];
             //console.log(keyindex);
             //console.log(base_youtube_url);
 
@@ -73,6 +76,7 @@
                 },
                 error: function(){
                     reject();
+                    
                     Swal.fire({
                         type: "warning",
                         title: "読み込みエラー",
@@ -106,7 +110,7 @@
             if (jsonitem_l.length < 1) {
                 document.getElementById("youtubeList_l").style.visibility = "hidden";
             } else {
-                $("#youtubeList_l").append('<h2>配信中🎥</h2>');
+                $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
                 for(var i = 0; i < jsonitem_l.length; i++){
                 var ID = jsonitem_l[i].id.videoId;
                 $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
@@ -114,7 +118,7 @@
             }
 
 
-            loop: for(var i = 0; i < jsonitem_u.length; i++){
+            loop: for(var i = jsonitem_u.length-1; i >= 0; i--){
                 if ((jsonitem_l.length != 0) && (jsonitem_l[0].id.videoId == jsonitem_u[i].id.videoId)) {
                     continue;
                 }
@@ -142,13 +146,13 @@
             <div id="youtubeList_l">
             </div>
             <div id="youtubeList_u">
-                <h2>配信予定</h2>
+                <h2 class="statetext">配信予定</h2>
             </div>
             <div id="youtubeList_c">
-                <h2>過去の配信</h2>
+                <h2 class="statetext">過去の配信</h2>
             </div>
         </div>
-        <p class="cc"><a href="https://twitter.com/_ringodev_">Copyright ©️ 2023 りんごでべろっぱ All Rights Reserved.</p>
+        <p class="cc"><a href="https://twitter.com/_ringodev_">&copy; 2023 りんごでべろっぱ All Rights Reserved.</p>
         <script src="./js/sample.js"></script>
     </body>
 </html>
