@@ -64,6 +64,57 @@ function show_result() {
     localStorage.setItem('showed-result', 'true');
 }*/
 
+function getRandomInt() {
+    return Math.floor(Math.random() * max);
+}
+
+function checkDevMode() {
+    let result = localStorage.getItem('dev_mode');
+
+    if (result == "true") { /* devmode */
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + Y_API_KEY_D1;
+        console.log("developer");
+    } else {
+        /* 本番環境 */
+        let ringo = document.getElementById("ringo");
+        ringo.style.display = "none";
+        let keyindex = getRandomInt();
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + K_LIST[keyindex];
+        console.log("user");
+        //console.log(keyindex);
+        //console.log(base_youtube_url);
+    }
+}
+let base_youtube_url;
+checkDevMode();
+let cnt = 0;
+
+function secBtn() {
+    cnt++;
+    console.log(cnt);
+    if (cnt >= 10) {
+        enable_dev_mode();
+        window.location.reload();
+    }
+}
+
+function ringoBtn() {
+    disable_dev_mode();
+    window.location.reload();
+}
+
 function show_sch() {
     window.open("https://www.youtube.com/@LaylaMagnolia/community");
+}
+
+function enable_dev_mode() {
+    pass_key = config.dev_key;
+    input_pass = window.prompt("Developerモードを有効にします。\nパスキーを入力してください", "");
+    if (input_pass == pass_key) {
+        localStorage.setItem('dev_mode', 'true');
+    }
+}
+
+function disable_dev_mode() {
+    localStorage.setItem('dev_mode', 'false');
 }
