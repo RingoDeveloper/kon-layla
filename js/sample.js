@@ -112,6 +112,8 @@ function enable_dev_mode() {
     input_pass = window.prompt("Developerモードを有効にします。\nパスキーを入力してください", "");
     if (input_pass == pass_key) {
         localStorage.setItem('dev_mode', 'true');
+    } else {
+        window.alert('パスキーが間違っています。')
     }
 }
 
