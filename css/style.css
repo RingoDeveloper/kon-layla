@@ -36,17 +36,29 @@ body {
   padding: 1px;
 }
 .titleScripts {
+    display: flex;
+    width: 100%;
+    justify-content: center;
     text-align:center;
+    align-items: center;
     font-size: xx-large;
 }
 .contents-wapper {
     font-family: sans-serif;
 }
 
+.footer
 
 .cc {
     font-family: sans-serif;
     margin-left: 10px;
+    float: left;
+}
+
+.version {
+    margin: 10px;
+    font-family: sans-serif;
+    float: right;
 }
 
 .no01 {
@@ -125,13 +137,16 @@ body {
     font-size: xx-large;
 }
 
+.link {
+    float: left;
+}
+
 .twitter-follow-button {
     margin: 10px;
     margin-bottom: 3px;
     text-align: right;
     font-size: large;
 }
-
 
 .twitter-hashtag-button {
     margin-left: 10px;
@@ -141,8 +156,9 @@ body {
 }
 
 #ringo {
-    margin-left: 10px;
-    margin-top: 3px;
+    display: none;
+    margin: 10px;
+    float: right;
 }
 
 iframe {
@@ -152,8 +168,67 @@ iframe {
 }
 
 
+.switch_label {
+    display: none;
+    margin: 10px;
+    align-items: center;
+}
+  
+input[type='checkbox'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+  
+.base {
+    width: 56px;
+    border-radius: 15px;
+    height: 32px;
+    background-color: #ddd;
+}
+  
+.title {
+    margin-left: 4px;
+}
 
-/* ここから上に812px以上用（タブレット・パソコン） */
+
+
+.circle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: white;
+    transition: 0.5s;
+}
+  
+input:checked ~ .base {
+    background-color: rgb(219, 234, 254);
+    transition: 0.5s;
+}
+
+input:checked ~ .circle {
+    transform: translateX(100%);
+    background-color: blue;
+}
+  
+
+.switch {
+    position: relative;
+}
+#switch {
+    display: none;
+}
+
+.title_blkapi {
+    margin-right: 10px;
+}
+
+
+
+/* ここから上に812px以上用（タブレット・パソコン）以降に特段設定しなければ上が優先 */
 @media screen and (max-width: 812px) {
 /* ここに812px以下用（タブレット・スマートフォン） */
     .header_title{
@@ -195,16 +270,16 @@ iframe {
     .cc {
         font-size: small;
     }
+    .version {
+        font-size: small;
+    }
+    
     .statetext {
         font-size: large;
     }
     iframe {
         width: 320px;
         height: 180px;
-    }
-    #ringo {
-        width: 20px;
-        height: 20px;
     }
 }
 

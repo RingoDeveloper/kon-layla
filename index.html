@@ -28,16 +28,15 @@
             </div>
         </div>
         <div class="link">
-            <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+            <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
+            <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
         </div>
-        <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a><br>
         <img id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
+        <br>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <div class="titleScripts">
             <h1>こんレイラ！</h1>
         </div>
-        
-        
         <!--ul class="follow-me">
             <li><a href="https://twitter.com"></a></li>
             <li><a href="https://www.youtube.com"></a></li>
@@ -45,6 +44,16 @@
         <div class="button" id="button_sch">
             <a onclick="show_sch()">スケジュールはこちら</a>
         </div>
+
+        <label for="switch" class="switch_label" id="switch_label">
+            <span class="title_blkapi">block API</span>
+            <div class="switch"> 
+                <input type="checkbox" id="switch" />
+                <div class="circle"></div>
+                <div class="base"></div>
+            </div>
+        </label>
+
         <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script type="text/javascript" src="keys.js"></script>
@@ -63,6 +72,10 @@
 
 
         $(function() {
+            if (checkbox.checked) {
+                console.log("block_api")
+                return;
+            }
             const promiseFunc = (value,value2) => {
             return new Promise((resolve, reject) => {
                 //console.log(value + value2);
@@ -151,7 +164,10 @@
                 <h2 class="statetext">過去の配信</h2>
             </div>
         </div>
-        <p class="cc"><a href="https://twitter.com/_ringodev_">&copy; 2023 りんごでべろっぱ All Rights Reserved.</p>
+        <div class="footer">
+            <p class="version">Ver. 0.1.0</p>
+            <p class="cc"><a href="https://twitter.com/_ringodev_">&copy; 2023 りんごでべろっぱ All Rights Reserved.</a></p>
+        </div>
         <script src="./js/sample.js"></script>
     </body>
 </html>
