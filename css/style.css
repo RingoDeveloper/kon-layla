@@ -7,6 +7,7 @@ body {
     margin: 0px;
 }
 
+
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 @font-face{
@@ -47,18 +48,40 @@ body {
     font-family: sans-serif;
 }
 
-.footer
-
-.cc {
-    font-family: sans-serif;
-    margin-left: 10px;
-    float: left;
+footer {
+    width: 100%;
+    height: auto;
+    background-color: #424141;
+    text-align: center;
+    color: #ddd;
+    margin-top: auto;
 }
 
-.version {
-    margin: 10px;
+
+ul.footer_menu {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+ul.footer_menu li {
+    display: inline;
+}
+
+#cc {
     font-family: sans-serif;
-    float: right;
+    color: #ddd;
+}
+
+#version {
+    font-family: sans-serif;
+}
+
+#ringo_footer {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    padding: 10px;
 }
 
 .no01 {
@@ -137,8 +160,14 @@ body {
     font-size: xx-large;
 }
 
-.link {
+#link {
     float: left;
+}
+
+.ringo  {
+    display: none;
+    margin: 10px;
+    float: right;
 }
 
 .twitter-follow-button {
@@ -155,11 +184,7 @@ body {
     font-size: large;
 }
 
-#ringo {
-    display: none;
-    margin: 10px;
-    float: right;
-}
+
 
 iframe {
     width: 608px;
@@ -267,10 +292,21 @@ input:checked ~ .circle {
         max-width: 160px;
         margin-bottom: 20px;
     }
-    .cc {
+
+    footer {
+        width: auto;
+        height: auto;
+        background-color: #424141;
+        text-align: center;
+        color: #ddd;
+        margin-bottom: 0%;
+    }
+
+
+    #cc {
         font-size: small;
     }
-    .version {
+    #version {
         font-size: small;
     }
     

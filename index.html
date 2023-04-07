@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>レイラ・マグノリア非公式配信スケジュール</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>レイラ・マグノリア非公式配信スケジュール</title>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <!--link rel="icon" type="image/x-icon" href="./layla_twitter_icon.jpg"-->
 
@@ -27,11 +27,11 @@
             </center>
             </div>
         </div>
-        <div class="link">
+        <div id="link">
             <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
             <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
         </div>
-        <img id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
+        <img class="ringo" id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
         <br>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <div class="titleScripts">
@@ -164,10 +164,13 @@
                 <h2 class="statetext">過去の配信</h2>
             </div>
         </div>
-        <div class="footer">
-            <p class="version">Ver. 0.1.1</p>
-            <p class="cc"><a href="https://twitter.com/_ringodev_">&copy; 2023 りんごでべろっぱ All Rights Reserved.</a></p>
-        </div>
         <script src="./js/sample.js"></script>
     </body>
+    <footer>
+        <ul class="footer_menu">
+            <li id="version">Ver. 0.1.1</li>
+            <li><br></li>
+            <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
+        </ul>
+    </footer>
 </html>
