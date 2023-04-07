@@ -18,159 +18,178 @@
         </script>
     </head>
 
+        
+
     <body>
-        <div class="hwrapper">
-            <div class="header" onclick="secBtn()">
-            <center>
-                <p class="header_title">レイラ・マグノリア</p>
-                <p class="header_title">配信スケジュール [非公式]</p>
-            </center>
+        <header class="header">
+            <div class="header_inner">
+                <div class="logo">
+                    <img id="layla_logo" src="layla_funsite_log.png" onclick="secBtn()">
+                </div>
+                <nav class="nav">
+                    <ul class="nav_list">
+                        <li class="nav_item"><a href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
+                        <li class="nav_item"><a href="https://ringodeveloper.github.io/POTY2022/">POTY</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-        <div id="link">
-            <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
-            <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
-        </div>
-        <img class="ringo" id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
-        <br>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        <div class="titleScripts">
-            <h1>こんレイラ！</h1>
-        </div>
-        <!--ul class="follow-me">
-            <li><a href="https://twitter.com"></a></li>
-            <li><a href="https://www.youtube.com"></a></li>
-        </ul-->
-        <div class="button" id="button_sch">
-            <a onclick="show_sch()">スケジュールはこちら</a>
-        </div>
-
-        <label for="switch" class="switch_label" id="switch_label">
-            <span class="title_blkapi">block API</span>
-            <div class="switch"> 
-                <input type="checkbox" id="switch" />
-                <div class="circle"></div>
-                <div class="base"></div>
+            <div class="hamburger" id="js-hamburger">
+                <span class="hamburger_border hamburger_border_top"></span>
+                <span class="hamburger_border hamburger_border_center"></span>
+                <span class="hamburger_border hamburger_border_bottom"></span>
             </div>
-        </label>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-        <script type="text/javascript" src="keys.js"></script>
-        <script type="text/javascript">
-        const K_LIST = []; //キーを編集
-        const Y_API_KEY1 = config.y_apikey_1;
-        const Y_API_KEY2 = config.y_apikey_2;
-        const Y_API_KEY3 = config.y_apikey_3;
-        const Y_API_KEY_D1 = config.y_apikey_d1;
-        const Y_API_KEY_D2 = config.y_apikey_d2;
-        const DEV_KEY = config.dev_key;
-        K_LIST.push(Y_API_KEY1);
-        K_LIST.push(Y_API_KEY2);
-        K_LIST.push(Y_API_KEY3);
-        const max = K_LIST.length;
-
-
-        $(function() {
-            if (checkbox.checked) {
-                console.log("block_api")
-                return;
-            }
-            const promiseFunc = (value,value2) => {
-            return new Promise((resolve, reject) => {
-                //console.log(value + value2);
-                $.ajax({
-                type: 'GET',
-                url: value + value2,
-                datatype: 'json',
-                success: function(json){
-                    resolve(json.items);
-                },
-                error: function(){
-                    reject();
-                    
-                    Swal.fire({
-                        type: "warning",
-                        title: "読み込みエラー",
-                        html: "ページの読み込みに失敗しました。<br>恐れ入りますが再読み込みをお試しください。<br><br>解決しない場合はお手数ですが、下記リンクよりお問合せください。",
-                        footer: '<a href="https://twitter.com/_ringodev_/status/1617468992071008258" target="_blank">エラーを報告する</a>',
-                    });
+            <div class="black_bg" id="js-black-bg"></div>
+        </header>
+        
+        <main class="main">
+            <div id="link">
+                <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
+                <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
+            </div>
+            <img class="ringo" id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
+            <br>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="titleScripts">
+                <h1>こんレイラ！</h1>
+            </div>
+            <!--ul class="follow-me">
+                <li><a href="https://twitter.com"></a></li>
+                <li><a href="https://www.youtube.com"></a></li>
+            </ul-->
+            <div class="button" id="button_sch">
+                <a onclick="show_sch()">スケジュールはこちら</a>
+            </div>
+    
+            <label for="switch" class="switch_label" id="switch_label">
+                <span class="title_blkapi">block API</span>
+                <div class="switch"> 
+                    <input type="checkbox" id="switch" />
+                    <div class="circle"></div>
+                    <div class="base"></div>
+                </div>
+            </label>
+    
+            <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script type="text/javascript" src="keys.js"></script>
+            <script type="text/javascript">
+            const K_LIST = []; //キーを編集
+            const Y_API_KEY1 = config.y_apikey_1;
+            const Y_API_KEY2 = config.y_apikey_2;
+            const Y_API_KEY3 = config.y_apikey_3;
+            const Y_API_KEY_D1 = config.y_apikey_d1;
+            const Y_API_KEY_D2 = config.y_apikey_d2;
+            const DEV_KEY = config.dev_key;
+            K_LIST.push(Y_API_KEY1);
+            K_LIST.push(Y_API_KEY2);
+            K_LIST.push(Y_API_KEY3);
+            const max = K_LIST.length;
+    
+    
+            $(function() {
+                if (checkbox.checked) {
+                    console.log("block_api")
+                    return;
                 }
-                });
-            });
-            };
-
-            // 非同期関数
-            async function asyncFunc() {
-            // 並行して処理が実行され、全ての処理が終わるまで待機
-            const values_upcoming = await Promise.all([
-                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=upcoming'),
-            ]);
-
-            const values_live = await Promise.all([
-                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=live'),
-            ]);
-
-            const values_completed = await Promise.all([
-                promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
-            ]);
-
-            const jsonitem_u = values_upcoming.flat();
-            const jsonitem_l = values_live.flat();
-            const jsonitem_c = values_completed.flat();
-            
-            if (jsonitem_l.length < 1) {
-                document.getElementById("youtubeList_l").style.visibility = "hidden";
-            } else {
-                $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
-                for(var i = 0; i < jsonitem_l.length; i++){
-                var ID = jsonitem_l[i].id.videoId;
-                $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
-            }
-            }
-
-
-            loop: for(var i = jsonitem_u.length-1; i >= 0; i--){
-                if ((jsonitem_l.length != 0) && (jsonitem_l[0].id.videoId == jsonitem_u[i].id.videoId)) {
-                    continue;
-                }
-                for (j = 0; j < jsonitem_c.length; j++) {
-                    if (jsonitem_u[i].id.videoId == jsonitem_c[j].id.videoId) {
-                        break loop;
+                const promiseFunc = (value,value2) => {
+                return new Promise((resolve, reject) => {
+                    //console.log(value + value2);
+                    $.ajax({
+                    type: 'GET',
+                    url: value + value2,
+                    datatype: 'json',
+                    success: function(json){
+                        resolve(json.items);
+                    },
+                    error: function(){
+                        reject();
+                        
+                        Swal.fire({
+                            type: "warning",
+                            title: "読み込みエラー",
+                            html: "ページの読み込みに失敗しました。<br>恐れ入りますが再読み込みをお試しください。<br><br>解決しない場合はお手数ですが、下記リンクよりお問合せください。",
+                            footer: '<a href="https://twitter.com/_ringodev_/status/1617468992071008258" target="_blank">エラーを報告する</a>',
+                        });
                     }
+                    });
+                });
+                };
+    
+                // 非同期関数
+                async function asyncFunc() {
+                // 並行して処理が実行され、全ての処理が終わるまで待機
+                const values_upcoming = await Promise.all([
+                    promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=upcoming'),
+                ]);
+    
+                const values_live = await Promise.all([
+                    promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=live'),
+                ]);
+    
+                const values_completed = await Promise.all([
+                    promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
+                ]);
+    
+                const jsonitem_u = values_upcoming.flat();
+                const jsonitem_l = values_live.flat();
+                const jsonitem_c = values_completed.flat();
+                
+                if (jsonitem_l.length < 1) {
+                    document.getElementById("youtubeList_l").style.visibility = "hidden";
+                } else {
+                    $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
+                    for(var i = 0; i < jsonitem_l.length; i++){
+                    var ID = jsonitem_l[i].id.videoId;
+                    $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
                 }
-                var ID = jsonitem_u[i].id.videoId;
-                //console.log(ID);
-                $("#youtubeList_u").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
-            }
-
-            for(var i = 0; i < jsonitem_c.length; i++){
-                var ID = jsonitem_c[i].id.videoId;
-                $("#youtubeList_c").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
-            }
-            }
-
-            asyncFunc();
-        });
-
-        </script>
-        <div class="contents-wapper2"> 
-            <div id="youtubeList_l">
+                }
+    
+    
+                loop: for(var i = jsonitem_u.length-1; i >= 0; i--){
+                    if ((jsonitem_l.length != 0) && (jsonitem_l[0].id.videoId == jsonitem_u[i].id.videoId)) {
+                        continue;
+                    }
+                    for (j = 0; j < jsonitem_c.length; j++) {
+                        if (jsonitem_u[i].id.videoId == jsonitem_c[j].id.videoId) {
+                            break loop;
+                        }
+                    }
+                    var ID = jsonitem_u[i].id.videoId;
+                    //console.log(ID);
+                    $("#youtubeList_u").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+                }
+    
+                for(var i = 0; i < jsonitem_c.length; i++){
+                    var ID = jsonitem_c[i].id.videoId;
+                    $("#youtubeList_c").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+                }
+                }
+    
+                asyncFunc();
+            });
+            </script>
+    
+            <div class="contents-wapper2"> 
+                <div id="youtubeList_l">
+                </div>
+                <div id="youtubeList_u">
+                    <h2 class="statetext">配信予定</h2>
+                </div>
+                <div id="youtubeList_c">
+                    <h2 class="statetext">過去の配信</h2>
+                </div>
             </div>
-            <div id="youtubeList_u">
-                <h2 class="statetext">配信予定</h2>
-            </div>
-            <div id="youtubeList_c">
-                <h2 class="statetext">過去の配信</h2>
-            </div>
-        </div>
+        </main>
+        
+        <footer>
+            <ul class="footer_menu">
+                <li id="version">Ver. 0.1.2</li>
+                <li><br></li>
+                <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
+            </ul>
+        </footer>
+
         <script src="./js/sample.js"></script>
     </body>
-    <footer>
-        <ul class="footer_menu">
-            <li id="version">Ver. 0.1.1</li>
-            <li><br></li>
-            <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
-        </ul>
-    </footer>
+    
 </html>
