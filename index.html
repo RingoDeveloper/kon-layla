@@ -150,9 +150,11 @@
                         continue;
                     }
                     for (j = 0; j < jsonitem_c.length; j++) {
+                        
                         if (jsonitem_u[i].id.videoId == jsonitem_c[j].id.videoId) {
-                            break loop;
+                            continue loop;
                         }
+                        
                     }
                     var ID = jsonitem_u[i].id.videoId;
                     //console.log(ID);
