@@ -327,6 +327,7 @@ iframe {
 
 
 .switch_label {
+    width: fit-content;
     display: none;
     margin: 10px;
     align-items: center;
