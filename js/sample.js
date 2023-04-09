@@ -27,6 +27,7 @@ function decryption(string, key) {
 /* debug variable */
 const owner = "ringo";
 let base_youtube_url;
+let base_youtube_url_live;
 let cnt = 0;
 
 const checkbox = document.getElementById('switch');
@@ -64,7 +65,9 @@ function checkDevMode() {
     let blk_api_switch = document.getElementById("switch_label");
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length); 
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=W3F-SEISqRQ,vD_UjBh9hK8';
+
         console.log("developer");
         //デベロッパーモードで表示
         ringo.style.display = "flex";
@@ -109,3 +112,15 @@ function ringoBtn() {
     }
 }
 
+function toggleNav() {
+    var body = document.body;
+    var hamburger = document.getElementById('js-hamburger');
+    var blackBg = document.getElementById('js-black-bg');
+  
+    hamburger.addEventListener('click', function() {
+      body.classList.toggle('nav-open');
+    });
+    blackBg.addEventListener('click', function() {
+      body.classList.remove('nav-open');
+    });
+}
