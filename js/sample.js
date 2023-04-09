@@ -64,7 +64,7 @@ function checkDevMode() {
     let blk_api_switch = document.getElementById("switch_label");
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + 'AIzaSyC_tpHp8ICWcgeyDKJx06TjsT-4b4--l7A';//decryption(Y_API_KEY_D1, owner.length); 
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length); 
         console.log("developer");
         //デベロッパーモードで表示
         ringo.style.display = "flex";
