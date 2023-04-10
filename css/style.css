@@ -196,6 +196,12 @@ footer {
     text-align: center;
     color: #ddd;
     margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+ul.footer_menu {
+    margin-top: 0px;
 }
 
 
@@ -279,6 +285,11 @@ ul.footer_menu li {
     border-radius: 7px;
 }
 
+#youtubeList_u_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #youtubeList_l {
     background-color: rgba(243, 90, 90, 0.5);
     padding: 10px;
@@ -292,6 +303,12 @@ ul.footer_menu li {
     margin: 10px;
     border-radius: 7px;
 }
+
+#youtubeList_c_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .statetext {
     font-size: xx-large;
 }
@@ -326,6 +343,29 @@ iframe {
     width: 608px;
     height: 342px;
     border-radius: 7px;
+}
+
+.iframe_wrapper {
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-width: 2px;
+    border-style: outset;
+    border-color: #000000;
+    border-radius: 7px;
+    background-color: #ffffff9a;
+}
+
+h2.sc-time {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+.iframe_wrapper_c {
+    margin: 5px;
 }
 
 
@@ -412,6 +452,11 @@ input:checked ~ .circle {
         width: 352px;
         height: 198px;
     }
+
+    .iframe_wrapper {
+        padding: 5px;
+        width: auto;
+    }
 }
 
 
@@ -439,6 +484,10 @@ input:checked ~ .circle {
         margin-bottom: 0%;
     }
 
+    footer {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 
     #cc {
         font-size: small;
@@ -453,6 +502,25 @@ input:checked ~ .circle {
     iframe {
         width: 320px;
         height: 180px;
+    }
+
+    .iframe_wrapper {
+        padding: 5px;
+        margin: 5px;
+        width: auto;
+    }
+
+    #youtubeList_u {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 5px;
+    }
+
+    h2.statetext {
+        margin-left: 5px;
+    }
+
+    h2.sc-time {
+        font-size: large;
     }
 }
 
