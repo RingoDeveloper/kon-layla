@@ -67,8 +67,8 @@ function checkDevMode() {
     let blk_api_switch = document.getElementById("switch_label");
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + decryption(Y_API_KEY_D2, owner.length);//decryption(Y_API_KEY_D2, owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' + decryption(Y_API_KEY_D2, owner.length) + '&id=';
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
 
         console.log("developer");
         //デベロッパーモードで表示

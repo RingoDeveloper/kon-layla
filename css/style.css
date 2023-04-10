@@ -222,6 +222,7 @@ ul.footer_menu li {
 
 #version {
     font-family: sans-serif;
+    color: #ddd;
 }
 
 
@@ -311,6 +312,8 @@ ul.footer_menu li {
 
 .statetext {
     font-size: xx-large;
+    width: fit-content;
+    margin-top: 16px;
 }
 
 #link {
@@ -362,6 +365,19 @@ h2.sc-time {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.statetext_top {
+    text-align: center;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.ave_time {
+    height: fit-content;
+    margin-top: 16px;
+}
+
+
 
 
 .iframe_wrapper_c {
@@ -521,6 +537,12 @@ input:checked ~ .circle {
 
     h2.sc-time {
         font-size: large;
+    }
+
+    .ave_time {
+        font-size: small;
+        width: fit-content;
+        text-align: end;
     }
 }
 
