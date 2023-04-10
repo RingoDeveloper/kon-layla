@@ -275,6 +275,11 @@ ul.footer_menu li {
     border-radius: 7px;
 }
 
+#youtubeList_u_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #youtubeList_l {
     background-color: rgba(243, 90, 90, 0.5);
     padding: 10px;
@@ -288,6 +293,12 @@ ul.footer_menu li {
     margin: 10px;
     border-radius: 7px;
 }
+
+#youtubeList_c_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .statetext {
     font-size: xx-large;
 }
@@ -322,6 +333,11 @@ iframe {
     width: 608px;
     height: 342px;
     border-radius: 7px;
+}
+
+.iframe_wrapper {
+    width: 610px;
+    margin: 5px;
 }
 
 
@@ -407,6 +423,10 @@ input:checked ~ .circle {
         width: 352px;
         height: 198px;
     }
+
+    .iframe_wrapper {
+        width: 354px;
+    }
 }
 
 
@@ -448,6 +468,10 @@ input:checked ~ .circle {
     iframe {
         width: 320px;
         height: 180px;
+    }
+
+    .iframe_wrapper {
+        width: 322px;
     }
 }
 
