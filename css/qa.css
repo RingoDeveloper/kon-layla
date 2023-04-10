@@ -213,6 +213,34 @@ ul.footer_menu li {
   color: #ddd;
 }
 
+@media screen and (max-width: 480px) {
+  /* ここに480px以下用（スマートフォン） */
+      .header_title{
+          font-size: large;
+      }
+  
+      footer {
+          width: auto;
+          height: auto;
+          background-color: #424141;
+          text-align: center;
+          color: #ddd;
+          margin-bottom: 0%;
+      }
+  
+      footer {
+          padding-top: 5px;
+          padding-bottom: 5px;
+      }
+  
+      #cc {
+          font-size: small;
+      }
+      #version {
+          font-size: small;
+      }
+}
+
   .googleform-wrapper {
     position: relative;
     width: 100%;
