@@ -192,6 +192,12 @@ footer {
     text-align: center;
     color: #ddd;
     margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+ul.footer_menu {
+    margin-top: 0px;
 }
 
 
@@ -336,7 +342,25 @@ iframe {
 }
 
 .iframe_wrapper {
-    width: 610px;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-width: 2px;
+    border-style: outset;
+    border-color: #000000;
+    border-radius: 7px;
+    background-color: #ffffff9a;
+}
+
+h2.sc-time {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+.iframe_wrapper_c {
     margin: 5px;
 }
 
@@ -425,7 +449,8 @@ input:checked ~ .circle {
     }
 
     .iframe_wrapper {
-        width: 354px;
+        padding: 5px;
+        width: auto;
     }
 }
 
@@ -454,6 +479,10 @@ input:checked ~ .circle {
         margin-bottom: 0%;
     }
 
+    footer {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 
     #cc {
         font-size: small;
@@ -471,7 +500,22 @@ input:checked ~ .circle {
     }
 
     .iframe_wrapper {
-        width: 322px;
+        padding: 5px;
+        margin: 5px;
+        width: auto;
+    }
+
+    #youtubeList_u {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 5px;
+    }
+
+    h2.statetext {
+        margin-left: 5px;
+    }
+
+    h2.sc-time {
+        font-size: large;
     }
 }
 

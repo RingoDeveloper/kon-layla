@@ -65,8 +65,8 @@ function checkDevMode() {
     let blk_api_switch = document.getElementById("switch_label");
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + 'AIzaSyCm5MKJ1LlIWdXF0evc-ygOpKptvNf8AX4';//decryption(Y_API_KEY_D1, owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' + 'AIzaSyCm5MKJ1LlIWdXF0evc-ygOpKptvNf8AX4' + '&id=';
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=' + 'AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4';//decryption(Y_API_KEY_D1, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' + 'AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4' + '&id=';
 
         console.log("developer");
         //デベロッパーモードで表示
@@ -80,6 +80,7 @@ function checkDevMode() {
 
         let keyindex = getRandomInt();
         base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=20&order=date&type=video&key=' + decryption(K_LIST[keyindex], owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=20&key=' +decryption(K_LIST[keyindex], owner.length) + '&id=';
         console.log("user");
         //console.log(keyindex);
         //console.log(base_youtube_url);
@@ -124,3 +125,4 @@ function toggleNav() {
       body.classList.remove('nav-open');
     });
 }
+toggleNav();
