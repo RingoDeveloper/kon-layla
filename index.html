@@ -55,7 +55,7 @@
         <main class="main">
             <div id="link">
                 <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
-                <a href="https://twitter.com/intent/tweet?button_hashtag=LayLive&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#LayLiveをツイートする</a>
+                <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#なまモクレンをツイートする</a>
             </div>
             <img class="ringo" id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
             <br>
@@ -143,20 +143,23 @@
                     ]);
 
                     /*
-                    const values_live_details = await Promise.all([
-                        promiseFunc(base_youtube_url_live,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
+                    const values_channel = await Promise.all([
+                        promiseFunc(base_youtube_url_channel,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ')
                     ]);
                     */
+                    
         
                     const jsonitem_u = values_upcoming.flat();
                     const jsonitem_l = values_live.flat();
                     const jsonitem_c = values_completed.flat();
+                    //const jsonitem_cn = values_channel.flat();
                     
-                    /*for (var i = 0; i < jsonitem_ld.length; i++) {
-                        console.log(jsonitem_ld[i]);
+                    /*
+                    for (var i = 0; i < jsonitem_cn.length; i++) {
+                        console.log(jsonitem_cn[i]);
                     }
                     */
-                    
+
                     if (jsonitem_l.length < 1) {
                         document.getElementById("youtubeList_l").style.visibility = "hidden";
                     } else {
@@ -334,7 +337,7 @@
         
         <footer>
             <ul class="footer_menu">
-                <a href="https://ringodeveloper.github.io/kon-layla/README.txt"><li id="version">Ver. 0.1.3</li></a>
+                <a href="https://ringodeveloper.github.io/kon-layla/README.txt"><li id="version">Ver. 0.1.4</li></a>
                 <li><br></li>
                 <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
             </ul>
