@@ -4,6 +4,6 @@ const config = {
     y_apikey_3 : "<Du\\Nt=QfkbPb\\Is\\RD.cl>33A<uAIug@k3-nsP",
     y_apikey_d1 : "<Du\\Nt<TnHn/i3bDkRBU>c@Ul-sk(_iIj(G,bnT",
     y_apikey_d2 : "<Du\\Nt?^rf-HoqmJ1.nGi,RrBl,\\cgTB.+=^i</",
-    
-    dev_key : "mdibj_`q`gjk`m0./3"
-} 
+    dev_key : "mdibj_`q`gjk`m0./3",
+    version : "Ver. 0.1.5",
+}

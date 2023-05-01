@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>レイラ・マグノリア非公式ファンサイト</title>
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-        <!--link rel="icon" type="image/x-icon" href="./layla_twitter_icon.jpg"-->
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+        <!--link rel="icon" type="image/x-icon" href="./src/layla_twitter_icon.jpg"-->
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJHHNYD65"></script>
@@ -34,13 +34,13 @@
         <header class="header">
             <div class="header_inner">
                 <div class="logo">
-                    <img id="layla_logo" src="layla_funsite_log.png" onclick="secBtn()">
+                    <img id="layla_logo" src="src/layla_funsite_log.png" onclick="secBtn()">
                 </div>
                 <nav class="nav">
                     <ul class="nav_list">
-                        <li class="nav_item"><a href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
-                        <li class="nav_item"><a href="https://ringodeveloper.github.io/POTY2022/">POTY</a></li>
-                        <li class="nav_item"><a href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
+                        <li class="nav_item"><a id="menu_sch" href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
+                        <li class="nav_item"><a id="menu_poty" href="https://ringodeveloper.github.io/kon-layla/poty2022.html">POTY</a></li>
+                        <li class="nav_item"><a id="qa" href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
                     </ul>
                 </nav>
             </div>
@@ -57,7 +57,7 @@
                 <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
                 <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#なまモクレンをツイートする</a>
             </div>
-            <img class="ringo" id="ringo" src="ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
+            <img class="ringo" id="ringo" src="src/ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
             <br>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             <div class="titleScripts">
@@ -82,7 +82,7 @@
     
             <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-            <script type="text/javascript" src="keys.js"></script>
+            <script type="text/javascript" src="config.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
             <script type="text/javascript">
             const K_LIST = []; //キーを編集
@@ -337,13 +337,18 @@
         
         <footer>
             <ul class="footer_menu">
-                <a href="https://ringodeveloper.github.io/kon-layla/README.txt"><li id="version">Ver. 0.1.4</li></a>
+                <a href="https://ringodeveloper.github.io/kon-layla/README.txt"><li id="version"></li></a>
                 <li><br></li>
                 <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
             </ul>
+            <script>
+                const VERSION = config.version;
+                let elm_ver = document.getElementById("version");
+                elm_ver.textContent = VERSION;
+            </script>
         </footer>
 
-        <script src="./js/sample.js"></script>
+        <script src="./js/index.js"></script>
     </body>
     
 </html>

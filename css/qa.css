@@ -1,10 +1,14 @@
 body {
   font-family: 'HuiFontP109', sans-serif;
-  background-image: url("../pastel_00108.jpg"); /* 画像 */
+  background-image: url("../src/pastel_00108.jpg"); /* 画像 */
   background-size: cover;               /* 全画面 */
   background-attachment: fixed;         /* 固定 */
   background-position: center center;   /* 縦横中央 */
   margin: 0px;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* メニュー関係 start*/
@@ -153,13 +157,28 @@ body {
   .nav_list li{
     display: inline-block;
     text-align: right;
-    padding-left: 20px;
+    padding: 0px 0px 0px 0px;
     font-size: large;
   }
-  .nav_list li a{
+  .nav_list a {
+      padding: 10px 5px 10px 5px;
+      border-radius: 5px;
+      margin-left: 15px;
+  }
+  .nav_item a{
     color: #FFE4C4;
     font-weight: 600;
   }
+  .nav_item #menu_qa { 
+    color: #333;
+    background-color: #FFE4C4;
+    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);  
+  }
+  .nav_item a:hover  {
+      color: #333;
+      background-color: #FFE4C4;
+  }
+
 }/* pc */
 /* メニュー関係 end*/
 

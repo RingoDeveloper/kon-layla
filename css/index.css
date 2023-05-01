@@ -1,6 +1,6 @@
 body {
     font-family: 'HuiFontP109', sans-serif;
-    background-image: url("../pastel_00108.jpg"); /* 画像 */
+    background-image: url("../src/pastel_00108.jpg"); /* 画像 */
     background-size: cover;               /* 全画面 */
     background-attachment: fixed;         /* 固定 */
     background-position: center center;   /* 縦横中央 */
@@ -17,6 +17,10 @@ body {
     url('https://dl.dropboxusercontent.com/s/7pscemjdvt0wyiq/HuiFontP109.woff') format('woff'),
     url('https://dl.dropboxusercontent.com/s/0w9uuopxrns8ehi/HuiFontP109.ttf') format('truetype'),
     url('https://dl.dropboxusercontent.com/s/xnnsbxtz8o6d98i/HuiFontP109.svg#HuiFontP109') format('svg');
+}
+
+a {
+    text-decoration: none;
 }
 
 /* メニュー関係 start*/
@@ -152,28 +156,43 @@ body {
       transform: rotate(-45deg);
       top: 20px;
     }
-  }/* sp */
+}/* sp */
   
-  @media only screen and (min-width: 769px) {
+@media only screen and (min-width: 769px) {
     .header_inner {
-      width: 95%;
-      padding: 5px 15px;
+        width: 95%;
+        padding: 5px 15px;
     }
     .nav_list{
-      text-align: right;
+        text-align: right;
     }
     .nav_list li{
-      display: inline-block;
-      text-align: right;
-      padding-left: 20px;
-      font-size: large;
+        display: inline-block;
+        text-align: right;
+        padding: 0px 0px 0px 0px;
+        font-size: large;
     }
-    .nav_list li a{
-      color: #FFE4C4;
-      font-weight: 600;
+    .nav_list a {
+        padding: 10px 5px 10px 5px;
+        border-radius: 5px;
+        margin-left: 15px;
     }
-  }/* pc */
-  /* メニュー関係 end*/
+    .nav_item a{
+        color: #FFE4C4;
+        font-weight: 600;
+    }
+
+    .nav_item #menu_sch { 
+        color: #333;
+        background-color: #FFE4C4;
+        box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);  
+    }
+    .nav_item a:hover  {
+        color: #333;
+        background-color: #FFE4C4;
+    }
+}/* pc */
+/* メニュー関係 end*/
 
 
 
