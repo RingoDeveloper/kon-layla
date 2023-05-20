@@ -540,8 +540,8 @@ input:checked ~ .circle {
 }
 
 
-@media screen and (max-width: 480px) {
-/* ここに480px以下用（スマートフォン） */
+@media screen and (max-width: 500px) {
+/* ここに500px以下用（スマートフォン） */
     .header_title{
         font-size: large;
     }
