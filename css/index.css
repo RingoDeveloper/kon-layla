@@ -191,6 +191,16 @@ a {
         color: #333;
         background-color: #FFE4C4;
     }
+
+    /*セレクトボックス関連 */
+    #title_shownum {
+        font-size:x-large;
+    }
+    #numSelect {
+        width: 70px;
+        height: 40px;
+        font-size: large;
+    }
 }/* pc */
 /* メニュー関係 end*/
 
@@ -367,6 +377,12 @@ iframe {
     border-radius: 7px;
 }
 
+.thumb {
+    width: 608px;
+    height: 342px;
+    border-radius: 7px;
+}
+
 .iframe_wrapper {
     margin: 5px;
     padding: 5px;
@@ -410,6 +426,15 @@ h2.sc-time {
     margin: 10px;
     align-items: center;
 }
+
+.switch_light_label {
+    width: fit-content;
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+
+
   
 input[type='checkbox'] {
     position: absolute;
@@ -459,9 +484,25 @@ input:checked ~ .circle {
     display: none;
 }
 
+.switch_light {
+    position: relative;
+}
+
+#switch_light {
+    display: none;
+}
+
+
+
 .title_blkapi {
     margin-right: 10px;
 }
+
+.enable_lightmode {
+    margin-right: 10px;
+}
+
+
 
 
 
@@ -484,6 +525,10 @@ input:checked ~ .circle {
         font-size: x-large;
     }
     iframe {
+        width: 352px;
+        height: 198px;
+    }
+    .thumb {
         width: 352px;
         height: 198px;
     }
@@ -535,6 +580,11 @@ input:checked ~ .circle {
         font-size: large;
     }
     iframe {
+        width: 320px;
+        height: 180px;
+    }
+
+    .thumb {
         width: 320px;
         height: 180px;
     }

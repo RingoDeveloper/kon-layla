@@ -79,6 +79,15 @@
                     <div class="base"></div>
                 </div>
             </label>
+
+            <label for="switch_light" class="switch_light_label" id="switch_light_label">
+                <span class="enable_lightmode">軽量化モード</span>
+                <div class="switch_light">
+                    <input type="checkbox" id="switch_light"/>
+                    <div class="circle"></div>
+                    <div class="base"></div>
+                </div>
+            </label>
     
             <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
@@ -96,7 +105,6 @@
             K_LIST.push(Y_API_KEY2);
             K_LIST.push(Y_API_KEY3);
             const max = K_LIST.length;
-    
     
             $(function() {
                 if (checkbox.checked) {
@@ -142,6 +150,7 @@
                         promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
                     ]);
 
+
                     /*
                     const values_channel = await Promise.all([
                         promiseFunc(base_youtube_url_channel,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ')
@@ -152,6 +161,7 @@
                     const jsonitem_u = values_upcoming.flat();
                     const jsonitem_l = values_live.flat();
                     const jsonitem_c = values_completed.flat();
+                    
                     //const jsonitem_cn = values_channel.flat();
                     
                     /*
@@ -159,6 +169,7 @@
                         console.log(jsonitem_cn[i]);
                     }
                     */
+                    
 
                     if (jsonitem_l.length < 1) {
                         document.getElementById("youtubeList_l").style.visibility = "hidden";
@@ -187,11 +198,13 @@
                             }
                         }
                         var ID = jsonitem_u[i].id.videoId;
+                        //upcomming video のIDを列挙
                         videoId_u.push(ID);
                         videoId_u_string += (ID + ',');
                         //console.log(videoId_u_string);
                         //$("#youtubeList_u").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
                     }
+                    /* upcomingVideo列挙*/
                     (function ($) {
                         $(function () {
                             $.ajax({
@@ -216,6 +229,7 @@
                                 //console.log(video_u_obj_list_sorted);
                                 for (let i = 0; i < video_u_obj_list_sorted.length; i++) {
                                     var ID = video_u_obj_list_sorted[i].videoid;
+                                    var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                                     var DATETIME = video_u_obj_list_sorted[i].time;
                                     var year = DATETIME.getFullYear() ;	// 年
                                     var month = DATETIME.getMonth() + 1 ;	// 月
@@ -226,8 +240,17 @@
                                     var dayOfWeek = DATETIME.getDay() ;	// 曜日(数値)
                                     var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek] ;	// 曜日(日本語表記)
                                     var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
-                                    $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
                                     //$("#youtubeList_u_inner").append(''); /////
+
+                                    //配信予定のアイテムを表示
+                                    if (localStorage.getItem('lightmode') == "true") {
+                                        //developer mode
+                                        //console.log("https://www.youtube.com/watch?v=" + ID);
+                                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + '><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
+                                    } else {
+                                        //nomal mode
+                                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                                    }
                                 }
                             }).fail(function (data) {
                             // error
@@ -241,11 +264,19 @@
                     let videoId_c_string = '';
                     let video_c_obj_list = [];
                     for(var i = 0; i < jsonitem_c.length; i++){
+                        //軽量化用のテスト
+                        //サムネイルのimg URLを表示
+                        //console.log(jsonitem_c[i].snippet.thumbnails.high); ///
                         var ID = jsonitem_c[i].id.videoId;
+                        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
+                        //console.log(TN_URL);
+                        //completed video のIDを列挙
                         videoId_c.push(ID);
                         videoId_c_string += (ID + ',');
                         //$("#youtubeList_c").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>'); /////
                     }
+
+                    /* completedVideo列挙関数 */
                     (function ($) {
                         $(function () {
                             $.ajax({
@@ -269,13 +300,15 @@
                                     video_c_obj_list.push({videoid: videoId_c[i], time: date});
                                 }
                                 //console.log(time_total);
-                                let time_total_ave = Math.floor(time_total / 20);
+                                let num_cv = check_num_cv();
+                                let time_total_ave = Math.floor(time_total / parseInt(num_cv));
                                 const time_total_sec = (time_total_ave%60).toString().padStart(2, '0');
                                 const time_total_min = (Math.floor(time_total_ave/60)%60).toString().padStart(2, '0');
                                 const time_total_hour = Math.floor(time_total_ave/3600)%60;
                         
                                 time_total_ave_formated = `${time_total_hour}:${time_total_min}:${time_total_sec}`;
-                                $(".statetext_top").append('<h2 class="ave_time">最近20回の平均配信時間  ' + time_total_ave_formated + '</h2>');
+                                
+                                $(".statetext_top").append(`<h2 class="ave_time">最近${num_cv}回の平均配信時間  ` + time_total_ave_formated + '</h2>');
                                 let video_c_obj_list_sorted = video_c_obj_list.sort(
                                     (a, b) => moment(b.time).diff(a.time)
                                 );
@@ -291,8 +324,19 @@
                                     var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek] ;	// 曜日(日本語表記)
                                     var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
                                     var ID = video_c_obj_list_sorted[i].videoid;
+                                    var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                                     //$("#youtubeList_c_inner").append('<div class="iframe_wrapper"><h2>' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                                    $("#youtubeList_c_inner").append('<div class="iframe_wrapper_c"><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                                    
+                                    if (localStorage.getItem('lightmode') == "true") {
+                                        //developer mode
+                                        console.log("https://www.youtube.com/watch?v=" + ID);
+                                        //$("#youtubeList_c_inner").append('<div class="iframe_wrapper_c"><a href=' + 'https://www.youtube.com/watch?v=' + ID + '><img class="thumb" src=' + TN_URL + '></a></div>');
+                                        $("#youtubeList_c_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + '><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
+                                    } else {
+                                        //nomal mode
+                                        $("#youtubeList_c_inner").append('<div class="iframe_wrapper_c"><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                                    }
+                                    
                                     
                                 }
                             }).fail(function (data) {
@@ -328,8 +372,34 @@
                     <div class="statetext_top">
                         <h2 class="statetext">過去の配信</h2>
                     </div>
-                    
-
+                    <div>
+                        <span id="title_shownum" >表示数</span>
+                        <select class="onlydev" id="numSelect" onchange="update_num_CV()">
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                        </select>
+                    </div>
+                    <script>
+                        let num_cv = localStorage.getItem('num_cv');
+                        if (num_cv == null) {
+                            num_cv = "20";
+                        }
+                        document.getElementById('numSelect').value = num_cv;
+                        /*
+                        if (localStorage.getItem('dev_mode') != "true") {
+                            console.log("script");
+                            elm = document.getElementsByClassName("onlydev");
+                            console.log(elm.length);
+                            for (var i = 0; i < elm.length; i++) {
+                                elm[i].style.visibility='hidden';
+                                while(elm[i].firstChild) {
+                                    elm[i].firstChild.remove();
+                                }
+                            }
+                        }
+                        */
+                    </script>
                     <div id="youtubeList_c_inner"></div>
                 </div>
             </div>
