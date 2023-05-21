@@ -103,6 +103,12 @@ function checkDevMode() {
     }
 }
 
+function retCheckDev() {
+    let result = localStorage.getItem('dev_mode');
+    console.log("run retCheckDev()");
+    return result == "true";
+}
+
 
 function checkBlkAPI() {
     let result = localStorage.getItem('blk_api');
