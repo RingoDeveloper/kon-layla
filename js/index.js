@@ -52,6 +52,7 @@ checkbox2.addEventListener('click', ()=> {
 
 /* run debug functions */
 checkDevMode();
+checkLightMode();
 checkBlkAPI();
 //console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
 //console.log(decryption(, owner.length));
@@ -79,8 +80,8 @@ function checkDevMode() {
     
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(Y_API_KEY_D2, owner.length);//decryption(Y_API_KEY_D2, owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(Y_API_KEY_D2, owner.length) + '&id=';
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
         //base_youtube_url_channel = 'https://www.googleapis.com/youtube/v3/channelSections?part=snippet&key=' + decryption(Y_API_KEY_D1, owner.length);
 
         console.log("developer");
@@ -117,7 +118,7 @@ function checkLightMode() {
     let result = localStorage.getItem('lightmode');
 
     if (result == "true") {
-        checkbox.checked = true;
+        checkbox2.checked = true;
         return true;
     } 
     return false;
