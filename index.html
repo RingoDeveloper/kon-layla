@@ -268,6 +268,7 @@
                         //サムネイルのimg URLを表示
                         //console.log(jsonitem_c[i].snippet.thumbnails.high); ///
                         var ID = jsonitem_c[i].id.videoId;
+                        console.log(ID);
                         var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                         //console.log(TN_URL);
                         //completed video のIDを列挙
@@ -374,7 +375,7 @@
                     </div>
                     <div>
                         <span id="title_shownum" >表示数</span>
-                        <select class="onlydev" id="numSelect" onchange="update_num_CV()">
+                        <select id="numSelect" onchange="update_num_CV()">
                             <option value="20">20</option>
                             <option value="30">30</option>
                             <option value="40">40</option>
@@ -386,21 +387,16 @@
                             num_cv = "20";
                         }
                         document.getElementById('numSelect').value = num_cv;
-                        /*
-                        if (localStorage.getItem('dev_mode') != "true") {
-                            console.log("script");
-                            elm = document.getElementsByClassName("onlydev");
-                            console.log(elm.length);
-                            for (var i = 0; i < elm.length; i++) {
-                                elm[i].style.visibility='hidden';
-                                while(elm[i].firstChild) {
-                                    elm[i].firstChild.remove();
-                                }
-                            }
-                        }
-                        */
                     </script>
                     <div id="youtubeList_c_inner"></div>
+                </div>
+
+                <div class="develm" id="youtubeList_test">
+                    <h2 class="statetext">デザインテスト</h2>
+                    <div id="youtubeList_test_inner">
+                        <div class="iframe_wrapper_test"><a href="https://www.youtube.com/watch?v=tOh9SteCSjc"><h2 class="sc-time" style="color:black">12/1(木) 22:30</h2><img class="thumb" src="https://img.youtube.com/vi/tOh9SteCSjc/maxresdefault.jpg"></a></div>
+                        <div class="iframe_wrapper_test"><a href="https://www.youtube.com/watch?v=7UlSmDggDGI"><h2 class="sc-time" style="color:black">12/1(木) 22:30</h2><img class="thumb" src="https://img.youtube.com/vi/7UlSmDggDGI/maxresdefault.jpg"></a></div>
+                    </div>
                 </div>
             </div>
         </main>

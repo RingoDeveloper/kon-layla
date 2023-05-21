@@ -169,3 +169,17 @@ function check_num_cv() {
     }
     return num_cv;
 }
+
+function remove_develms() {
+    if (localStorage.getItem('dev_mode') != "true") {
+        elm = document.getElementsByClassName("develm");
+        console.log(elm.length);
+        for (var i = 0; i < elm.length; i++) {
+            elm[i].style.visibility='hidden';
+            while(elm[i].firstChild) {
+                elm[i].firstChild.remove();
+            }
+        }
+    }
+}
+remove_develms();
