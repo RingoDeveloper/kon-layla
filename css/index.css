@@ -1,13 +1,3 @@
-body {
-    font-family: 'HuiFontP109', sans-serif;
-    background-image: url("../src/pastel_00108.jpg"); /* 画像 */
-    background-size: cover;               /* 全画面 */
-    background-attachment: fixed;         /* 固定 */
-    background-position: center center;   /* 縦横中央 */
-    margin: 0px;
-}
-
-
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 @font-face{
@@ -17,6 +7,16 @@ body {
     url('https://dl.dropboxusercontent.com/s/7pscemjdvt0wyiq/HuiFontP109.woff') format('woff'),
     url('https://dl.dropboxusercontent.com/s/0w9uuopxrns8ehi/HuiFontP109.ttf') format('truetype'),
     url('https://dl.dropboxusercontent.com/s/xnnsbxtz8o6d98i/HuiFontP109.svg#HuiFontP109') format('svg');
+    font-display: swap; /* フォントがロードされるまで代替フォントを表示 */
+}
+
+body {
+    font-family: 'HuiFontP109', sans-serif;
+    background-image: url("../src/pastel_00108.jpg"); /* 画像 */
+    background-size: cover;               /* 全画面 */
+    background-attachment: fixed;         /* 固定 */
+    background-position: center center;   /* 縦横中央 */
+    margin: 0px;
 }
 
 a {
