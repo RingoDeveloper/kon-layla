@@ -352,6 +352,18 @@ ul.footer_menu li {
     flex-wrap: wrap;
 }
 
+#youtubeList_singing {
+    background-color: #FFE4C4;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 7px;
+}
+
+#youtubeList_singing_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .statetext {
     font-size: xx-large;
     width: fit-content;
@@ -417,6 +429,18 @@ iframe {
     border-width: 0px;
     border-radius: 7px;
     background-color: #ffffff9a;
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.iframe_wrapper_singing {
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-width: 0px;
+    border-radius: 7px;
+    background-color: #ffffff;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -620,6 +644,12 @@ input:checked ~ .circle {
     }
 
     .iframe_wrapper_test {
+        padding: 5px;
+        margin: 5px;
+        width: auto;
+    }
+
+    .iframe_wrapper_singing {
         padding: 5px;
         margin: 5px;
         width: auto;
