@@ -175,21 +175,21 @@
                         document.getElementById("youtubeList_l").style.visibility = "hidden";
                     } else {
                         $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
+                        $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
+                        
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
-                            var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
-                            if (retCheckDev()) {
-                                //配信中のアイテムを表示
-                                if (localStorage.getItem('lightmode') == "true") {
-                                    //light mode
-                                    $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
-                                } else {
-                                    //nomal mode
-                                    $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                                }
+                            var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
+                            var TITLE = jsonitem_l[i].snippet.title;
+                            //配信中のアイテムを表示
+                            if (localStorage.getItem('lightmode') == "true") {
+                                //light mode
+                                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
                             } else {
-                                $("#youtubeList_l").append('<iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe>');
+                                //nomal mode
+                                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe><h2 class="sc-time">' + TITLE + '</h2></div>'); /////
                             }
+                            
                         }
                     }
         

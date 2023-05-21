@@ -327,6 +327,11 @@ ul.footer_menu li {
     border-radius: 7px;
 }
 
+#youtubeList_l_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 #youtubeList_c {
     background-color: rgba(255, 255, 255, 0.5);
@@ -400,12 +405,14 @@ iframe {
     width: 608px;
     height: 342px;
     border-radius: 7px;
+    margin-top: 5px;
 }
 
 .thumb {
     width: 608px;
     height: 342px;
     border-radius: 7px;
+    margin-top: 5px;
 }
 
 .iframe_wrapper {
@@ -418,6 +425,7 @@ iframe {
     border-radius: 7px;
     background-color: #ffffff9a;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+    max-width: min-content;
 }
 
 .iframe_wrapper_test {
