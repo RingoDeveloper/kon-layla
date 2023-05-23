@@ -77,7 +77,6 @@ function checkDevMode() {
     let ringo = document.getElementById("ringo");
     let blk_api_switch = document.getElementById("switch_label");
     let num_cv = check_num_cv();
-    
 
     if (result == "true") { /* devmode */
         base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(Y_API_KEY_D2, owner.length);//decryption(Y_API_KEY_D2, owner.length);
@@ -106,7 +105,15 @@ function checkDevMode() {
 function retCheckDev() {
     let result = localStorage.getItem('dev_mode');
     console.log("run retCheckDev()");
-    return result == "true";
+    if (result != "true") {
+        let switch_l_elm = document.getElementById("switch_light_label");
+        if (switch_l_elm != null) {
+            switch_l_elm.remove();
+        }
+        return false;
+    }
+    return true;
+    
 }
 
 
@@ -123,7 +130,7 @@ function checkBlkAPI() {
 function checkLightMode() {
     let result = localStorage.getItem('lightmode');
 
-    if (result == "true") {
+    if ((result == "true") || !retCheckDev()) {
         checkbox2.checked = true;
         return true;
     } 
@@ -189,3 +196,13 @@ function remove_develms() {
     }
 }
 remove_develms();
+
+function check_screen_width() {
+    var ww = window.screen.width;
+    if (ww < 500) {
+        var elm = document.getElementById("no-display-sp");
+        elm.remove();
+    }
+}
+check_screen_width()
+

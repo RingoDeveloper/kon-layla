@@ -58,19 +58,46 @@
                 <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#なまモクレンをツイートする</a>
             </div>            
             <img class="ringo" id="ringo" src="src/ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
+            <div class="button" id="button_sch">
+                <a onclick="show_sch()">スケジュールはこちら</a>
+            </div>
             <br>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <div class="titleScripts">
-                <h1>こんレイラ！</h1>
+            
+            <div class="links" id="links">
+                <a href="https://www.youtube.com/channel/UCm-nZofnh3_1s_l2Gq3G1KQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/youtube_social_square_white.png"></a>
+                <a href="https://twitter.com/Layla__Magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/Twitter social icons - square - blue.png"></a>
+                <a href="https://www.twitch.tv/layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/twitch-logo.png"></a>
+                <a href="https://www.tiktok.com/@layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" id="tiktok" src="./src/logo/tiktok-app-icon-seeklogo.com.svg"></a>
+                <a href="https://layla-magnolia.fanbox.cc/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/fanbox-logo.png"></a>
+                <a href="https://laylamagnolia.booth.pm/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/logo_icon.png"></a>
+                <a href="https://marshmallow-qa.com/layla__magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/mshumaro-logo.png"></a>
+                <a href="https://www.amazon.jp/hz/wishlist/ls/3VAKTD0I7HNQO?ref_=wl_share" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/amazon_logo.png"></a>
             </div>
+
+            <div class="titleScripts">
+                <h1 id="kon-layla">こんレイラ！</h1><br>
+            </div>
+            <p class="description_text">
+                レイラ・マグノリア非公式ファンサイトようこそ<br>
+                当サイトはゲーム大好き吸血鬼VTuberのレイラ・マグノリアさんを支援する目的で作成されたファンサイトです。<br>
+                是非ご活用ください！<br>
+            </p>
+            <p class="description_text" id="no-display-sp">
+                また、当サイトは開発中のものです。不定期でアップデートが実施されます。<br>
+                不具合や機能のご要望等ございましたら、お気軽にお問い合わせページにてお申し付けください。<br>
+                今後とも当サイトをよろしくお願いいたします。 
+            </p>
+            <p class="description_text">
+                管理人 りんごでべろっぱ
+                <br>
+            </p> 
+                
+            
             <!--ul class="follow-me">
                 <li><a href="https://twitter.com"></a></li>
                 <li><a href="https://www.youtube.com"></a></li>
             </ul-->
-            <div class="button" id="button_sch">
-                <a onclick="show_sch()">スケジュールはこちら</a>
-            </div>
-    
             <label for="switch" class="switch_label" id="switch_label">
                 <span class="title_blkapi">block API</span>
                 <div class="switch"> 
@@ -179,12 +206,18 @@
                         
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
+
                             var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
                             var TITLE = jsonitem_l[i].snippet.title;
-                            //配信中のアイテムを表示
-                            if (localStorage.getItem('lightmode') == "true") {
-                                //light mode
-                                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+                            if (retCheckDev()) {
+                                //配信中のアイテムを表示
+                                if (checkLightMode()) {
+                                    //light mode
+                                    $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+                                } else {
+                                    //nomal mode
+                                    $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                                }
                             } else {
                                 //nomal mode
                                 $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe><h2 class="sc-time">' + TITLE + '</h2></div>'); /////
@@ -255,7 +288,7 @@
                                     //$("#youtubeList_u_inner").append(''); /////
 
                                     //配信予定のアイテムを表示
-                                    if (localStorage.getItem('lightmode') == "true") {
+                                    if (checkLightMode()) {
                                         //developer mode
                                         //console.log("https://www.youtube.com/watch?v=" + ID);
                                         $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
@@ -338,7 +371,7 @@
                                     var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                                     //$("#youtubeList_c_inner").append('<div class="iframe_wrapper"><h2>' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
                                     
-                                    if (localStorage.getItem('lightmode') == "true") {
+                                    if (checkLightMode()) {
                                         //developer mode
                                         //console.log("https://www.youtube.com/watch?v=" + ID);
                                         //$("#youtubeList_c_inner").append('<div class="iframe_wrapper_c"><a href=' + 'https://www.youtube.com/watch?v=' + ID + '><img class="thumb" src=' + TN_URL + '></a></div>');
@@ -415,6 +448,8 @@
                     </div>
                 </div>
             </div>
+
+            
               
         </main>
         
