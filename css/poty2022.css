@@ -60,103 +60,112 @@ a {
     margin-top: 70px;
 }
   
-@media only screen and (max-width: 768px) {
-    .nav {
-      position: fixed;
-      right: -320px; /* 右から出てくる */
-      top: 0;
-      width: 300px; /* スマホに収まるサイズ */
-      height: 100vh;
-      padding-top: 60px;
-      background-color: #6C3246;
-      transition: all .6s;
-      z-index: 200;
-      overflow-y: auto; /* メニューが多くなったらスクロールできるように */
-    }
-    .hamburger {
-      position: absolute;
-      right: 15px;
-      top: 12px;
-      width: 40px; /* クリックしやすい幅 */
-      height: 40px; /* クリックしやすい高さ */
-      cursor: pointer;
-      z-index: 300;
-    }
-    .nav_list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .nav_item {
-      text-align: center;
-      padding: 0 14px;
-    }
-    .nav_item a {
-      display: block;
-      padding: 8px 0;
-      border-bottom: 1px solid #FFE4C4;
-      text-decoration: none;
-      color: #FFE4C4;
-    }
-    .nav_item a:hover {
-      background-color: #FFE4C4;
-      
-      color: #333;
-    }
-    .hamburger_border {
-      position: absolute;
-      left: 11px;
-      width: 18px;
-      height: 2px;
-      background-color: #FFE4C4;
-      transition: all .6s;
-    }
-    .hamburger_border_top {
-      top: 14px;
-    }
-    .hamburger_border_center {
-      top: 20px;
-    }
-    .hamburger_border_bottom {
-      top: 26px;
-    }
-    .black_bg {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 100;
-      background-color: #333;
-      opacity: 0;
-      visibility: hidden;
-      transition: all .6s;
-      cursor: pointer;
-    }
+@media only screen and (max-width: 900px) {
+  .nav {
+    position: fixed;
+    right: -320px; /* 右から出てくる */
+    top: 0;
+    width: 300px; /* スマホに収まるサイズ */
+    height: 100vh;
+    padding-top: 60px;
+    background-color: #6C3246;
+    transition: all .6s;
+    z-index: 200;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+  }
+  .hamburger {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    width: 40px; /* クリックしやすい幅 */
+    height: 40px; /* クリックしやすい高さ */
+    cursor: pointer;
+    z-index: 300;
+  }
+  .nav_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .nav_item {
+    text-align: center;
+    padding: 0 14px;
+  }
+  .nav_item a {
+    display: block;
+    padding: 8px 0;
+    text-decoration: none;
+    color: #FFE4C4;
+  }
+  .nav_item a:hover {
+    background-color: #FFE4C4;
+    
+    color: #333;
+  }
+  .hamburger_border {
+    position: absolute;
+    left: 11px;
+    width: 18px;
+    height: 2px;
+    background-color: #FFE4C4;
+    transition: all .6s;
+  }
+  .hamburger_border_top {
+    top: 14px;
+  }
+  .hamburger_border_center {
+    top: 20px;
+  }
+  .hamburger_border_bottom {
+    top: 26px;
+  }
+  .black_bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .6s;
+    cursor: pointer;
+  }
   
-    /* 表示された時用のCSS */
-    .nav-open .nav {
-      right: 0;
-    }
-    .nav-open .black_bg {
-      opacity: .8;
-      visibility: visible;
-    }
-    .nav-open .hamburger_border_top {
-      transform: rotate(45deg);
-      top: 20px;
-    }
-    .nav-open .hamburger_border_center {
-      width: 0;
-      left: 50%;
-    }
-    .nav-open .hamburger_border_bottom {
-      transform: rotate(-45deg);
-      top: 20px;
-    }
-  }/* sp */
+  /* 表示された時用のCSS */
+  .nav-open .nav {
+    right: 0;
+  }
+  .nav-open .black_bg {
+    opacity: .8;
+    visibility: visible;
+  }
+  .nav-open .hamburger_border_top {
+    transform: rotate(45deg);
+    top: 20px;
+  }
+  .nav-open .hamburger_border_center {
+    width: 0;
+    left: 50%;
+  }
+  .nav-open .hamburger_border_bottom {
+    transform: rotate(-45deg);
+    top: 20px;
+  }
+
+  .nav_item #menu_poty { 
+    color: #333;
+    background-color: #FFE4C4;
+  }
+
+  .nav_item {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}/* sp */
   
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 900px) {
     .header_inner {
       width: 95%;
       padding: 5px 15px;
@@ -223,12 +232,24 @@ a {
         font-weight: 400;
         font-style: normal;
     }
-    iframe {
+    .thumb {
       width: 608px;
-      height: 342px;
+      height: 338px;
+      border-radius: 7px;
+      object-fit: cover; /* この一行を追加するだけ！ */
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .iframe_wrapper_test {
+      margin-top: 30px;
+      width:min-content;
+      padding: 20px;
+      overflow-wrap: break-all;
+      background-color: #FFFFFF;
       border-radius: 7px;
     }
     .wtitle {
+      margin-top: 40px;
         font-size: 25pt;
         font-weight: bold;
     }
@@ -518,47 +539,106 @@ ul.footer_menu li {
       .header_title{
           font-size: x-large;
       }
-      iframe {
-          width: 352px;
-          height: 198px;
+      .thumb {
+          width: calc(100%);
+          height: calc(100% * (9 / 16));
+          margin: auto;
+          display: block;
           border-radius: 7px;
+          object-fit: cover; /* この一行を追加するだけ！ */
+          box-shadow: 0 0 5px rgba(0,0,0,0.2);
       }
+  
+      .iframe_wrapper_test {
+        margin-top: 10px;
+        width:90%;
+        margin: auto;
+        display: block;
+        padding: 20px;
+        overflow-wrap: break-all;
+        background-color: #FFFFFF;
+        border-radius: 7px;
+      }
+      .wtitle {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 20pt;
+        font-weight: bold;
+      }
+
+
   
   }
 
 @media screen and (max-width: 480px) {
   /* ここに480px以下用（スマートフォン） */
       
-      .header_title{
-          font-size: large;
-      }
-  
-      footer {
-          width: auto;
-          height: auto;
-          background-color: #424141;
-          text-align: center;
-          color: #ddd;
-          margin-bottom: 0%;
-      }
-  
-      footer {
-          padding-top: 5px;
-          padding-bottom: 5px;
-      }
-  
-      #cc {
-          font-size: small;
-      }
-      #version {
-          font-size: small;
-      }
+    .header_title{
+        font-size: large;
+    }
 
-      iframe {
-        width: 320px;
-        height: 180px;
-        border-radius: 7px;
-      }
+    footer {
+        width: auto;
+        height: auto;
+        background-color: #424141;
+        text-align: center;
+        color: #ddd;
+        margin-bottom: 0%;
+    }
+
+    footer {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #cc {
+        font-size: small;
+    }
+    #version {
+        font-size: small;
+    }
+
+    .no01,
+    .no02,
+    .no03,
+    .no04 {
+      padding: 0px;
+      padding-top: 5px;
+    }
+
+    .thumb {
+      width: calc(100%);
+      height: calc(100% * (9 / 16));
+      border-radius: 7px;
+      margin: auto;
+      margin-bottom: 5px;
+      display: block;
+      object-fit: cover; /* この一行を追加するだけ！ */
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .iframe_wrapper_test {
+      width:90%;
+      margin: auto;
+      display: block;
+      padding: 10px;
+      overflow-wrap: break-all;
+      background-color: #FFFFFF;
+      border-radius: 7px;
+    }
+
+    .sc-time {
+      margin: 0px;
+      font-size: 14px;
+    }
+
+    .wtitle {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 18pt;
+      font-weight: bold;
+    }
+      
 }
 
 

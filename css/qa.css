@@ -51,7 +51,7 @@ a {
   margin-top: 70px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
   .nav {
     position: fixed;
     right: -320px; /* 右から出てくる */
@@ -85,7 +85,6 @@ a {
   .nav_item a {
     display: block;
     padding: 8px 0;
-    border-bottom: 1px solid #FFE4C4;
     text-decoration: none;
     color: #FFE4C4;
   }
@@ -144,9 +143,19 @@ a {
     transform: rotate(-45deg);
     top: 20px;
   }
+
+  .nav_item #menu_qa { 
+    color: #333;
+    background-color: #FFE4C4;
+}
+
+  .nav_item {
+      padding-left: 0px;
+      padding-right: 0px;
+  }
 }/* sp */
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 900px) {
   .header_inner {
     width: 95%;
     padding: 5px 15px;

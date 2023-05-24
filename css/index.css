@@ -64,7 +64,7 @@ a {
     margin-top: 70px;
 }
   
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     .nav {
       position: fixed;
       right: -320px; /* 右から出てくる */
@@ -98,7 +98,7 @@ a {
     .nav_item a {
       display: block;
       padding: 8px 0;
-      border-bottom: 1px solid #FFE4C4;
+      
       text-decoration: none;
       color: #FFE4C4;
     }
@@ -157,9 +157,19 @@ a {
       transform: rotate(-45deg);
       top: 20px;
     }
+
+    .nav_item #menu_sch { 
+        color: #333;
+        background-color: #FFE4C4;
+    }
+
+    .nav_item {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }/* sp */
   
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 900px) {
     .header_inner {
         width: 95%;
         padding: 5px 15px;
@@ -237,8 +247,8 @@ a {
 }
 
 footer {
+    font-family: sans-serif;
     width: 100%;
-    height: auto;
     background-color: #424141;
     text-align: center;
     color: #ddd;
@@ -303,7 +313,8 @@ ul.footer_menu li {
 
 .button {
     margin: 30px;
-    float: right;
+    margin: auto;
+    display: block;
 }
 
 
@@ -377,11 +388,12 @@ ul.footer_menu li {
 }
 
 #youtubeList_singing {
-    background-color: #FFE4C4;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 10px;
     margin: 10px;
     border-radius: 7px;
 }
+
 
 #youtubeList_singing_inner {
     display: flex;
@@ -404,19 +416,20 @@ ul.footer_menu li {
     margin: 10px;
     float: right;
 }
-
+/*
 .twitter-follow-button {
     margin: 10px;
     margin-bottom: 3px;
     text-align: right;
     font-size: large;
 }
+*/
 
 .twitter-hashtag-button {
-    margin-left: 10px;
-    margin-top: 3px;
+    margin-left: 30px;
+    margin-top: 30px;
     text-align: right;
-    font-size: large;
+    font-size: x-large;
 }
 
 
@@ -434,7 +447,7 @@ iframe {
 }
 
 .iframe_wrapper {
-    font-family: sans-serif;
+    
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
@@ -447,7 +460,7 @@ iframe {
 }
 
 .iframe_wrapper_test {
-    font-family: sans-serif;
+    
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
@@ -460,7 +473,7 @@ iframe {
 }
 
 .iframe_wrapper_singing {
-    font-family: sans-serif;
+    
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
@@ -469,7 +482,7 @@ iframe {
     border-width: 0px;
     border-radius: 7px;
     background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgb(0, 179, 255);
 }
 
 h2.sc-time {
@@ -688,10 +701,10 @@ input:checked ~ .circle {
         margin: 10px;
     }
     #button_sch a {
-        font-size: 13px;
-        max-width: 160px;
+        font-size: 15px;
+        max-width: 180px;
         margin-bottom: 20px;
-        padding: 10px;
+        padding: 7px;
     }
 
     footer {
@@ -726,31 +739,40 @@ input:checked ~ .circle {
     }
 
     .thumb {
-        width: 320px;
-        height: 180px;
+        width: 304px;
+        height: 171px;
+        margin: auto;
+        display: block;
     }
 
     .iframe_wrapper {
+        width:95%;
+        margin: auto;
+        display: block;
         padding: 5px;
-        margin: 5px;
-        width: auto;
+        margin-bottom: 5px;
+        margin-top: 5px;
     }
 
     .iframe_wrapper_test {
+        width:95%;
+        margin: auto;
+        display: block;
         padding: 5px;
-        margin: 5px;
-        width: auto;
+        margin-bottom: 5px;
+        margin-top: 5px;
     }
 
     .iframe_wrapper_singing {
+        width:95%;
+        margin: auto;
+        display: block;
         padding: 5px;
-        margin: 5px;
-        width: auto;
+        box-shadow: 0 0 10px rgb(0, 179, 255);
     }
 
     #youtubeList_u {
         background-color: rgba(255, 255, 255, 0.5);
-        padding: 5px;
     }
 
     h2.statetext {
@@ -759,6 +781,8 @@ input:checked ~ .circle {
 
     h2.sc-time {
         font-size: large;
+        width: 304px;
+        margin: auto;
     }
 
     .ave_time {
@@ -777,12 +801,14 @@ input:checked ~ .circle {
     #tiktok {
         background-color: black;
     }
+    /*
+    #twitter-follow-button {
+        margin-bottom: 5px;
+    }
+    */
+
+    .twitter-hashtag-button {
+        margin-top: 10px;
+        margin-left: 5px;
+    }
 }
-
-
-
-
-
-
-
-

@@ -40,7 +40,8 @@
                     <ul class="nav_list">
                         <li class="nav_item"><a id="menu_sch" href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
                         <li class="nav_item"><a id="menu_poty" href="https://ringodeveloper.github.io/kon-layla/poty2022.html">POTY</a></li>
-                        <li class="nav_item"><a id="qa" href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
+                        <li class="nav_item"><a id="menu_qa" href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
+                        <li class="nav_item"><a id="menu_pp" href="https://ringodeveloper.github.io/kon-layla/pp.html">プライバシーポリシー</a></li>
                     </ul>
                 </nav>
             </div>
@@ -54,26 +55,15 @@
         
         <main class="main">
             <div id="link">
-                <a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
+                <!--a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br-->
                 <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#なまモクレンをツイートする</a>
             </div>            
             <img class="ringo" id="ringo" src="src/ringodev_logo_v2.png" width="45", height="45" onclick="ringoBtn()">
-            <div class="button" id="button_sch">
-                <a onclick="show_sch()">スケジュールはこちら</a>
-            </div>
+            
             <br>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             
-            <div class="links" id="links">
-                <a href="https://www.youtube.com/channel/UCm-nZofnh3_1s_l2Gq3G1KQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/youtube_social_square_white.png"></a>
-                <a href="https://twitter.com/Layla__Magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/Twitter social icons - square - blue.png"></a>
-                <a href="https://www.twitch.tv/layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/twitch-logo.png"></a>
-                <a href="https://www.tiktok.com/@layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" id="tiktok" src="./src/logo/tiktok-app-icon-seeklogo.com.svg"></a>
-                <a href="https://layla-magnolia.fanbox.cc/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/fanbox-logo.png"></a>
-                <a href="https://laylamagnolia.booth.pm/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/logo_icon.png"></a>
-                <a href="https://marshmallow-qa.com/layla__magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/mshumaro-logo.png"></a>
-                <a href="https://www.amazon.jp/hz/wishlist/ls/3VAKTD0I7HNQO?ref_=wl_share" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/amazon_logo.png"></a>
-            </div>
+            
 
             <div class="titleScripts">
                 <h1 id="kon-layla">こんレイラ！</h1><br>
@@ -92,12 +82,21 @@
                 管理人 りんごでべろっぱ
                 <br>
             </p> 
+            <div class="links" id="links">
+                <a href="https://www.youtube.com/channel/UCm-nZofnh3_1s_l2Gq3G1KQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/youtube_social_square_white.png"></a>
+                <a href="https://twitter.com/Layla__Magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/Twitter social icons - square - blue.png"></a>
+                <a href="https://www.twitch.tv/layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/twitch-logo.png"></a>
+                <a href="https://www.tiktok.com/@layla_magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" id="tiktok" src="./src/logo/tiktok-app-icon-seeklogo.com.svg"></a>
+                <a href="https://layla-magnolia.fanbox.cc/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/fanbox-logo.png"></a>
+                <a href="https://laylamagnolia.booth.pm/" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/logo_icon.png"></a>
+                <a href="https://marshmallow-qa.com/layla__magnolia" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/mshumaro-logo.png"></a>
+                <a href="https://www.amazon.jp/hz/wishlist/ls/3VAKTD0I7HNQO?ref_=wl_share" target="_blank" rel="noopener noreferrer"><img class="link-logo" src="./src/logo/amazon_logo.png"></a>
+            </div>
+
+            <div class="button" id="button_sch">
+                <a onclick="show_sch()">スケジュールはこちら</a>
+            </div>
                 
-            
-            <!--ul class="follow-me">
-                <li><a href="https://twitter.com"></a></li>
-                <li><a href="https://www.youtube.com"></a></li>
-            </ul-->
             <label for="switch" class="switch_label" id="switch_label">
                 <span class="title_blkapi">block API</span>
                 <div class="switch"> 
@@ -128,8 +127,8 @@
             const Y_API_KEY_D1 = config.y_apikey_d1;
             const Y_API_KEY_D2 = config.y_apikey_d2;
             const DEV_KEY = config.dev_key;
-            K_LIST.push(Y_API_KEY1);
-            K_LIST.push(Y_API_KEY2);
+            //K_LIST.push(Y_API_KEY1);
+            //K_LIST.push(Y_API_KEY2);
             K_LIST.push(Y_API_KEY3);
             const max = K_LIST.length;
     
@@ -407,7 +406,7 @@
                     <div id="youtubeList_u_inner"></div>
                 </div>
                 <div class="notdevelm" id="youtubeList_singing">
-                    <h2 class="statetext">歌ってみた🎤</h2>
+                    <h2 class="statetext" id="statetext_sing">歌ってみた🎤</h2>
                     <div id="youtubeList_singing_inner">
                         <div class="iframe_wrapper_singing"><a href="https://www.youtube.com/watch?v=mNkMnQJAfKg" target="_blank" rel="noopener noreferrer"><h2 class="sc-time" style="color:black">1000人記念 歌ってみた公開中！</h2><img class="thumb" src="https://img.youtube.com/vi/mNkMnQJAfKg/maxresdefault.jpg"></a></div>
                     </div>
@@ -442,9 +441,6 @@
                     </div>
                 </div>
             </div>
-
-            
-              
         </main>
         
         <footer>
@@ -464,4 +460,3 @@
     </body>
     
 </html>
-
