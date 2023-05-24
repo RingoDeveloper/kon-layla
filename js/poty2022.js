@@ -81,3 +81,15 @@ function toggleNav() {
     });
 }
 toggleNav();
+
+
+function change_thumb_size() {
+    if (screen.width < 480) {
+        var elms = document.getElementsByClassName("thumb");
+        for (let i = 0; i < elms.length; i++) {
+            var newsrc = elms[i].src.replace('sddefault', 'mqdefault');
+            elms.src = newsrc;
+            console.log(newsrc);
+        }
+    }
+}
