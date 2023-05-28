@@ -514,6 +514,7 @@ ul.footer_menu {
 }
 
 
+
 ul.footer_menu {
   list-style-type: none;
   padding-left: 0px;
@@ -568,6 +569,13 @@ ul.footer_menu li {
 
 
   
+  }
+
+  .inner-logo {
+    height: 25px;
+    width: auto;
+    margin-top: 10px;
+    float: inline-end;
   }
 
 @media screen and (max-width: 480px) {
@@ -637,6 +645,13 @@ ul.footer_menu li {
       margin-bottom: 10px;
       font-size: 18pt;
       font-weight: bold;
+    }
+
+    .inner-logo {
+      height: 16px;
+      width: auto;
+      margin-top: 3px;
+      float: inline-end;
     }
       
 }

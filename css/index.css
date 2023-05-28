@@ -489,10 +489,10 @@ iframe {
     border-radius: 7px;
     background-color: #ffffff9a;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    max-width: min-content;
 }
 
 .iframe_wrapper_singing {
-    
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
@@ -502,6 +502,7 @@ iframe {
     border-radius: 7px;
     background-color: #ffffff;
     box-shadow: 0 0 20px rgb(0, 179, 255);
+    max-width: min-content;
 }
 
 h2.sc-time {
@@ -632,6 +633,12 @@ input:checked ~ .circle {
     background-color: black;
 }
 
+.inner-logo {
+    height: 30px;
+    width: auto;
+    margin-top: 15px;
+    float: inline-end;
+}
 
 
 
@@ -686,6 +693,11 @@ input:checked ~ .circle {
     
     #tiktok {
         background-color: black;
+    }
+
+    .inner-logo {
+        height: 20px;
+        width: auto;
     }
 }
 
@@ -787,6 +799,8 @@ input:checked ~ .circle {
         margin: auto;
         display: block;
         padding: 5px;
+        margin-bottom: 5px;
+        margin-top: 5px;
         box-shadow: 0 0 10px rgb(0, 179, 255);
     }
 
@@ -799,7 +813,7 @@ input:checked ~ .circle {
     }
 
     h2.sc-time {
-        font-size: large;
+        font-size: 16px;
         width: 304px;
         margin: auto;
     }
@@ -829,5 +843,11 @@ input:checked ~ .circle {
     .twitter-hashtag-button {
         margin-top: 10px;
         margin-left: 5px;
+    }
+
+    .inner-logo {
+        height: 16px;
+        width: auto;
+        margin-top: 8px;
     }
 }
