@@ -78,8 +78,8 @@ function checkDevMode() {
     let num_cv = check_num_cv();
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(K_LIST[keyindex], owner.length);//decryption(Y_API_KEY_D2, owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(K_LIST[keyindex], owner.length) + '&id=';
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(K_LIST[0], owner.length);//decryption(Y_API_KEY_D2, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(K_LIST[0], owner.length) + '&id=';
         //base_youtube_url_channel = 'https://www.googleapis.com/youtube/v3/channelSections?part=snippet&key=' + decryption(Y_API_KEY_D1, owner.length);
 
         console.log("developer");
@@ -95,9 +95,9 @@ function checkDevMode() {
         if (switch_l_elm != null) {
             switch_l_elm.remove();
         }
-        let keyindex = getRandomInt();
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(K_LIST[keyindex], owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' +decryption(K_LIST[keyindex], owner.length) + '&id=';
+        //
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(K_LIST[0], owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' +decryption(K_LIST[0], owner.length) + '&id=';
         console.log("user");
         
         //console.log(keyindex);
