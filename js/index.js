@@ -78,8 +78,8 @@ function checkDevMode() {
     let num_cv = check_num_cv();
 
     if (result == "true") { /* devmode */
-        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
-        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
+        base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + num_cv + '&order=date&type=video&key=' + decryption(Y_API_KEY_D2, owner.length);//decryption(Y_API_KEY_D2, owner.length);
+        base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + num_cv + '&key=' + decryption(Y_API_KEY_D2, owner.length) + '&id=';
         //base_youtube_url_channel = 'https://www.googleapis.com/youtube/v3/channelSections?part=snippet&key=' + decryption(Y_API_KEY_D1, owner.length);
 
         console.log("developer");
@@ -208,3 +208,80 @@ function check_screen_width() {
 }
 check_screen_width()
 
+
+function push_mo_ul(video_u_obj_list) {
+    console.log("runnnnn");
+    // チャンネルIDとAPIキーを設定
+    var channelId = 'UCm-nZofnh3_1s_l2Gq3G1KQ';
+    var KEY = decryption(Y_API_KEY_D1, owner.length);
+    var apiKey = KEY;
+
+    // メンバー限定動画の再生リストIDを取得するリクエスト
+    $.ajax({
+    url: 'https://www.googleapis.com/youtube/v3/channels',
+    type: 'GET',
+    dataType: 'json',
+    data: {
+        part: 'contentDetails',
+        id: channelId,
+        key: apiKey
+    }
+    }).done(function(data) {
+    // メンバー限定動画の再生リストIDを取得
+    var uploadsPlaylistId = data.items[0].contentDetails.relatedPlaylists.uploads;
+
+    // メンバー限定動画の再生リストを取得するリクエスト
+    $.ajax({
+        url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+        part: 'snippet',
+        maxResults: 50, // 取得する動画の最大数（50まで）
+        playlistId: "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx",
+        key: apiKey
+        }
+    }).done(function(data) {
+        // メンバー限定動画を列挙
+        var items = data.items;
+        for (var i = 0; i < items.length; i++) {
+            var videoId = items[i].snippet.resourceId.videoId;
+            var videoTitle = items[i].snippet.title;
+            $.ajax({
+                url: 'https://www.googleapis.com/youtube/v3/videos',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    part: 'liveStreamingDetails',
+                    id: videoId,
+                    key: apiKey
+                },
+                success: function(data) {
+                    // 応答データの処理
+                    var liveStreamingDetails = data.items[0].liveStreamingDetails;
+                    if (liveStreamingDetails && liveStreamingDetails.actualStartTime) {
+                        var startTime = new Date(liveStreamingDetails.actualStartTime);
+                        console.log('配信開始時間:', startTime);
+                        // 動画の情報を表示するなどの処理を行う
+                        console.log("Video ID:", videoId);
+                        //console.log("Video Title:", videoTitle);
+                        video_u_obj_list.push({videoid: videoId, time: startTime});
+                    } else {
+                        console.log('配信情報がありません');
+                    }
+                },
+                error: function(error) {
+                    // エラーの処理
+                    console.log('エラー:', error);
+                }
+            });
+        }
+            }).fail(function(data) {
+                // エラーハンドリング
+                console.log('Error: Failed to retrieve member-exclusive videos.');
+            });
+        }).fail(function(data) {
+            // エラーハンドリング
+            console.log('Error: Failed to retrieve channel details.');
+            });
+}
