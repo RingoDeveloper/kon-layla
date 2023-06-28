@@ -26,7 +26,7 @@ function decryption(string, key) {
 ////* debug tools *////
 /* debug variable */
 const owner = "ringo";
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 let base_youtube_url;
 let base_youtube_url_live;
 let cnt = 0;
