@@ -304,6 +304,25 @@ color: #ddd;
 }
 
 
+@media only screen and (max-width: 610px) {
+    .twitter-hashtag-button {
+        text-align: right;
+        font-size: x-large;
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+
+    .search-button {
+        border: 0px;
+        border-radius: 20px;
+        background-color: #1DA1F2;
+        padding: 6px 10px 6px 10px;
+        width: auto;
+        color: #fff;
+        margin-left: 5px;
+    }
+}
+
 
 @media screen and (max-width: 480px) {
 /* ここに480px以下用（スマートフォン） */

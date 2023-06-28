@@ -18,7 +18,7 @@ function removeDataSizeAttribute() {
     for (let i = 0; i < tweetLinks.length; i++) {
       const tweetLink = tweetLinks[i];
       
-      if (window.innerWidth < 1080) {
+      if (window.innerWidth < 480) {
         tweetLink.removeAttribute('data-size');
       }
     }
