@@ -41,6 +41,7 @@
                 <nav class="nav">
                     <ul class="nav_list">
                         <li class="nav_item"><a id="menu_sch" href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
+                        <li class="nav_item"><a id="menu_ht" href="https://ringodeveloper.github.io/kon-layla/hashtags.html">ハッシュタグ</a></li>
                         <li class="nav_item"><a id="menu_poty" href="https://ringodeveloper.github.io/kon-layla/poty2022.html">POTY</a></li>
                         <li class="nav_item"><a id="menu_qa" href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
                         <li class="nav_item"><a id="menu_pp" href="https://ringodeveloper.github.io/kon-layla/pp.html">プライバシーポリシー</a></li>
@@ -221,7 +222,7 @@
                                 }
                             } else {
                                 //nomal mode
-                                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe><h2 class="sc-time">' + TITLE + '</h2></div>'); /////
+                                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
                             }
                             
                         }
@@ -269,7 +270,7 @@
                                     date = new Date(time);
                                     video_u_obj_list.push({videoid: videoId_u[i], time: date});
                                 }
-                                push_mo_ul(video_u_obj_list);
+                                //push_mo_ul(video_u_obj_list); //メン限
                                 let video_u_obj_list_sorted = video_u_obj_list.sort(
                                     (a, b) => moment(a.time).diff(b.time)
                                 );
@@ -402,7 +403,7 @@
                     
                     */
 
-                    /* メンバー限定動画列挙関数 
+                    /*メンバー限定動画列挙関数 
                     (function($) {
                     $(function() {
                         // チャンネルIDとAPIキーを設定
@@ -458,6 +459,7 @@
                                             console.log('配信開始時間:', startTime);
                                             // 動画の情報を表示するなどの処理を行う
                                             console.log("Video ID:", videoId);
+                                            console.log("V_TITLE:", videoTitle);
                                             //console.log("Video Title:", videoTitle);
                                             //video_u_obj_list.push({videoid: videoId, time: startTime});
                                         } else {

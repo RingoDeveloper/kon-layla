@@ -56,7 +56,7 @@ a {
     align-items: center;
 }
   
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1080px) {
     .nav {
       position: fixed;
       right: -320px; /* 右から出てくる */
@@ -160,7 +160,7 @@ a {
     }
 }/* sp */
   
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 1080px) {
     .header_inner {
       width: 95%;
       padding: 5px 15px;
