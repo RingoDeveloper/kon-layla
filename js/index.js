@@ -216,6 +216,20 @@ function check_screen_width() {
 }
 check_screen_width()
 
+function removeDataSizeAttribute() {
+    const tweetLinks = document.getElementsByClassName('twitter-hashtag-button');
+    
+    for (let i = 0; i < tweetLinks.length; i++) {
+      const tweetLink = tweetLinks[i];
+      
+      if (window.innerWidth < 480) {
+        tweetLink.removeAttribute('data-size');
+      }
+    }
+}
+  
+removeDataSizeAttribute(); // 初回の実行
+
 
 function push_mo_ul(video_u_obj_list) {
     
