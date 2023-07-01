@@ -17,6 +17,8 @@ body {
     background-attachment: fixed;         /* 固定 */
     background-position: center center;   /* 縦横中央 */
     margin: 0px;
+    min-width: 360px; /* 画面幅360pxまで */
+    overflow-x: auto;
 }
 
 body {
