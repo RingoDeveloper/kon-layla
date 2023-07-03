@@ -322,6 +322,9 @@ function setLVideo() {
             $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
         }
     } else {
+        var ID = video_l_obj_list[0].videoid;
+        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
+        var TITLE = video_l_obj_list[0].title;
         if (retCheckDev()) {
             //配信中のアイテムを表示
             if (checkLightMode()) {
