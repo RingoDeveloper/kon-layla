@@ -199,18 +199,18 @@
                     }
                     */
                     
-                    
-                    if (/*jsonitem_l.length < 1*/false) {
-                        //document.getElementById("youtubeList_l").style.visibility = "hidden";
+
+                    if (jsonitem_l.length < 1) {
+                        document.getElementById("youtubeList_l").style.visibility = "hidden";
                     } else {
                         $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
                         $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
+                        
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
-                            var TITLE = jsonitem_l[i].snippet.title;
-                            await checkVideoStatus(ID, false, TITLE);
-                            /*
+
                             var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
+                            var TITLE = jsonitem_l[i].snippet.title;
                             if (retCheckDev()) {
                                 //配信中のアイテムを表示
                                 if (checkLightMode()) {
@@ -224,7 +224,7 @@
                                 //nomal mode
                                 $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
                             }
-                            */
+                            
                         }
                     }
         
@@ -268,15 +268,12 @@
                                 for (let i = 0; i < jsonitem_ld.length; i++) {
                                     time = Date.parse(jsonitem_ld[i].liveStreamingDetails.scheduledStartTime);
                                     date = new Date(time);
-                                    video_u_obj_list.push({videoid: videoId_u[i], time: date, mo: false});
+                                    video_u_obj_list.push({videoid: videoId_u[i], time: date});
                                 }
-                                video_u_obj_list = push_mo_ul(video_u_obj_list); //メン限を格納
-                                /* //////////////////////////////here
-                                const entries = Object.entries(video_u_obj_list);
-                                entries.sort(
+                                //push_mo_ul(video_u_obj_list); //メン限
+                                let video_u_obj_list_sorted = video_u_obj_list.sort(
                                     (a, b) => moment(a.time).diff(b.time)
                                 );
-                                const video_u_obj_list_sorted = Object.fromEntries(entries);
                                 console.log(video_u_obj_list_sorted);
                                 for (let i = 0; i < video_u_obj_list_sorted.length; i++) {
                                     var ID = video_u_obj_list_sorted[i].videoid;
@@ -295,29 +292,15 @@
                                     //$("#youtubeList_u_inner").append(''); /////
 
                                     //配信予定のアイテムを表示
-
-                                    if (video_u_obj_list_sorted[i].mo == true) { //メン限コンテンツ
-                                        if (checkLightMode()) {
-                                        //developer mode
-                                        //console.log("https://www.youtube.com/watch?v=" + ID);
-                                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
-                                        } else {
-                                            //nomal mode
-                                            $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                                        }
-                                    } else {                                    //公開コンテンツ
-                                        if (checkLightMode()) {
+                                    if (checkLightMode()) {
                                         //developer mode
                                         //console.log("https://www.youtube.com/watch?v=" + ID);
                                         $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
-                                        } else {
-                                            //nomal mode
-                                            $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                                        }
+                                    } else {
+                                        //nomal mode
+                                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
                                     }
-                                    
                                 }
-                                */
                             }).fail(function (data) {
                             // error
                             console.log('error');
@@ -410,6 +393,96 @@
                             });
                         });
                     })(jQuery);
+                    /*
+                    const values_completed_details = Promise.all([
+                        promiseFunc((base_youtube_url_live+videoId_c_string),'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
+                    ]);
+                    console.log(values_completed_details);
+                    const jsonitem_ld = values_completed_details.flat();
+                    
+                    
+                    */
+
+                    /*メンバー限定動画列挙関数 
+                    (function($) {
+                    $(function() {
+                        // チャンネルIDとAPIキーを設定
+                        var channelId = 'UCm-nZofnh3_1s_l2Gq3G1KQ';
+                        var KEY = decryption(Y_API_KEY_D1, owner.length);
+                        var apiKey = KEY;
+
+                        // メンバー限定動画の再生リストIDを取得するリクエスト
+                        $.ajax({
+                        url: 'https://www.googleapis.com/youtube/v3/channels',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            part: 'contentDetails',
+                            id: channelId,
+                            key: apiKey
+                        }
+                        }).done(function(data) {
+                        // メンバー限定動画の再生リストIDを取得
+                        var uploadsPlaylistId = data.items[0].contentDetails.relatedPlaylists.uploads;
+
+                        // メンバー限定動画の再生リストを取得するリクエスト
+                        $.ajax({
+                            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {
+                            part: 'snippet',
+                            maxResults: 50, // 取得する動画の最大数（50まで）
+                            playlistId: "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx",
+                            key: apiKey
+                            }
+                        }).done(function(data) {
+                            // メンバー限定動画を列挙
+                            var items = data.items;
+                            for (var i = 0; i < items.length; i++) {
+                                var videoId = items[i].snippet.resourceId.videoId;
+                                var videoTitle = items[i].snippet.title;
+                                $.ajax({
+                                    url: 'https://www.googleapis.com/youtube/v3/videos',
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    data: {
+                                        part: 'liveStreamingDetails',
+                                        id: videoId,
+                                        key: apiKey
+                                    },
+                                    success: function(data) {
+                                        // 応答データの処理
+                                        var liveStreamingDetails = data.items[0].liveStreamingDetails;
+                                        if (liveStreamingDetails && liveStreamingDetails.actualStartTime) {
+                                            var startTime = new Date(liveStreamingDetails.actualStartTime);
+                                            console.log('配信開始時間:', startTime);
+                                            // 動画の情報を表示するなどの処理を行う
+                                            console.log("Video ID:", videoId);
+                                            console.log("V_TITLE:", videoTitle);
+                                            //console.log("Video Title:", videoTitle);
+                                            //video_u_obj_list.push({videoid: videoId, time: startTime});
+                                        } else {
+                                            console.log('配信情報がありません');
+                                        }
+                                    },
+                                    error: function(error) {
+                                        // エラーの処理
+                                        console.log('エラー:', error);
+                                    }
+                                });
+                            }
+                                }).fail(function(data) {
+                                    // エラーハンドリング
+                                    console.log('Error: Failed to retrieve member-exclusive videos.');
+                                });
+                            }).fail(function(data) {
+                                // エラーハンドリング
+                                console.log('Error: Failed to retrieve channel details.');
+                                });
+                            });
+                    })(jQuery);
+                    */
                 }
                 
     
@@ -432,7 +505,7 @@
                 </div>
                 <div id="youtubeList_c">
                     <div class="statetext_top">
-                        <h2 class="statetext">アーカイブ</h2>
+                        <h2 class="statetext">過去の配信</h2>
                     </div>
                     <div>
                         <span id="title_shownum" >表示数</span>
@@ -451,15 +524,6 @@
                     </script>
                     <div id="youtubeList_c_inner"></div>
                 </div>
-
-                <div id="youtubeList_m">
-                    <div class="statetext">
-                        <h2 class="statetext">メンバー限定配信アーカイブ</h2>
-                    </div>
-                    <div id="youtubeList_m_inner"></div>
-                </div>
-
-
 
                 <div class="develm" id="youtubeList_test">
                     <h2 class="statetext">デザインテスト</h2>
