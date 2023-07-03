@@ -1,0 +1,24 @@
+part: 'liveStreamingDetails'
+
+// ストリーミング中
+{ 
+  "actualStartTime": "2023-07-03T06:41:15Z",
+  "scheduledStartTime": "2023-07-03T06:40:57Z",
+  "concurrentViewers": "1",
+  "activeLiveChatId": "Cg0KC25KWmo1UXBJWU9FKicKGFVDenVuOVhhM2VJb2ljYTlKb09qalppQRILbkpaajVRcElZT0U"
+}
+
+//ストリーミング終了直後
+{
+  "actualStartTime": "2023-07-03T06:41:15Z",
+  "actualEndTime": "2023-07-03T06:51:35Z",
+  "scheduledStartTime": "2023-07-03T06:40:57Z",
+  "activeLiveChatId": "Cg0KC25KWmo1UXBJWU9FKicKGFVDenVuOVhhM2VJb2ljYTlKb09qalppQRILbkpaajVRcElZT0U"
+}
+
+// アーカイブ
+{
+  "actualStartTime": "2023-07-02T12:59:41Z",
+  "actualEndTime": "2023-07-02T15:17:54Z",
+  "scheduledStartTime": "2023-07-02T13:00:10Z"
+}

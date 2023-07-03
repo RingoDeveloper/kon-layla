@@ -1,3 +1,15 @@
+/* グローバル変数 */
+const owner = "ringo";
+const DEBUG_MODE = false; //debug時はここをtrueに
+
+let base_youtube_url;
+let base_youtube_url_live;
+let cnt = 0;
+const mo_videoIds = [];
+
+//console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
+//console.log(decryption(, owner.length));
+
 function getRandomInt() {
     return Math.floor(Math.random() * max);
 }
@@ -22,14 +34,15 @@ function decryption(string, key) {
     return result;
 }
 
-
-////* debug tools *////
-/* debug variable */
-const owner = "ringo";
-const DEBUG_MODE = false;
-let base_youtube_url;
-let base_youtube_url_live;
-let cnt = 0;
+function setAPIKey(debug_mode) {
+    if (debug_mode) { //止まったら切り替え可能
+        return decryption(Y_API_KEY_D1, owner.length); 
+        //return decryption(Y_API_KEY_D2, owner.length);
+    } else {
+        return decryption(K_LIST[0], owner.length);
+    }
+}
+const APIKEY = setAPIKey(DEBUG_MODE);
 
 const checkbox = document.getElementById('switch');
 checkbox.addEventListener('click', ()=> {
@@ -51,11 +64,7 @@ checkbox2.addEventListener('click', ()=> {
     window.location.reload();
 });
 
-/* run debug functions */
-checkDevMode();
-checkBlkAPI();
-//console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
-//console.log(decryption(, owner.length));
+
 
 /* define debug functions */
 function enable_dev_mode() {
@@ -112,17 +121,15 @@ function checkDevMode() {
         //console.log(base_youtube_url);
     }
 }
+checkDevMode();
 
 function retCheckDev() {
     let result = localStorage.getItem('dev_mode');
-    console.log("run retCheckDev()");
     if (result != "true") {
         return false;
     }
     return true;
-    
 }
-
 
 function checkBlkAPI() {
     let result = localStorage.getItem('blk_api');
@@ -133,6 +140,7 @@ function checkBlkAPI() {
     } 
     return false;
 }
+checkBlkAPI();
 
 function checkLightMode() {
     let result = localStorage.getItem('lightmode');
@@ -227,105 +235,244 @@ function removeDataSizeAttribute() {
       }
     }
 }
-  
 removeDataSizeAttribute(); // 初回の実行
 
-
-function push_mo_ul(video_u_obj_list) {
-    
-    console.log("runnnnn");
-    // チャンネルIDとAPIキーを設定
-    var channelId = 'UCm-nZofnh3_1s_l2Gq3G1KQ';
-    var KEY = decryption(Y_API_KEY_D1, owner.length);
-    var apiKey = KEY;
-    var mo_videoIds = [];
-
-    // メンバー限定動画の再生リストを取得するリクエスト
-    $.ajax({
-        url: 'https://www.googleapis.com/youtube/v3/playlistItems',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-        part: 'snippet',
-        maxResults: 50, // 取得する動画の最大数（50まで）
-        playlistId: "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx",
-        key: apiKey
-        }
-    }).done(function(data) {
-        // メンバー限定動画を列挙
-        var items = data.items;
-        var videoId;
-        var videoTitle;
-        
+var video_m_obj_list = []; //グローバル宣言
+var video_l_obj_list = []; //グローバル宣言
+async function push_mo_ul(video_u_obj_list) {
+    try {
+        const response  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx",
+            key: APIKEY
+            }
+        });
+        const items = response.items;
+        //video_u_obj_list = await checkVideoStatus("ZxNsc2aZ7xo", true, "TEST", video_u_obj_list); debug用
         for (var i = 0; i < items.length; i++) {
-            videoId = items[i].snippet.resourceId.videoId;
-            mo_videoIds.push(videoId);
-            videoTitle = items[i].snippet.title;
-            console.log(videoTitle);
+            video_u_obj_list = await checkVideoStatus(items[i].snippet.resourceId.videoId, true, items[i].snippet.title, video_u_obj_list);
+            //mo_videoIds.push(items[i].snippet.resourceId.videoId);
         }
-    }).fail(function(data) {
-        // エラーハンドリング
-        console.log('Error: Failed to retrieve member-exclusive videos.');
-    });
+        
+        await setMOVideo();
+        await setUCVideo(video_u_obj_list);
+        await setLVideo();
+    } catch (error) {
+        console.log('Error: Failed to retrieve member-exclusive videos.', error);
+    }   
+}
 
-    for (let j = 0; j < mo_videoIds.length; j++) {
-        console.log("Ajax2");
-        $.ajax({
+async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []) {
+    try {
+        const data = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/videos',
             type: 'GET',
             dataType: 'json',
             data: {
                 part: 'liveStreamingDetails',
-                id: mo_videoIds[j],
-                key: apiKey
-            },
-            success: function(data) {
-                // 応答データの処理
-                var liveStreamingDetails = data.items[0].liveStreamingDetails;
-                console.log(data.items[0]);
-                if (liveStreamingDetails && liveStreamingDetails.actualStartTime) {
-                    var startTime = new Date(liveStreamingDetails.actualStartTime);
-                    console.log('配信開始時間:', startTime);
-                    // 動画の情報を表示するなどの処理を行う
-                    console.log("Video ID:", videoId);
-                    //console.log("Video Title:", videoTitle);
-                    video_u_obj_list.push({videoid: videoId, time: startTime});
-                    //サムネを追加する処理
-                    console.log(mo_videoIds);
-                    var ID = mo_videoIds[j];
-                    var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
-                    console.log(TN_URL);
-                    var DATETIME = startTime;
-                    var year = DATETIME.getFullYear() ;	// 年
-                    var month = DATETIME.getMonth() + 1 ;	// 月
-                    var day = DATETIME.getDate() ;	// 日
-                    var hour = DATETIME.getHours() ;	// 時
-                    var minute = DATETIME.getMinutes() ;	// 分
-                    var second = DATETIME.getSeconds() ;	// 秒
-                    var dayOfWeek = DATETIME.getDay() ;	// 曜日(数値)
-                    var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek] ;	// 曜日(日本語表記)
-                    var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
-                    //$("#youtubeList_u_inner").append(''); /////
-
-                    //配信予定のアイテムを表示
-                    if (checkLightMode()) {
-                        //developer mode
-                        //console.log("https://www.youtube.com/watch?v=" + ID);
-                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
-                    } else {
-                        //nomal mode
-                        $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                    }
-                    
-                } else {
-                    console.log('配信情報がありません');
-                }
-            },
-            error: function(error) {
-                // エラーの処理
-                console.log('エラー:', error);
+                id: videoId,
+                key: APIKEY
             }
         });
-    }
         
+        const liveStreamingDetails = data.items[0].liveStreamingDetails;
+        //console.log(title, liveStreamingDetails);
+        if (liveStreamingDetails.actualEndTime && liveStreamingDetails.actualStartTime) { //終了済みのメン限配信
+            let startTime = new Date(liveStreamingDetails.actualStartTime);
+            video_m_obj_list.push({videoid: videoId, time: startTime});
+        } else if (liveStreamingDetails.actualStartTime) { //配信中のメン限配信
+            let startTime = new Date(liveStreamingDetails.actualStartTime);
+            video_l_obj_list.push({videoid: videoId, time: startTime, title: title, mo: mo});
+        } else { //配信予定のメン限
+            let startTime = new Date(liveStreamingDetails.scheduledStartTime);
+            videoUObjList.push({videoid: videoId, time: startTime, mo: mo});
+        }
+        return videoUObjList;
+    } catch (error) {
+        console.log('エラー:', error);
+        return videoUObjList;
+    }
 }
+
+function setLVideo() {
+    //console.log("LSV: ", video_l_obj_list);
+    if (Object.keys(video_l_obj_list).length < 1) {
+        document.getElementById("youtubeList_l").remove();
+    }
+    else if (video_l_obj_list[0].mo == true) { //メン限コンテンツ
+        var ID = video_l_obj_list[0].videoid;
+        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
+        var TITLE = video_l_obj_list[0].title;
+        if (retCheckDev()) {
+            //配信中のアイテムを表示
+            if (checkLightMode()) {
+                //light mode
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+            } else {
+                //nomal mode
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+            }
+        } else {
+            //nomal mode
+            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+        }
+    } else {
+        if (retCheckDev()) {
+            //配信中のアイテムを表示
+            if (checkLightMode()) {
+                //light mode
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+            } else {
+                //nomal mode
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+            }
+        } else {
+            //nomal mode
+            $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+        }
+    }
+}
+//checkVideoStatus("ZxNsc2aZ7xo", true, "TEST");
+
+async function setUCVideo(video_u_obj_list) {
+    //console.log("UCV: ", video_u_obj_list);
+    //const entries = Object.entries(video_u_obj_list);
+    //entries.sort(
+    //   (a, b) => moment(a.time).diff(b.time)
+    //);
+
+    //const video_u_obj_list_sorted = Object.fromEntries(entries);
+    const video_u_obj_list_sorted = video_u_obj_list.sort(
+        (a, b) => moment(a.time).diff(b.time)
+    );
+    //console.log("UCV_sorted: ", video_u_obj_list_sorted);
+    for (let i = 0; i < Object.keys(video_u_obj_list_sorted).length; i++) {
+        var ID = video_u_obj_list_sorted[i].videoid;
+        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
+        var DATETIME = video_u_obj_list_sorted[i].time;
+        var year = DATETIME.getFullYear() ;	// 年
+        var month = DATETIME.getMonth() + 1 ;	// 月
+        var day = DATETIME.getDate() ;	// 日
+        var hour = DATETIME.getHours() ;	// 時
+        var minute = DATETIME.getMinutes() ;	// 分
+        var second = DATETIME.getSeconds() ;	// 秒
+        var dayOfWeek = DATETIME.getDay() ;	// 曜日(数値)
+        var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek] ;	// 曜日(日本語表記)
+        var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
+        //$("#youtubeList_u_inner").append(''); /////
+
+        //配信予定のアイテムを表示
+
+        if (video_u_obj_list_sorted[i].mo == true) { //メン限コンテンツ
+            if (checkLightMode()) {
+            //developer mode
+            //console.log("https://www.youtube.com/watch?v=" + ID);
+            await $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
+            } else {
+                //nomal mode
+                $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+            }
+        } else {                                    //公開コンテンツ
+            if (checkLightMode()) {
+            //developer mode
+            //console.log("https://www.youtube.com/watch?v=" + ID);
+            await $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
+            } else {
+                //nomal mode
+                await $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+            }
+        }
+        
+    }
+}
+
+async function setMOVideo() {
+    const THUMB_TYPES = [
+        /** w1280 */
+        'maxresdefault.jpg',
+        /** w640 */
+        'sddefault.jpg',
+        /** w480 */
+        'hqdefault.jpg',
+        /** w320 */
+        'mqdefault.jpg',
+        /** w120 */
+        'default.jpg',
+    ];
+    
+    let video_m_obj_list_sorted = video_m_obj_list.sort(
+        (a, b) => moment(b.time).diff(a.time)
+    );
+    //console.log("MOV: ", video_m_obj_list_sorted.length);
+    for (let k = 0; k < video_m_obj_list_sorted.length; k++) {
+        var ID = video_m_obj_list_sorted[k].videoid;
+        let thumb_max = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
+        var TN_URL = thumb_max; // 初期値として maxresdefault サイズのサムネイルを使用
+
+        const getYtThumbnail = async (videoId) => {
+            // 画像をロードする処理
+            const loadImage = (src) => {
+              return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = (e) => resolve(img);
+                img.src = src;
+              });
+            };
+          
+            for (let i = 0; i < THUMB_TYPES.length; i++) {
+              const fileName = `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[i]}`;
+          
+              const res = await loadImage(fileName);
+          
+              // ダミー画像じゃなかったら（横幅が121px以上だったら）
+              // もしくは、これ以上小さい解像度が無かった場合は、このURLで決定
+              if (
+                !THUMB_TYPES[i + 1]
+                || (res).width > 120
+              ) {
+                return fileName;
+              }
+            }
+        };
+        
+        await (async () => {
+            // Get the largest size under sddefault.jpg.
+            TN_URL = await getYtThumbnail(ID, 'maxresdefault.jpg');
+            var DATETIME = video_m_obj_list_sorted[k].time;
+            var year = DATETIME.getFullYear();
+            var month = DATETIME.getMonth() + 1;
+            var day = DATETIME.getDate();
+            var hour = DATETIME.getHours();
+            var minute = DATETIME.getMinutes();
+            var second = DATETIME.getSeconds();
+            var dayOfWeek = DATETIME.getDay();
+            var dayOfWeekStr = ["日", "月", "火", "水", "木", "金", "土"][dayOfWeek];
+            var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
+            // 配信予定のアイテムを表示
+            if (checkLightMode()) {
+              // developer mode
+              // console.log("https://www.youtube.com/watch?v=" + ID);
+              await new Promise((resolve) => {
+                $("#youtubeList_m_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
+                resolve();
+              });
+            } else {
+              // nomal mode
+              await new Promise((resolve) => {
+                $("#youtubeList_m_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' + DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                resolve();
+              });
+            }
+          })();
+          
+    }
+}
+
+
+
+
