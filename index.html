@@ -57,6 +57,13 @@
         </header>
         
         <main class="main">
+            <div id="loader-overlay">
+                <div id="loader"></div>
+                <br>
+                <p id="loader-message">読み込み中...</p>
+            </div>
+              
+              
             <div id="link">
                 <!--a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br-->
                 <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" data-lang="ja" data-show-count="false">#なまモクレンをツイートする</a>
@@ -156,7 +163,7 @@
                     },
                     error: function(){
                         reject();
-                        
+                        hideLoader();
                         Swal.fire({
                             type: "warning",
                             title: "読み込みエラー",

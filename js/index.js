@@ -7,6 +7,23 @@ let base_youtube_url_live;
 let cnt = 0;
 const mo_videoIds = [];
 
+// 読み込み中の状態を表示する関数
+function showLoader(message) {
+    var loaderOverlay = document.getElementById("loader-overlay");
+    var loaderMessage = document.getElementById("loader-message");
+    
+    loaderMessage.textContent = message; // メッセージを設定
+    loaderOverlay.style.display = "flex"; // ロード画面を表示
+}
+  
+// ロード画面を非表示にする関数
+function hideLoader() {
+    document.getElementById("loader-overlay").style.display = "none";
+}
+  
+// 例: 読み込み中の状態を表示してから3秒後に非表示にする
+showLoader("読み込み中...");
+
 //console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
 //console.log(decryption(, owner.length));
 
@@ -314,7 +331,9 @@ async function push_mo_ul(video_u_obj_list) {
         await setLVideo();
     } catch (error) {
         console.log('Error: Failed to retrieve member-exclusive videos.', error);
-    }   
+    } finally {
+        hideLoader();
+    }
 }
 
 async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []) {
