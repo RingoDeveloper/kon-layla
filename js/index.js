@@ -18,6 +18,14 @@ function show_sch() {
     window.open("https://www.youtube.com/@LaylaMagnolia/community?view=desktop");
 }
 
+function goto_mo() {
+    var target = document.getElementById("youtubeList_m");
+    target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
 function excryption(string, key) {
     let result = ""
     for (let i = 0; i < string.length; i++) {
@@ -239,23 +247,65 @@ removeDataSizeAttribute(); // 初回の実行
 
 var video_m_obj_list = []; //グローバル宣言
 var video_l_obj_list = []; //グローバル宣言
+var mo_list_id1 = "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx"; //メン限雑談配信リスト
+var mo_list_id2 = "PLCUfW5KwcvZEgLeXOvqy4hWkTne4SXQKI"; //メン限同時視聴リスト
+var mo_list_id3 = "PLCUfW5KwcvZHp-Jj27GkIb-UcYdiLd-C1"; //限定公開のアーカイブリスト
 async function push_mo_ul(video_u_obj_list) {
     try {
-        const response  = await $.ajax({
+        //メン限雑談配信リスト取得
+        const response1  = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/playlistItems',
             type: 'GET',
             dataType: 'json',
             data: {
             part: 'snippet',
             maxResults: 50, // 取得する動画の最大数（50まで）
-            playlistId: "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx",
+            playlistId: mo_list_id1,
             key: APIKEY
             }
         });
-        const items = response.items;
+        const items1 = response1.items;
         //video_u_obj_list = await checkVideoStatus("ZxNsc2aZ7xo", true, "TEST", video_u_obj_list); debug用
-        for (var i = 0; i < items.length; i++) {
-            video_u_obj_list = await checkVideoStatus(items[i].snippet.resourceId.videoId, true, items[i].snippet.title, video_u_obj_list);
+        for (var i = 0; i < items1.length; i++) {
+            video_u_obj_list = await checkVideoStatus(items1[i].snippet.resourceId.videoId, true, items1[i].snippet.title, video_u_obj_list);
+            //mo_videoIds.push(items[i].snippet.resourceId.videoId);
+        }
+
+        //メン限同時視聴リスト取得
+        const response2  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: mo_list_id2,
+            key: APIKEY
+            }
+        });
+        const items2 = response2.items;
+        //video_u_obj_list = await checkVideoStatus("ZxNsc2aZ7xo", true, "TEST", video_u_obj_list); debug用
+        for (var i = 0; i < items2.length; i++) {
+            video_u_obj_list = await checkVideoStatus(items2[i].snippet.resourceId.videoId, true, items2[i].snippet.title, video_u_obj_list);
+            //mo_videoIds.push(items[i].snippet.resourceId.videoId);
+        }
+
+        //限定公開のアーカイブリスト取得
+        const response3  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: mo_list_id3,
+            key: APIKEY
+            }
+        });
+        const items3 = response3.items;
+        //video_u_obj_list = await checkVideoStatus("ZxNsc2aZ7xo", true, "TEST", video_u_obj_list); debug用
+        for (var i = 0; i < items3.length; i++) {
+            video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
             //mo_videoIds.push(items[i].snippet.resourceId.videoId);
         }
         
@@ -286,6 +336,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_m_obj_list.push({videoid: videoId, time: startTime});
         } else if (liveStreamingDetails.actualStartTime) { //配信中のメン限配信
+            console.log("mol");
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_l_obj_list.push({videoid: videoId, time: startTime, title: title, mo: mo});
         } else { //配信予定のメン限
@@ -301,6 +352,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
 
 function setLVideo() {
     //console.log("LSV: ", video_l_obj_list);
+    console.log(video_l_obj_list);
     if (Object.keys(video_l_obj_list).length < 1) {
         document.getElementById("youtubeList_l").remove();
     }
@@ -455,7 +507,7 @@ async function setMOVideo() {
             var second = DATETIME.getSeconds();
             var dayOfWeek = DATETIME.getDay();
             var dayOfWeekStr = ["日", "月", "火", "水", "木", "金", "土"][dayOfWeek];
-            var DATETIME_formated = `${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
+            var DATETIME_formated = `${year}/${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
             // 配信予定のアイテムを表示
             if (checkLightMode()) {
               // developer mode
