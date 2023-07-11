@@ -731,7 +731,7 @@ input:checked ~ .circle {
     height: 30px;
     width: auto;
     margin-top: 15px;
-    float: inline-end;
+    float: right;
 }
 
 @media screen and (max-width: 1079px) {
