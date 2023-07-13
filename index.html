@@ -388,7 +388,7 @@
                                 let video_c_obj_list_sorted = video_c_obj_list.sort(
                                     (a, b) => moment(b.time).diff(a.time)
                                 );
-                                for (let i = 0; i < video_c_obj_list_sorted.length; i++) {
+                                for (let i = 0; i < num_cv; i++) {
                                     var DATETIME = video_c_obj_list_sorted[i].time;
                                     var year = DATETIME.getFullYear() ;	// 年
                                     var month = DATETIME.getMonth() + 1 ;	// 月
@@ -448,6 +448,8 @@
                     <div>
                         <span id="title_shownum" >表示数</span>
                         <select id="numSelect" onchange="update_num_CV()">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
                             <option value="40">40</option>
