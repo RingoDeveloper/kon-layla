@@ -258,7 +258,8 @@
                         }
                         for (j = 0; j < jsonitem_c.length; j++) {
                             //console.log(jsonitem_c[j].snippet.videoId);
-                            if (jsonitem_u[i].id.videoId == jsonitem_c[j].snippet.videoId) {
+                            console.log(jsonitem_c[j]);
+                            if (jsonitem_u[i].id.videoId == jsonitem_c[j].id.videoId) {
                                 continue loop;
                             }
                         }
