@@ -4,12 +4,15 @@ const DEBUG_MODE = false; //debug時はここをtrueに
 
 let base_youtube_url;
 let base_youtube_url_live;
+let base_url_list = 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=' + 'UUm-nZofnh3_1s_l2Gq3G1KQ' + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&part=snippet&maxResults=49';
 let cnt = 0;
 const mo_videoIds = [];
 var video_c_obj_list_sorted;
 var video_c_titles = [];
 var video_c_elms = [];
 var SEACHING = false;
+
+let num_cv = check_num_cv();
 
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
@@ -93,6 +96,31 @@ checkbox2.addEventListener('click', ()=> {
     window.location.reload();
 });
 
+// フォームの送信イベントを処理する関数
+function handleFormSubmit(event) {
+    event.preventDefault(); // デフォルトの送信動作を無効化
+  
+    // フォームの処理を実行
+    // ここにフォームの送信時に行いたい処理を記述
+    // テキストボックスの要素を取得
+    const myInput = document.getElementById("searchBox");
+    // テキストボックスのエンターキーの押下イベントを監視
+    myInput.addEventListener("keydown", handleEnterKey);
+}
+  
+// フォームの要素を取得
+const myForm = document.getElementById("search_funcs");
+// フォームの送信イベントを監視
+myForm.addEventListener("submit", handleFormSubmit);
+
+function handleEnterKey(event) {
+    if (event.keyCode === 13) {
+      // エンターキーが押されたらボタンのクリックを実行
+      document.getElementById("search-button").click();
+    }
+}
+
+
 
 
 
@@ -119,12 +147,12 @@ function checkDevMode() {
 
     if (result == "true") { /* devmode */
         if (DEBUG_MODE == true) { //debug mode. using debug key
-            base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 45 + '&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
-            base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 45 + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
+            base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 40 + '&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
+            base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 40 + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
             console.log("///USING DEBUG KEY NOW///\n");
         } else {
-            base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 45 + '&order=date&type=video&key=' + decryption(K_LIST[0], owner.length);//decryption(Y_API_KEY_D2, owner.length);
-            base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 45 + '&key=' + decryption(K_LIST[0], owner.length) + '&id=';
+            base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 49 + '&order=date&safeSearch=none&type=video&videoCaption=any&videoLicense=any&videoType=any&key=' + decryption(K_LIST[0], owner.length);//decryption(Y_API_KEY_D2, owner.length);
+            base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 49 + '&key=' + decryption(K_LIST[0], owner.length) + '&id=';
         }
         
         //base_youtube_url_channel = 'https://www.googleapis.com/youtube/v3/channelSections?part=snippet&key=' + decryption(Y_API_KEY_D1, owner.length);
@@ -219,7 +247,7 @@ function update_num_CV() {
     var elm =  document.getElementById('numSelect');
     var val = elm.value;
     localStorage.setItem('num_cv', val);
-    console.log("num = " + val);
+    //console.log("num = " + val);
     window.location.reload();
 }
 
@@ -234,7 +262,7 @@ function check_num_cv() {
 function remove_develms() {
     if (localStorage.getItem('dev_mode') != "true") {
         elm = document.getElementsByClassName("develm");
-        console.log(elm.length);
+        //console.log(elm.length);
         for (var i = 0; i < elm.length; i++) {
             elm[i].style.visibility='hidden';
             while(elm[i].firstChild) {
@@ -273,9 +301,10 @@ function search_func() {
     }
     let keyword = document.getElementById("searchBox").value;
     let idxToShow = [];
-    console.log(idxToShow);
-    console.log(keyword);
+    //console.log(idxToShow);
+    //console.log(keyword);
     for (let i = 0; i < num_cv; i++) {
+        //console.log(num_cv);
         //console.log(video_c_obj_list_sorted[i].title);
         if (video_c_obj_list_sorted[i].title.includes(keyword)) {
             idxToShow.push(i);
@@ -314,7 +343,6 @@ function reset_func() {
     for (let j = 0; j < video_c_elms.length; j++) {
         divElement.appendChild(video_c_elms[j]);
     }
-    console.log("comp_reset()");
     SEACHING = false;
 }
 
@@ -411,7 +439,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_m_obj_list.push({videoid: videoId, time: startTime});
         } else if (liveStreamingDetails.actualStartTime) { //配信中のメン限配信
-            console.log("mol");
+            
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_l_obj_list.push({videoid: videoId, time: startTime, title: title, mo: mo});
         } else { //配信予定のメン限
@@ -427,7 +455,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
 
 function setLVideo() {
     //console.log("LSV: ", video_l_obj_list);
-    console.log(video_l_obj_list);
+    
     if (Object.keys(video_l_obj_list).length < 1) {
         document.getElementById("youtubeList_l").remove();
     }

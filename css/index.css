@@ -1021,6 +1021,6 @@ input:checked ~ .circle {
     }
 
     #searchBox {
-        width: 60%;
+        width: 50%;
     }
 }

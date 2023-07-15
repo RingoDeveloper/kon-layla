@@ -187,8 +187,12 @@
                     ]);
         
                     const values_completed = await Promise.all([
-                        promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed')
+                        promiseFunc(base_youtube_url,'&channelId=UCm-nZofnh3_1s_l2Gq3G1KQ&eventType=completed'),
                     ]);
+
+                    const val_l = await Promise.all([
+                        promiseFunc(base_url_list, '')
+                    ])
 
 
                     /*
@@ -201,12 +205,14 @@
                     const jsonitem_u = values_upcoming.flat();
                     const jsonitem_l = values_live.flat();
                     const jsonitem_c = values_completed.flat();
+                    const jsonitem_list = val_l.flat();
                     
                     //const jsonitem_cn = values_channel.flat();
-                    
                     /*
-                    for (var i = 0; i < jsonitem_cn.length; i++) {
-                        console.log(jsonitem_cn[i]);
+                    console.log(jsonitem_list.length);
+                    for (var i = 0; i < jsonitem_list.length; i++) {
+                        console.log(jsonitem_list[i].snippet.title, jsonitem_list[i].snippet.resourceId.kind);
+                        console.log(jsonitem_list[i])
                     }
                     */
                     
@@ -251,7 +257,8 @@
                             continue;
                         }
                         for (j = 0; j < jsonitem_c.length; j++) {
-                            if (jsonitem_u[i].id.videoId == jsonitem_c[j].id.videoId) {
+                            //console.log(jsonitem_c[j].snippet.videoId);
+                            if (jsonitem_u[i].id.videoId == jsonitem_c[j].snippet.videoId) {
                                 continue loop;
                             }
                         }
@@ -340,12 +347,12 @@
                     let videoId_c = [];
                     let videoId_c_string = '';
                     let video_c_obj_list = [];
-                    for(var i = 0; i < jsonitem_c.length; i++){
+                    for(var i = 0; i < jsonitem_list.length; i++){
                         //軽量化用のテスト
                         //サムネイルのimg URLを表示
                         //console.log(jsonitem_c[i].snippet.thumbnails.high); ///
-                        var ID = jsonitem_c[i].id.videoId;
-                        video_c_titles.push(jsonitem_c[i].snippet.title);
+                        var ID = jsonitem_list[i].snippet.resourceId.videoId;
+                        video_c_titles.push(jsonitem_list[i].snippet.title);
                         //console.log(jsonitem_c[i].snippet.title);
                         var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                         //completed video のIDを列挙
@@ -368,11 +375,20 @@
                                 var data_json = JSON.parse(data_stringify);
                                 //jsonデータから各データを取得
                                 let jsonitem_ld = data_json["items"];
-                                
-                                let num_cv = check_num_cv();
+                                num_cv = check_num_cv();
                                 for (let i = 0; i < jsonitem_ld.length; i++) {
+                                    if (!jsonitem_ld[i].liveStreamingDetails) {
+                                        //console.log("skip:", jsonitem_ld[i]);
+                                        //num_cv--;
+                                        continue;
+                                    } else if (!jsonitem_ld[i].liveStreamingDetails.actualStartTime) {
+                                        //console.log("skip:", jsonitem_ld[i]);
+                                        //num_cv--;
+                                        continue;
+                                    }
                                     start_time = Date.parse(jsonitem_ld[i].liveStreamingDetails.actualStartTime);
                                     end_time = Date.parse(jsonitem_ld[i].liveStreamingDetails.actualEndTime);
+        
                                     //console.log((end_time - start_time) / 1000);
                                     //time_total += Math.floor((end_time - start_time) / 1000);
                                     let airtime = Math.floor((end_time - start_time) / 1000);
@@ -472,7 +488,7 @@
                         </select>
                     </div>
                     <script>
-                        let num_cv = localStorage.getItem('num_cv');
+                        num_cv = localStorage.getItem('num_cv');
                         if (num_cv == null) {
                             num_cv = "20";
                         }
