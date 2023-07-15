@@ -261,6 +261,30 @@ a {
         height: 40px;
         font-size: large;
     }
+
+    #search_funcs {
+        float: right;
+     
+    }
+
+    #searchBox {
+        width: 300px;
+        height: 35px;
+        font-size: large;
+    }
+
+    #search-button {
+        width: 70px;
+        height: 40px;
+        font-size: large;
+    }
+
+    #reset-button {
+        width: 90px;
+        height: 40px;
+        font-size: large;
+    }
+
 }/* pc */
 /* メニュー関係 end*/
 

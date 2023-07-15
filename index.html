@@ -345,6 +345,8 @@
                         //サムネイルのimg URLを表示
                         //console.log(jsonitem_c[i].snippet.thumbnails.high); ///
                         var ID = jsonitem_c[i].id.videoId;
+                        video_c_titles.push(jsonitem_c[i].snippet.title);
+                        //console.log(jsonitem_c[i].snippet.title);
                         var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
                         //completed video のIDを列挙
                         videoId_c.push(ID);
@@ -366,17 +368,28 @@
                                 var data_json = JSON.parse(data_stringify);
                                 //jsonデータから各データを取得
                                 let jsonitem_ld = data_json["items"];
-                                var time_total = 0;
+                                
+                                let num_cv = check_num_cv();
                                 for (let i = 0; i < jsonitem_ld.length; i++) {
                                     start_time = Date.parse(jsonitem_ld[i].liveStreamingDetails.actualStartTime);
                                     end_time = Date.parse(jsonitem_ld[i].liveStreamingDetails.actualEndTime);
                                     //console.log((end_time - start_time) / 1000);
-                                    time_total += Math.floor((end_time - start_time) / 1000);
+                                    //time_total += Math.floor((end_time - start_time) / 1000);
+                                    let airtime = Math.floor((end_time - start_time) / 1000);
                                     date = new Date(start_time);
-                                    video_c_obj_list.push({videoid: videoId_c[i], time: date});
+                                    video_c_obj_list.push({videoid: videoId_c[i], time: date, airtime: airtime, title: video_c_titles[i]});
                                 }
                                 //console.log(time_total);
-                                let num_cv = check_num_cv();
+                                
+                                
+                                video_c_obj_list_sorted = video_c_obj_list.sort(
+                                    (a, b) => moment(b.time).diff(a.time)
+                                );
+                                /* 平均時間計算 */
+                                var time_total = 0;
+                                for (let k = 0; k < num_cv; k++) {
+                                    time_total += video_c_obj_list_sorted[k].airtime;
+                                }
                                 let time_total_ave = Math.floor(time_total / parseInt(num_cv));
                                 const time_total_sec = (time_total_ave%60).toString().padStart(2, '0');
                                 const time_total_min = (Math.floor(time_total_ave/60)%60).toString().padStart(2, '0');
@@ -385,9 +398,7 @@
                                 time_total_ave_formated = `${time_total_hour}:${time_total_min}:${time_total_sec}`;
                                 
                                 $(".statetext_top").append(`<h2 class="ave_time">最近${num_cv}回の平均配信時間  ` + time_total_ave_formated + '</h2>');
-                                let video_c_obj_list_sorted = video_c_obj_list.sort(
-                                    (a, b) => moment(b.time).diff(a.time)
-                                );
+
                                 for (let i = 0; i < num_cv; i++) {
                                     var DATETIME = video_c_obj_list_sorted[i].time;
                                     var year = DATETIME.getFullYear() ;	// 年
@@ -445,6 +456,11 @@
                     <div class="statetext_top">
                         <h2 class="statetext">アーカイブ</h2>
                     </div>
+                    <form id="search_funcs">
+                        <input type="text" id="searchBox" name="searchBox" placeholder="検索キーワードを入力してください">
+                        <input type="Button" id="search-button" value="検索" onclick="search_func()">
+                        <input type="button" id="reset-button" value="リセット" onclick="reset_func()">
+                    </form>
                     <div>
                         <span id="title_shownum" >表示数</span>
                         <select id="numSelect" onchange="update_num_CV()">

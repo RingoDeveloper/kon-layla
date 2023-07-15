@@ -6,6 +6,10 @@ let base_youtube_url;
 let base_youtube_url_live;
 let cnt = 0;
 const mo_videoIds = [];
+var video_c_obj_list_sorted;
+var video_c_titles = [];
+var video_c_elms = [];
+var SEACHING = false;
 
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
@@ -88,6 +92,7 @@ checkbox2.addEventListener('click', ()=> {
     }
     window.location.reload();
 });
+
 
 
 
@@ -261,6 +266,57 @@ function removeDataSizeAttribute() {
     }
 }
 removeDataSizeAttribute(); // 初回の実行
+
+function search_func() {
+    if (SEACHING == true) {
+        reset_func();
+    }
+    let keyword = document.getElementById("searchBox").value;
+    let idxToShow = [];
+    console.log(idxToShow);
+    console.log(keyword);
+    for (let i = 0; i < num_cv; i++) {
+        //console.log(video_c_obj_list_sorted[i].title);
+        if (video_c_obj_list_sorted[i].title.includes(keyword)) {
+            idxToShow.push(i);
+        }
+    }
+
+    const divElement = document.getElementById("youtubeList_c_inner");
+    const childElements = divElement.children;
+    for (let j = num_cv - 1; j >= 0; j--) {
+        video_c_elms.unshift(childElements[j]);
+        if (!idxToShow.includes(j)) {
+            let elementToRemove = childElements[j];
+            divElement.removeChild(elementToRemove);
+        }
+    }
+    if (childElements.length == 0) {
+        divElement.textContent = "検索結果に一致するコンテンツがありません";
+    }
+    SEACHING = true;
+}
+
+function reset_func() {
+    if (SEACHING == false) {
+        return 0;
+    }
+    const divElement = document.getElementById("youtubeList_c_inner");
+    const childElements = divElement.children;
+    if (childElements.length == 0) {
+        divElement.textContent = "";
+    } else {
+        for (let i = 0; i < childElements.length; i++) {
+            divElement.removeChild(childElements[i]);
+        }
+    }
+    
+    for (let j = 0; j < video_c_elms.length; j++) {
+        divElement.appendChild(video_c_elms[j]);
+    }
+    console.log("comp_reset()");
+    SEACHING = false;
+}
 
 var video_m_obj_list = []; //グローバル宣言
 var video_l_obj_list = []; //グローバル宣言
