@@ -1,7 +1,7 @@
 /* グローバル変数 */
 const owner = "ringo";
 const DEBUG_MODE = false; //debug時はここをtrueに
-
+let DEVELOPER_MODE = false;
 let base_youtube_url;
 let base_youtube_url_live;
 let base_url_list = 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=' + 'UUm-nZofnh3_1s_l2Gq3G1KQ' + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&part=snippet&maxResults=49';
@@ -9,6 +9,7 @@ let cnt = 0;
 const mo_videoIds = [];
 var video_c_obj_list_sorted;
 var video_c_titles = [];
+var video_c_descriptions = [];
 var video_c_elms = [];
 var SEACHING = false;
 
@@ -143,9 +144,9 @@ function checkDevMode() {
     let result = localStorage.getItem('dev_mode');
     let ringo = document.getElementById("ringo");
     let blk_api_switch = document.getElementById("switch_label");
-    let num_cv = check_num_cv();
 
     if (result == "true") { /* devmode */
+        DEVELOPER_MODE = true;
         if (DEBUG_MODE == true) { //debug mode. using debug key
             base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 40 + '&order=date&type=video&key=' + decryption(Y_API_KEY_D1, owner.length);//decryption(Y_API_KEY_D2, owner.length);
             base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 40 + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&id=';
@@ -154,6 +155,7 @@ function checkDevMode() {
             base_youtube_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=' + 49 + '&order=date&safeSearch=none&type=video&videoCaption=any&videoLicense=any&videoType=any&key=' + decryption(K_LIST[0], owner.length);//decryption(Y_API_KEY_D2, owner.length);
             base_youtube_url_live = 'https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&maxResults=' + 49 + '&key=' + decryption(K_LIST[0], owner.length) + '&id=';
         }
+
         
         //base_youtube_url_channel = 'https://www.googleapis.com/youtube/v3/channelSections?part=snippet&key=' + decryption(Y_API_KEY_D1, owner.length);
 
@@ -306,9 +308,17 @@ function search_func() {
     for (let i = 0; i < num_cv; i++) {
         //console.log(num_cv);
         //console.log(video_c_obj_list_sorted[i].title);
-        if (video_c_obj_list_sorted[i].title.includes(keyword)) {
-            idxToShow.push(i);
+        if (true) { //デベロッパー分岐<解除中>
+            console.log("search_func: developer mode");
+            if (video_c_obj_list_sorted[i].title.toLowerCase().includes(keyword.toLowerCase()) || video_c_obj_list_sorted[i].description.toLowerCase().includes(keyword.toLowerCase())) {
+                idxToShow.push(i);
+            }
+        } else {
+            if (video_c_obj_list_sorted[i].title.toLowerCase().includes(keyword.toLowerCase())) {
+                idxToShow.push(i);
+            }
         }
+        
     }
 
     const divElement = document.getElementById("youtubeList_c_inner");
