@@ -813,7 +813,7 @@ function getLiveStreamUrl() {
     .then(data => {
       if (data.data.length > 0) {
         const stream = data.data[0];
-        const streamUrl = `https://www.twitch.tv/${stream.user_login}`;
+        const streamUrl = `https://www.twitch.tv/${broadcasterName}`;
         console.log('ライブ配信URL:', streamUrl);
       } else {
         console.log('配信していません');
@@ -827,5 +827,6 @@ function getLiveStreamUrl() {
 if (DEVELOPER_MODE) {
     getLiveStreamUrl();
 }
+
 
 
