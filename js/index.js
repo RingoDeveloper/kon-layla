@@ -642,5 +642,159 @@ async function setMOVideo() {
 }
 
 
+// Twitch OAuth 2.0認証の設定
+const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24';
+const redirectUri = 'https://ringodeveloper.github.io/kon-layla/index.html'; // コールバックURL（登録したアプリケーションの設定に応じて変更してください）
+
+// アクセストークンの取得とリフレッシュトークンの管理を行うオブジェクト
+const tokenManager = {
+  accessToken: null,
+  refreshToken: null,
+
+  // アクセストークンの取得
+  async getAccessToken() {
+    // URLパラメータから認証コードを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+      try {
+        const response = await fetch('https://id.twitch.tv/oauth2/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `client_id=${clientId}&client_secret=<クライアントシークレット>&code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent(redirectUri)}`,
+        });
+
+        const data = await response.json();
+        this.accessToken = data.access_token;
+        this.refreshToken = data.refresh_token;
+        
+        // コールバックURLからクエリパラメータを除去
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+        return this.accessToken;
+      } catch (error) {
+        console.error('アクセストークンの取得に失敗しました:', error);
+        throw error;
+      }
+    } else {
+      throw new Error('認証コードがありません');
+    }
+  },
+
+  // リフレッシュトークンを使用してアクセストークンを更新
+  async refreshAccessToken() {
+    if (this.refreshToken) {
+      try {
+        const response = await fetch('https://id.twitch.tv/oauth2/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `client_id=${clientId}&client_secret=zlkaxoqbup6ya33fjifadgjk1zsnq0&refresh_token=${this.refreshToken}&grant_type=refresh_token&redirect_uri=${encodeURIComponent(redirectUri)}`,
+        });
+
+        const data = await response.json();
+        this.accessToken = data.access_token;
+        
+        return this.accessToken;
+      } catch (error) {
+        console.error('アクセストークンの更新に失敗しました:', error);
+        throw error;
+      }
+    } else {
+      throw new Error('リフレッシュトークンがありません');
+    }
+  },
+};
+
+// 配信状況を取得する
+async function getStreamStatus() {
+  try {
+    const response = await fetch('https://api.twitch.tv/helix/streams?user_login=layla_magnolia', {
+      headers: {
+        'Client-ID': clientId,
+        'Authorization': `Bearer ${tokenManager.accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    
+    if (data.data.length > 0) {
+      // 配信中
+      console.log('配信中');
+    } else {
+      // 配信していない
+      console.log('配信していません');
+    }
+  } catch (error) {
+    console.error('配信状況の取得に失敗しました:', error);
+  }
+}
+
+// 配信枠情報を取得する
+async function getChannelInfo() {
+  try {
+    const response = await fetch('https://api.twitch.tv/helix/channels?broadcaster_login=layla_magnolia', {
+      headers: {
+        'Client-ID': clientId,
+        'Authorization': `Bearer ${tokenManager.accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.data.length > 0) {
+      const channelInfo = data.data[0];
+      console.log('配信タイトル:', channelInfo.title);
+      console.log('ゲームカテゴリ:', channelInfo.game_name);
+      console.log('配信者の表示名:', channelInfo.broadcaster_name);
+    } else {
+      console.log('配信枠情報が見つかりませんでした');
+    }
+  } catch (error) {
+    console.error('配信枠情報の取得に失敗しました:', error);
+  }
+}
+
+// 認証ページにリダイレクト
+function redirectToAuthPage() {
+  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=user:read:email`;
+  window.location.href = authUrl;
+}
+
+// 認証コードの取得とアクセストークンの取得または更新を行う
+async function handleAuthorization() {
+  try {
+    if (!tokenManager.accessToken) {
+      await tokenManager.getAccessToken();
+    } else {
+      await tokenManager.refreshAccessToken();
+    }
+
+    // アクセストークンの取得または更新が成功した場合、配信状況と配信枠情報を取得する
+    getStreamStatus();
+    getChannelInfo();
+  } catch (error) {
+    console.error('認証の処理に失敗しました:', error);
+  }
+}
+
+// ページ読み込み時の処理
+window.addEventListener('DOMContentLoaded', () => {
+    if (DEVELOPER_MODE) {
+        // URLパラメータに認証コードが含まれている場合は認証の処理を行う
+        if (window.location.search.includes('code=')) {
+            handleAuthorization();
+        } else {
+            // 認証ページにリダイレクト
+            redirectToAuthPage();
+        }
+    }
+});
+
+
 
 
