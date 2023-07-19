@@ -812,6 +812,7 @@ function getLiveStreamUrl() {
     .then(response => response.json())
     .then(data => {
       if (data.data.length > 0) {
+        console.log(data);
         const stream = data.data[0];
         const streamUrl = `https://www.twitch.tv/${broadcasterName}`;
         console.log('ライブ配信URL:', streamUrl);
