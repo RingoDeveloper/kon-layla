@@ -641,7 +641,7 @@ async function setMOVideo() {
     }
 }
 
-
+/*
 // Twitch OAuth 2.0認証の設定
 const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24';
 const redirectUri = 'https://ringodeveloper.github.io/kon-layla/index.html'; // コールバックURL（登録したアプリケーションの設定に応じて変更してください）
@@ -798,6 +798,34 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+*/
 
+const clientId = '<クライアントID>'; // Twitch Developer Portalで生成されたクライアントID
+const broadcasterName = '<配信者のユーザー名>'; // 対象の配信者のユーザー名
+
+function getLiveStreamUrl() {
+  fetch(`https://api.twitch.tv/helix/streams?user_login=${broadcasterName}`, {
+    headers: {
+      'Client-ID': clientId,
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.data.length > 0) {
+        const stream = data.data[0];
+        const streamUrl = `https://www.twitch.tv/${stream.user_login}`;
+        console.log('ライブ配信URL:', streamUrl);
+      } else {
+        console.log('配信していません');
+      }
+    })
+    .catch(error => {
+      console.error('配信情報の取得に失敗しました:', error);
+    });
+}
+
+if (DEVELOPER_MODE) {
+    getLiveStreamUrl();
+}
 
 
