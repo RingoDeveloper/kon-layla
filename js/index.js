@@ -800,8 +800,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 */
 
-const clientId = '<クライアントID>'; // Twitch Developer Portalで生成されたクライアントID
-const broadcasterName = '<配信者のユーザー名>'; // 対象の配信者のユーザー名
+const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24'; // Twitch Developer Portalで生成されたクライアントID
+const broadcasterName = 'layla_magnolia'; // 対象の配信者のユーザー名
 
 function getLiveStreamUrl() {
   fetch(`https://api.twitch.tv/helix/streams?user_login=${broadcasterName}`, {
