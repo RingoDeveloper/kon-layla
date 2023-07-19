@@ -787,8 +787,10 @@ window.addEventListener('DOMContentLoaded', () => {
     if (DEVELOPER_MODE) {
         // URLパラメータに認証コードが含まれている場合は認証の処理を行う
         if (window.location.search.includes('code=')) {
+            console.log("handleAuthorization();")
             handleAuthorization();
         } else {
+            console.log("redirectToAuthPage();");
             // 認証ページにリダイレクト
             redirectToAuthPage();
         }
