@@ -785,6 +785,7 @@ async function handleAuthorization() {
 // ページ読み込み時の処理
 window.addEventListener('DOMContentLoaded', () => {
     if (DEVELOPER_MODE) {
+        redirectToAuthPage();
         // URLパラメータに認証コードが含まれている場合は認証の処理を行う
         if (window.location.search.includes('code=')) {
             console.log("handleAuthorization();")
