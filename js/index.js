@@ -693,7 +693,7 @@ const tokenManager = {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: `client_id=${clientId}&client_secret=zlkaxoqbup6ya33fjifadgjk1zsnq0&refresh_token=${this.refreshToken}&grant_type=refresh_token&redirect_uri=${encodeURIComponent(redirectUri)}`,
+          body: `client_id=${clientId}&client_secret=c505qyrukpkthzueogasz82wuoqsoq&refresh_token=${this.refreshToken}&grant_type=refresh_token&redirect_uri=${encodeURIComponent(redirectUri)}`,
         });
 
         const data = await response.json();
