@@ -12,11 +12,16 @@ var video_c_titles = [];
 var video_c_descriptions = [];
 var video_c_elms = [];
 var SEACHING = false;
+const FIRST_ANNIV = true;
 
 let num_cv = check_num_cv();
 
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
+    if (localStorage.getItem('blk_api') == "true") {
+        hideLoader();
+        return;
+    }
     var loaderOverlay = document.getElementById("loader-overlay");
     var loaderMessage = document.getElementById("loader-message");
     
@@ -27,10 +32,56 @@ function showLoader(message) {
 // ロード画面を非表示にする関数
 function hideLoader() {
     document.getElementById("loader-overlay").style.display = "none";
+    set_first_anniv();
+}
+
+
+/// テープの演出を作成する関数
+function createTape() {
+    const tapeContainer = document.createElement('div');
+    tapeContainer.className = 'tape-container';
+  
+    const tapeCount = 50; // テープの数
+    const animationDuration = 4000; // アニメーションの時間（ミリ秒）
+  
+    for (let i = 0; i < tapeCount; i++) {
+      const tape = document.createElement('div');
+      tape.className = 'tape';
+      tape.style.left = `${Math.random() * 100}%`;
+      tape.style.animationDuration = `${Math.random() * animationDuration + 2000}ms`;
+      tape.style.backgroundColor = randomRainbowColor(); // ランダムな虹色を設定
+      tapeContainer.appendChild(tape);
+    }
+  
+    document.body.appendChild(tapeContainer); // テープのコンテナをbodyに追加
 }
   
-// 例: 読み込み中の状態を表示してから3秒後に非表示にする
+  // ランダムな虹色を生成する関数
+function randomRainbowColor() {
+    const rainbowColors = [
+      '#FF0000', // 赤
+      '#FF7F00', // オレンジ
+      '#FFFF00', // 黄
+      '#00FF00', // 緑
+      '#0000FF', // 青
+      '#8B00FF', // 紫
+      '#FF1493', // ピンク
+      '#00FFFF', // シアン
+      '#FF4500', // オレンジレッド
+      '#FF69B4', // ローズ
+      '#FFD700', // 金
+      '#00FF7F', // スプリンググリーン
+    ]; // 虹色のリスト
+    return rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+}
+  
+//createTape(); // ページ読み込み時にテープの演出を作成
+  
+  
+  
 showLoader("読み込み中...");
+
+
 
 //console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
 //console.log(decryption(, owner.length));
@@ -494,14 +545,14 @@ function setLVideo() {
             //配信中のアイテムを表示
             if (checkLightMode()) {
                 //light mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
             } else {
                 //nomal mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
             }
         } else {
             //nomal mode
-            $("#youtubeList_l_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
         }
     }
 }
@@ -828,6 +879,38 @@ function getLiveStreamUrl() {
 if (DEVELOPER_MODE) {
     getLiveStreamUrl();
 }
+
+function check_first_anniv() {
+  // 現在時刻を取得
+  const currentDate = new Date();
+  // 2023年7月25日 00:00:00の時刻を設定
+  const targetDate = new Date("2023-07-25T00:00:00");
+  
+  // 現在時刻が2023年7月25日 00:00:00より後の場合に関数を実行
+  if ((currentDate > targetDate) && (FIRST_ANNIV)) {  
+    return true;
+  } 
+return false;
+  
+  
+}
+
+function set_first_anniv() {
+    if (check_first_anniv()) {
+        let elm = document.getElementById("kon-layla");
+        elm.textContent = "レイラさん1周年おめでとう！！！";
+        createTape();
+        //$("#kon-layla").append('<br>Layla Magnolia 1st anniversary!!<br>レイラさん1周年おめでとう！！！'); /////
+    }
+}
+
+function runAnniv() {
+    if (check_first_anniv()) {
+        createTape();
+    }
+}
+
+
 
 
 

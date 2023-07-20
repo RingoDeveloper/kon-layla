@@ -10,6 +10,56 @@
     font-display: swap; /* フォントがロードされるまで代替フォントを表示 */
 }
 
+/* テープのスタイル */
+@keyframes tapeAnimation {
+    0% {
+      transform: translateY(-100%) rotate(0deg);
+      opacity: 1; /* 透明度を1に設定 */
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 1; /* 透明度を1に設定 */
+    }
+  }
+  
+  .tape-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* マウスイベントを無効化 */
+    z-index: 9999; /* 一番手前に表示 */
+  }
+  
+  .tape {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform-origin: center bottom;
+    width: 20px; /* 大きさを調整 */
+    height: 20px; /* 大きさを調整 */
+    background-color: transparent; /* 背景色は透明 */
+    border-radius: 2px;
+    pointer-events: none; /* マウスイベントを無効化 */
+    opacity: 1; /* 初期は透明ではなく1に設定 */
+    animation: tapeAnimation 4s linear infinite; /* アニメーションの適用 */
+    content: '';
+  }
+  
+  .tape::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* 背景色は透明 */
+    border-radius: 2px;
+  }
+  
+  
+
 #loader-overlay {
     position: fixed;
     top: 0;
@@ -454,14 +504,20 @@ ul.footer_menu li {
 }
 
 #youtubeList_l {
-    background-color: rgba(243, 90, 90, 0.5);
+    /*background-color: rgba(243, 90, 90, 0.5);*/
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: center; /* 主軸方向（横軸）の中央寄せ */
+    align-items: center; /* クロス軸方向（縦軸）の中央寄せ */
+    
     padding: 10px;
     margin: 10px;
     border-radius: 7px;
 }
 
+
 #youtubeList_l_inner {
-    display: flex;
+    display:flexbox;
     flex-wrap: wrap;
 }
 
@@ -522,6 +578,16 @@ ul.footer_menu li {
     margin-bottom: 16px;
 }
 
+.statetext h2 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+#youtubeList_l.statetext {
+    text-align: center;
+}
+
+
 #link {
     float: left;
 }
@@ -565,7 +631,6 @@ iframe {
 }
 
 .iframe_wrapper {
-    
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
@@ -617,6 +682,21 @@ iframe {
     border-style: solid;
     border-width: 5px;
     border-color: #00a908;
+    border-radius: 7px;
+    background-color: #ffffff;
+    max-width: min-content;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.iframe_wrapper_l {
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #FF0000;
     border-radius: 7px;
     background-color: #ffffff;
     max-width: min-content;
@@ -834,6 +914,11 @@ input:checked ~ .circle {
         width: auto;
     }
 
+    .iframe_wrapper_l {
+        padding: 5px;
+        width: auto;
+    }
+
     .link-logo {
         width: 50px;
         height: 50px;
@@ -954,6 +1039,16 @@ input:checked ~ .circle {
     }
 
     .iframe_wrapper_m {
+        width:95%;
+        margin: auto;
+        display: block;
+        padding: 5px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border-width: 3px;
+    }
+
+    .iframe_wrapper_l {
         width:95%;
         margin: auto;
         display: block;

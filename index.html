@@ -62,6 +62,10 @@
                 <br>
                 <p id="loader-message">読み込み中...</p>
             </div>
+
+
+            <!-- 紙吹雪のコンテナー -->
+            <div class="tape-container"></div>
               
               
             <div id="link">
@@ -76,7 +80,7 @@
             
 
             <div class="titleScripts">
-                <h1 id="kon-layla">こんレイラ！</h1><br>
+                <h1 id="kon-layla" onclick="runAnniv()">こんレイラ！</h1>
             </div>
             <p class="description_text">
                 レイラ・マグノリア非公式ファンサイトへようこそ<br>
@@ -220,7 +224,7 @@
                     if (/*jsonitem_l.length < 1*/false) {
                         //document.getElementById("youtubeList_l").style.visibility = "hidden";
                     } else {
-                        $("#youtubeList_l").append('<h2 class="statetext">配信中🎥</h2>');
+                        $("#youtubeList_l").append('<div class="statetext"><h2>配信中🎥</h2></div>');
                         $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
