@@ -1128,4 +1128,8 @@ input:checked ~ .circle {
         width: 12px; /* 大きさを調整 */
         height: 12px; /* 大きさを調整 */
     }
+
+    #kon-layla {
+        font-size: 27px;
+    }
 }
