@@ -897,8 +897,13 @@ return false;
 
 function set_first_anniv() {
     if (check_first_anniv()) {
+        const screenWidth = window.innerWidth; // 現在の画面幅を取得
         let elm = document.getElementById("kon-layla");
-        elm.textContent = "レイラさん1周年おめでとう！！！";
+        if (screenWidth < 800) {
+            elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";
+        } else {
+            elm.textContent = "レイラさん1周年おめでとう！！！";
+        }
         createTape();
         //$("#kon-layla").append('<br>Layla Magnolia 1st anniversary!!<br>レイラさん1周年おめでとう！！！'); /////
     }
@@ -906,6 +911,15 @@ function set_first_anniv() {
 
 function runAnniv() {
     if (check_first_anniv()) {
+        createTape();
+    } else if (DEVELOPER_MODE) {
+        const screenWidth = window.innerWidth; // 現在の画面幅を取得
+        let elm = document.getElementById("kon-layla");
+        if (screenWidth < 800) {
+            elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";  
+        } else {
+            elm.textContent = "レイラさん1周年おめでとう！！！";
+        }
         createTape();
     }
 }

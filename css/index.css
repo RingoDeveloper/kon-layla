@@ -935,6 +935,11 @@ input:checked ~ .circle {
         width: auto;
     }
 
+    .tape {
+        width: 15px; /* 大きさを調整 */
+        height: 15px; /* 大きさを調整 */
+    }
+
     
 }
 
@@ -1117,5 +1122,10 @@ input:checked ~ .circle {
 
     #searchBox {
         width: 50%;
+    }
+
+    .tape {
+        width: 12px; /* 大きさを調整 */
+        height: 12px; /* 大きさを調整 */
     }
 }
