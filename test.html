@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitch API Example</title>
+</head>
+<body>
+  <h1>Twitch Stream Status</h1>
+  <p id="status"></p>
+  <div id="stream-info">
+    <p id="stream-title"></p>
+    <a id="stream-url" href="#" target="_blank">Watch Now</a>
+    <img id="thumbnail" src="" alt="Thumbnail">
+  </div>
+
+  <script>
+    // Twitch APIのエンドポイントURLと特定のチャンネル名
+    const apiUrl = 'https://api.twitch.tv/helix/streams';
+    const channelName = 'layla_magnolia';
+
+    // Twitch Developer サイトで取得したクライアントIDとクライアントシークレットを指定してください
+    const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24';
+    const clientSecret = '3kwkqryha3kqac2ddef63xzpdrun9z';
+
+    // アクセストークンを取得する関数
+    async function getAccessToken() {
+      try {
+        const response = await fetch('https://id.twitch.tv/oauth2/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            client_id: clientId,
+            client_secret: clientSecret,
+            grant_type: 'client_credentials',
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to get access token');
+        }
+
+        const data = await response.json();
+        return data.access_token;
+      } catch (error) {
+        console.error('Error getting access token:', error);
+        return null;
+      }
+    }
+
+    // 特定の配信者の配信状況を取得する関数
+    async function getStreamStatus() {
+      try {
+        const accessToken = await getAccessToken();
+        if (!accessToken) {
+          document.getElementById('status').textContent = 'Failed to get access token';
+          return;
+        }
+
+        const response = await fetch(`${apiUrl}?user_login=${channelName}`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Client-ID': clientId,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to get stream status');
+        }
+
+        const data = await response.json();
+
+        if (data.data.length > 0) {
+          // 配信中
+          const streamTitle = data.data[0].title;
+          const streamUrl = `https://www.twitch.tv/${channelName}`;
+          const thumbnailUrl = data.data[0].thumbnail_url.replace('{width}x{height}', '320x180');
+
+          document.getElementById('status').textContent = `${channelName} is currently streaming`;
+          document.getElementById('stream-info').style.display = 'block';
+          document.getElementById('stream-title').textContent = streamTitle;
+          document.getElementById('stream-url').href = streamUrl;
+          document.getElementById('thumbnail').src = thumbnailUrl;
+        } else {
+          // 配信していない
+          document.getElementById('status').textContent = `${channelName} is currently not streaming.`;
+          document.getElementById('stream-info').style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error fetching stream status:', error);
+        document.getElementById('status').textContent = 'Error fetching stream status';
+      }
+    }
+
+    // ページがロードされたら、配信状況を取得する関数を呼び出す
+    window.onload = getStreamStatus;
+  </script>
+</body>
+</html>

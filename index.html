@@ -226,6 +226,7 @@
                     } else {
                         $("#youtubeList_l").append('<div class="statetext"><h2>配信中🎥</h2></div>');
                         $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
+                        getStreamStatus();
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
                             var TITLE = jsonitem_l[i].snippet.title;

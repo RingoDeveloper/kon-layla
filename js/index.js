@@ -14,6 +14,7 @@ var video_c_elms = [];
 var SEACHING = false;
 const FIRST_ANNIV = true;
 var RUNNING_PARTICLE = false;
+var TWITCH_STATUS = false;
 const METRO_COLOR = ["#ff9500","#f62e36","#b5b5ac","#009bbf","#00bb85","#c1a470","#8f76d6","#00ac9b","#9c5e31","#f39700","#e60012","#9caeb7","#00a7db","#009944","#d7c447","#9b7cb6","#00ada9","#bb641d","#e85298","#0079c2","#6cbb5a","#b6007a","#e5171f","#522886","#0078ba","#019a66","#e44d93","#814721","#a9cc51","#ee7b1a","#00a0de",]
 const COLOR_SET1 = ["#ff4c4c", "#ff4ca5", "#ff4cff", "#a54cff", "#4c4cff", "#4ca5ff", "#4cffff", "#4cffa5", "#4cff4c", "#a5ff4c", "#ffff4c", "#ffa54c"]
 
@@ -533,8 +534,10 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
 function setLVideo() {
     //console.log("LSV: ", video_l_obj_list);
     
-    if (Object.keys(video_l_obj_list).length < 1) {
-        document.getElementById("youtubeList_l").remove();
+    if ((Object.keys(video_l_obj_list).length < 1)) {
+        if (!TWITCH_STATUS) {
+            document.getElementById("youtubeList_l").remove();
+        }
     }
     else if (video_l_obj_list[0].mo == true) { //メン限コンテンツ
         var ID = video_l_obj_list[0].videoid;
@@ -708,195 +711,90 @@ async function setMOVideo() {
     }
 }
 
-/*
-// Twitch OAuth 2.0認証の設定
+// Twitch APIのエンドポイントURLと特定のチャンネル名
+const apiUrl = 'https://api.twitch.tv/helix/streams';
+const channelName = 'layla_magnolia';
+
+// Twitch Developer サイトで取得したクライアントIDとクライアントシークレットを指定してください
 const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24';
-const redirectUri = 'https://ringodeveloper.github.io/kon-layla/index.html'; // コールバックURL（登録したアプリケーションの設定に応じて変更してください）
+const clientSecret = '3kwkqryha3kqac2ddef63xzpdrun9z';
 
-// アクセストークンの取得とリフレッシュトークンの管理を行うオブジェクト
-const tokenManager = {
-  accessToken: null,
-  refreshToken: null,
+// アクセストークンを取得する関数
+async function getAccessToken() {
+    try {
+    const response = await fetch('https://id.twitch.tv/oauth2/token', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: 'client_credentials',
+        }),
+    });
 
-  // アクセストークンの取得
-  async getAccessToken() {
-    // URLパラメータから認証コードを取得
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-
-    if (code) {
-      try {
-        const response = await fetch('https://id.twitch.tv/oauth2/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `client_id=${clientId}&client_secret=<クライアントシークレット>&code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent(redirectUri)}`,
-        });
-
-        const data = await response.json();
-        this.accessToken = data.access_token;
-        this.refreshToken = data.refresh_token;
-        
-        // コールバックURLからクエリパラメータを除去
-        window.history.replaceState({}, document.title, window.location.pathname);
-
-        return this.accessToken;
-      } catch (error) {
-        console.error('アクセストークンの取得に失敗しました:', error);
-        throw error;
-      }
-    } else {
-      throw new Error('認証コードがありません');
+    if (!response.ok) {
+        throw new Error('Failed to get access token');
     }
-  },
 
-  // リフレッシュトークンを使用してアクセストークンを更新
-  async refreshAccessToken() {
-    if (this.refreshToken) {
-      try {
-        const response = await fetch('https://id.twitch.tv/oauth2/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `client_id=${clientId}&client_secret=c505qyrukpkthzueogasz82wuoqsoq&refresh_token=${this.refreshToken}&grant_type=refresh_token&redirect_uri=${encodeURIComponent(redirectUri)}`,
-        });
-
-        const data = await response.json();
-        this.accessToken = data.access_token;
-        
-        return this.accessToken;
-      } catch (error) {
-        console.error('アクセストークンの更新に失敗しました:', error);
-        throw error;
-      }
-    } else {
-      throw new Error('リフレッシュトークンがありません');
+    const data = await response.json();
+    return data.access_token;
+    } catch (error) {
+    console.error('Error getting access token:', error);
+    return null;
     }
-  },
-};
+}
 
-// 配信状況を取得する
+// 特定の配信者の配信状況を取得する関数
 async function getStreamStatus() {
-  try {
-    const response = await fetch('https://api.twitch.tv/helix/streams?user_login=layla_magnolia', {
-      headers: {
-        'Client-ID': clientId,
-        'Authorization': `Bearer ${tokenManager.accessToken}`,
-      },
-    });
-
-    const data = await response.json();
-    
-    if (data.data.length > 0) {
-      // 配信中
-      console.log('配信中');
-    } else {
-      // 配信していない
-      console.log('配信していません');
+    try {
+    const accessToken = await getAccessToken();
+    if (!accessToken) {
+        document.getElementById('status').textContent = 'Failed to get access token';
+        return;
     }
-  } catch (error) {
-    console.error('配信状況の取得に失敗しました:', error);
-  }
-}
 
-// 配信枠情報を取得する
-async function getChannelInfo() {
-  try {
-    const response = await fetch('https://api.twitch.tv/helix/channels?broadcaster_login=layla_magnolia', {
-      headers: {
+    const response = await fetch(`${apiUrl}?user_login=${channelName}`, {
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
         'Client-ID': clientId,
-        'Authorization': `Bearer ${tokenManager.accessToken}`,
-      },
+        },
     });
+
+    if (!response.ok) {
+        throw new Error('Failed to get stream status');
+    }
 
     const data = await response.json();
 
     if (data.data.length > 0) {
-      const channelInfo = data.data[0];
-      console.log('配信タイトル:', channelInfo.title);
-      console.log('ゲームカテゴリ:', channelInfo.game_name);
-      console.log('配信者の表示名:', channelInfo.broadcaster_name);
+        // 配信中
+        TWITCH_STATUS = true;
+        const streamTitle = data.data[0].title;
+        const streamUrl = `https://www.twitch.tv/${channelName}`;
+        const thumbnailUrl = data.data[0].thumbnail_url.replace('{width}x{height}', '960x540');
+        console.log(streamTitle);
+        $("#youtubeList_l_inner").append('<div class="iframe_wrapper_t"><a href=' + streamUrl + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + thumbnailUrl + '><img class="inner-logo" src="./src/logo/twitch-logo.png"><h2 class="sc-time" style="color:black">' + streamTitle + '</h2></a></div>'); /////
+
+        /*
+        document.getElementById('status').textContent = `${channelName} is currently streaming`;
+        document.getElementById('stream-info').style.display = 'block';
+        document.getElementById('stream-title').textContent = streamTitle;
+        document.getElementById('stream-url').href = streamUrl;
+        document.getElementById('thumbnail').src = thumbnailUrl;
+        */
+
     } else {
-      console.log('配信枠情報が見つかりませんでした');
+        // 配信していない
+            console.log("twitch offline")
     }
-  } catch (error) {
-    console.error('配信枠情報の取得に失敗しました:', error);
-  }
-}
-
-// 認証ページにリダイレクト
-function redirectToAuthPage() {
-  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=user:read:email`;
-  window.location.href = authUrl;
-}
-
-// 認証コードの取得とアクセストークンの取得または更新を行う
-async function handleAuthorization() {
-  try {
-    if (!tokenManager.accessToken) {
-      await tokenManager.getAccessToken();
-    } else {
-      await tokenManager.refreshAccessToken();
+    } catch (error) {
+        console.error('Error fetching stream status:', error);
     }
-
-    // アクセストークンの取得または更新が成功した場合、配信状況と配信枠情報を取得する
-    getStreamStatus();
-    getChannelInfo();
-  } catch (error) {
-    console.error('認証の処理に失敗しました:', error);
-  }
 }
 
-// ページ読み込み時の処理
-window.addEventListener('DOMContentLoaded', () => {
-    if (DEVELOPER_MODE) {
-        redirectToAuthPage();
-        // URLパラメータに認証コードが含まれている場合は認証の処理を行う
-        if (window.location.search.includes('code=')) {
-            console.log("handleAuthorization();")
-            handleAuthorization();
-        } else {
-            console.log("redirectToAuthPage();");
-            // 認証ページにリダイレクト
-            redirectToAuthPage();
-        }
-    }
-});
 
-
-
-const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24'; // Twitch Developer Portalで生成されたクライアントID
-const broadcasterName = 'layla_magnolia'; // 対象の配信者のユーザー名
-
-function getLiveStreamUrl() {
-  fetch(`https://api.twitch.tv/helix/streams?user_login=${broadcasterName}`, {
-    headers: {
-      'Client-ID': clientId,
-    },
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.data.length > 0) {
-        console.log(data);
-        const stream = data.data[0];
-        const streamUrl = `https://www.twitch.tv/${broadcasterName}`;
-        console.log('ライブ配信URL:', streamUrl);
-      } else {
-        console.log('配信していません');
-      }
-    })
-    .catch(error => {
-      console.error('配信情報の取得に失敗しました:', error);
-    });
-}
-
-if (DEVELOPER_MODE) {
-    getLiveStreamUrl();
-}
-
-*/
 
 function check_first_anniv() {
   // 現在時刻を取得
