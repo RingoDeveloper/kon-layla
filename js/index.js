@@ -13,6 +13,8 @@ var video_c_descriptions = [];
 var video_c_elms = [];
 var SEACHING = false;
 const FIRST_ANNIV = true;
+var RUNNING_PARTICLE = false;
+
 
 let num_cv = check_num_cv();
 
@@ -54,6 +56,15 @@ function createTape() {
     }
   
     document.body.appendChild(tapeContainer); // テープのコンテナをbodyに追加
+}
+
+function shower() {
+    confetti();
+}
+
+function reset_tape() {
+    confetti.reset();
+    PARTICLE_CNT = 1;
 }
   
   // ランダムな虹色を生成する関数
@@ -917,6 +928,7 @@ function set_first_anniv() {
         }
         container.appendChild(tweetLink);
         reloadTwitterWidget();
+
         //createTape();
         confettiAnime();
         //$("#kon-layla").append('<br>Layla Magnolia 1st anniversary!!<br>レイラさん1周年おめでとう！！！'); /////
@@ -924,33 +936,38 @@ function set_first_anniv() {
 }
 
 function runAnniv() {
-    if (check_first_anniv()) {
-        createTape();
-    } else if (DEVELOPER_MODE) {
-        const screenWidth = window.innerWidth; // 現在の画面幅を取得
-        let elm = document.getElementById("kon-layla");
-        var container = document.getElementById("titleScripts");
+    if (!RUNNING_PARTICLE) {
+        console.log("RUN");
+        if (check_first_anniv()) {
+            confettiAnime();
+        } else if (DEVELOPER_MODE) {
+            const screenWidth = window.innerWidth; // 現在の画面幅を取得
+            let elm = document.getElementById("kon-layla");
+            var container = document.getElementById("titleScripts");
+                
+            var tweetLink = document.createElement("a");
+            tweetLink.href = "https://twitter.com/intent/tweet?button_hashtag=レイラマグノリア1周年&ref_src=twsrc%5Etfw";
+            tweetLink.className = "twitter-hashtag-button";
+            tweetLink.setAttribute("data-lang", "ja");
+            tweetLink.setAttribute("data-show-count", "false");
+            tweetLink.textContent = "#レイラマグノリア1周年をツイートする";
+            if (screenWidth < 800) {
+                elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";
+            } else {
+                elm.textContent = "レイラさん1周年おめでとう！！！";
+                tweetLink.setAttribute("data-size", "large");
+            }
+            container.appendChild(tweetLink);
+            reloadTwitterWidget();
+            confettiAnime();
             
-        var tweetLink = document.createElement("a");
-        tweetLink.href = "https://twitter.com/intent/tweet?button_hashtag=レイラマグノリア1周年&ref_src=twsrc%5Etfw";
-        tweetLink.className = "twitter-hashtag-button";
-        tweetLink.setAttribute("data-lang", "ja");
-        tweetLink.setAttribute("data-show-count", "false");
-        tweetLink.textContent = "#レイラマグノリア1周年をツイートする";
-        if (screenWidth < 800) {
-            elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";
-        } else {
-            elm.textContent = "レイラさん1周年おめでとう！！！";
-            tweetLink.setAttribute("data-size", "large");
         }
-        container.appendChild(tweetLink);
-        reloadTwitterWidget();
-        //createTape();
-        confettiAnime();
     }
+    
 }
 
 function confettiAnime() {
+    RUNNING_PARTICLE = true;
     confetti({
       origin: {
         x: Math.random(),
