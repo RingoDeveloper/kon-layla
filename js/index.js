@@ -14,6 +14,8 @@ var video_c_elms = [];
 var SEACHING = false;
 const FIRST_ANNIV = true;
 var RUNNING_PARTICLE = false;
+const METRO_COLOR = ["#ff9500","#f62e36","#b5b5ac","#009bbf","#00bb85","#c1a470","#8f76d6","#00ac9b","#9c5e31","#f39700","#e60012","#9caeb7","#00a7db","#009944","#d7c447","#9b7cb6","#00ada9","#bb641d","#e85298","#0079c2","#6cbb5a","#b6007a","#e5171f","#522886","#0078ba","#019a66","#e44d93","#814721","#a9cc51","#ee7b1a","#00a0de",]
+const COLOR_SET1 = ["#ff4c4c", "#ff4ca5", "#ff4cff", "#a54cff", "#4c4cff", "#4ca5ff", "#4cffff", "#4cffa5", "#4cff4c", "#a5ff4c", "#ffff4c", "#ffa54c"]
 
 
 let num_cv = check_num_cv();
@@ -923,16 +925,19 @@ function set_first_anniv() {
         tweetLink.setAttribute("data-lang", "ja");
         tweetLink.setAttribute("data-show-count", "false");
         tweetLink.textContent = "#レイラマグノリア1周年をツイートする";
-        if (screenWidth < 800) {
+        if (screenWidth > 480) {
+            tweetLink.setAttribute("data-size", "large");
+        }
+        if (screenWidth < 1080) {
             elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";
         } else {
             elm.textContent = "レイラさん1周年おめでとう！！！";
-            tweetLink.setAttribute("data-size", "large");
         }
         container.appendChild(tweetLink);
         reloadTwitterWidget();
 
         //createTape();
+        shower();
         confettiAnime();
         //$("#kon-layla").append('<br>Layla Magnolia 1st anniversary!!<br>レイラさん1周年おめでとう！！！'); /////
     }
@@ -954,11 +959,13 @@ function runAnniv() {
             tweetLink.setAttribute("data-lang", "ja");
             tweetLink.setAttribute("data-show-count", "false");
             tweetLink.textContent = "#レイラマグノリア1周年をツイートする";
-            if (screenWidth < 800) {
+            if (screenWidth > 480) {
+                tweetLink.setAttribute("data-size", "large");
+            }
+            if (screenWidth < 1080) {
                 elm.innerHTML = "レイラさん<br>1周年おめでとう！！！";
             } else {
                 elm.textContent = "レイラさん1周年おめでとう！！！";
-                tweetLink.setAttribute("data-size", "large");
             }
             container.appendChild(tweetLink);
             reloadTwitterWidget();
@@ -976,23 +983,10 @@ function confettiAnime() {
         x: Math.random(),
         y: 0
       },
-      particleCount: 20,
-      spread: 90,
+      particleCount: 40,
+      spread: 150,
       ticks: 1000,
-      colors: [
-        '#FF0000', // 赤
-        '#FF7F00', // オレンジ
-        '#FFFF00', // 黄
-        '#00FF00', // 緑
-        '#0000FF', // 青
-        '#8B00FF', // 紫
-        '#FF1493', // ピンク
-        '#00FFFF', // シアン
-        '#FF4500', // オレンジレッド
-        '#FF69B4', // ローズ
-        '#FFD700', // 金
-        '#00FF7F', // スプリンググリーン
-      ],
+      colors: COLOR_SET1,
       shapes: 'square'
     });
     
