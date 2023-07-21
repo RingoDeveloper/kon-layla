@@ -59,7 +59,10 @@ function createTape() {
 }
 
 function shower() {
-    confetti();
+    if (check_first_anniv() || DEVELOPER_MODE) {
+        confetti();
+    }
+    
 }
 
 function reset_tape() {
