@@ -138,17 +138,7 @@
             <script type="text/javascript" src="config.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
             <script type="text/javascript">
-            const K_LIST = []; //キーを編集
-            const Y_API_KEY1 = config.y_apikey_1;
-            const Y_API_KEY2 = config.y_apikey_2;
-            const Y_API_KEY3 = config.y_apikey_3;
-            const Y_API_KEY_D1 = config.y_apikey_d1;
-            const Y_API_KEY_D2 = config.y_apikey_d2;
-            const DEV_KEY = config.dev_key;
-            //K_LIST.push(Y_API_KEY1);
-            //K_LIST.push(Y_API_KEY2);
-            K_LIST.push(Y_API_KEY3);
-            const max = K_LIST.length;
+            
     
             $(function() {
                 if (checkbox.checked) {
@@ -311,7 +301,6 @@
                         videoId_c_string += (ID + ',');
 
                         if (true) { //デベロッパー分岐<解除中>
-                            console.log("video_c_descriptions.push(): developer mode");
                             video_c_descriptions.push(jsonitem_list[i].snippet.description);
                         }
                     }
@@ -350,7 +339,6 @@
                                     date = new Date(start_time);
 
                                     if (true) { //デベロッパー分岐<解除中>
-                                        console.log("video_c_obj_list.push(): developer mode");
                                         video_c_obj_list.push({videoid: videoId_c[i], time: date, airtime: airtime, title: video_c_titles[i], description: video_c_descriptions[i]});
                                     } else {
                                         video_c_obj_list.push({videoid: videoId_c[i], time: date, airtime: airtime, title: video_c_titles[i]});

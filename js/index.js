@@ -2,6 +2,19 @@
 const owner = "ringo";
 const DEBUG_MODE = false; //debug時はここをtrueに
 let DEVELOPER_MODE = false;
+
+//apikey
+const K_LIST = []; //キーを編集
+const Y_API_KEY1 = config.y_apikey_1;
+const Y_API_KEY2 = config.y_apikey_2;
+const Y_API_KEY3 = config.y_apikey_3;
+const Y_API_KEY_D1 = config.y_apikey_d1;
+const Y_API_KEY_D2 = config.y_apikey_d2;
+const DEV_KEY = config.dev_key;
+const TWITCH_C_ID = config.t_client_id;
+const TWITCH_C_SEC = config.t_client_secret;
+K_LIST.push(Y_API_KEY3);
+
 let base_youtube_url;
 let base_youtube_url_live;
 let base_url_list = 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=' + 'UUm-nZofnh3_1s_l2Gq3G1KQ' + '&key=' + decryption(Y_API_KEY_D1, owner.length) + '&part=snippet&maxResults=49';
@@ -39,7 +52,6 @@ function hideLoader() {
     document.getElementById("loader-overlay").style.display = "none";
     set_first_anniv();
 }
-
 
 /// テープの演出を作成する関数
 function createTape() {
@@ -90,18 +102,11 @@ function randomRainbowColor() {
       '#00FF7F', // スプリンググリーン
     ]; // 虹色のリスト
     return rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
-}
-  
-//createTape(); // ページ読み込み時にテープの演出を作成
-  
-  
-  
+}  
 showLoader("読み込み中...");
 
-
-
-//console.log(excryption('AIzaSyDcwk2MtvrO63sLn1WwGq1ahlYG30BcnA4', owner.length));
-//console.log(decryption(, owner.length));
+//console.log(excryption('', owner.length)); 
+//console.log(decryption('', owner.length));
 
 function getRandomInt() {
     return Math.floor(Math.random() * max);
@@ -134,6 +139,7 @@ function decryption(string, key) {
     }
     return result;
 }
+
 
 function setAPIKey(debug_mode) {
     if (debug_mode) { //止まったら切り替え可能
@@ -188,10 +194,6 @@ function handleEnterKey(event) {
       document.getElementById("search-button").click();
     }
 }
-
-
-
-
 
 /* define debug functions */
 function enable_dev_mode() {
@@ -716,8 +718,8 @@ const apiUrl = 'https://api.twitch.tv/helix/streams';
 const channelName = 'layla_magnolia';
 
 // Twitch Developer サイトで取得したクライアントIDとクライアントシークレットを指定してください
-const clientId = 'mb9h60e0tw7j1yehleur2l11d0zh24';
-const clientSecret = '3kwkqryha3kqac2ddef63xzpdrun9z';
+const clientId = decryption(TWITCH_C_ID, owner.length);
+const clientSecret = decryption(TWITCH_C_SEC, owner.length);
 
 // アクセストークンを取得する関数
 async function getAccessToken() {
@@ -787,13 +789,14 @@ async function getStreamStatus() {
 
     } else {
         // 配信していない
-            console.log("twitch offline")
+        if (DEVELOPER_MODE) {
+            console.log("twitch offline");
+        }
     }
     } catch (error) {
         console.error('Error fetching stream status:', error);
     }
 }
-
 
 
 function check_first_anniv() {
