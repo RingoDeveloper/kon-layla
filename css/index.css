@@ -598,6 +598,15 @@ ul.footer_menu li {
     margin: 10px;
     float: right;
 }
+
+.countdown {
+    background-color: #f3f3f3;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: xx-large;
+    margin: 10px;
+    float: right;
+}
 /*
 .twitter-follow-button {
     margin: 10px;
@@ -875,6 +884,10 @@ input:checked ~ .circle {
     #searchBox {
         font-size: 16px;
     }
+
+    .countdown {
+        font-size: x-large;
+    }
 }
 
 
@@ -959,6 +972,10 @@ input:checked ~ .circle {
     .tape {
         width: 15px; /* 大きさを調整 */
         height: 15px; /* 大きさを調整 */
+    }
+
+    .countdown {
+        font-size: large;
     }
 
     
@@ -1162,5 +1179,11 @@ input:checked ~ .circle {
 
     #kon-layla {
         font-size: 27px;
+    }
+
+    .countdown {
+        font-size: medium;
+        margin: 5px;
+        padding: 5px;
     }
 }

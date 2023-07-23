@@ -914,6 +914,39 @@ function confettiAnime() {
     document.body.appendChild(script);
 }
 
+const targetDate = '2023-07-25'; // カウントダウンの対象日をハードコード
+const targetTime = '00:00:00'; // カウントダウンの対象時間をハードコード
+let countdownInterval;
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const targetDateTime = new Date(`${targetDate}T${targetTime}`).getTime();
+    const timeDifference = targetDateTime - now;
+
+    if (timeDifference <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').remove();
+        set_first_anniv();
+    } else {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        const countdownText = `１周年まで残り${days}日 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+        document.getElementById('countdown').innerHTML = countdownText;
+    }
+}
+
+function formatTime(time) {
+  return time < 10 ? `0${time}` : time;
+}
+
+// カウントダウンを1秒ごとに更新
+countdownInterval = setInterval(updateCountdown, 1000);
+
+// 初回表示のために更新
+updateCountdown();
 
 
 
