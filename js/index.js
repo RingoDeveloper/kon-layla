@@ -836,7 +836,7 @@ function set_first_anniv() {
         }
         container.appendChild(tweetLink);
         reloadTwitterWidget();
-
+        setInterval(createFallingImage, 8000);
         //createTape();
         shower();
         confettiAnime();
@@ -871,7 +871,7 @@ function runAnniv() {
             container.appendChild(tweetLink);
             reloadTwitterWidget();
             confettiAnime();
-            
+            setInterval(createFallingImage, 8000);
         }
     }
     
@@ -947,6 +947,44 @@ countdownInterval = setInterval(updateCountdown, 1000);
 
 // 初回表示のために更新
 updateCountdown();
+
+
+let fallingArea = document.querySelector('#fallingArea');
+let imgCounter = 0;
+
+function createFallingImage() {
+    let image = document.createElement('img');
+    image.src = "src/ringodev_logo_v2.jpg";
+    image.style.position = 'absolute';
+    image.style.width = '10px';
+    image.style.height = '10px';
+    image.style.left = `${Math.random() * window.innerWidth}px`;
+    image.id = 'image' + imgCounter++;
+    fallingArea.appendChild(image);
+
+    let rotationX = 0,
+    rotationY = 0,
+    rotationZ = 0;
+    let fallingSpeed = 0.8;
+    let rotationSpeed = 2; // 回転速度を増やす
+
+    function rotateAndFall() {
+        rotationX += Math.random() * 5;
+        rotationY += Math.random() * 5;
+        rotationZ += Math.random() * 5;
+
+        image.style.top = (parseFloat(image.style.top) || 0) + fallingSpeed + 'px';
+        image.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`;
+
+        if (parseFloat(image.style.top) < window.innerHeight) {
+            requestAnimationFrame(rotateAndFall);
+        } else {
+            setTimeout(() => fallingArea.removeChild(image), 100);
+        }
+    }
+
+    rotateAndFall();
+}
 
 
 
