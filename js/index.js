@@ -965,7 +965,7 @@ function createFallingImage() {
     let rotationX = 0,
     rotationY = 0,
     rotationZ = 0;
-    let fallingSpeed = 1;
+    let fallingSpeed = 2;
     let rotationSpeed = 2; // 回転速度を増やす
 
     function rotateAndFall() {
