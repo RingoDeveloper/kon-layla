@@ -977,6 +977,9 @@ function createFallingImage() {
     rotationY = 0,
     rotationZ = 0;
     var ww = window.screen.width;
+    if (ww < 500) {
+        ww += 300;
+    }
     let fallingSpeed = 2500 / ww;
 
 
