@@ -926,7 +926,6 @@ function updateCountdown() {
     if (timeDifference <= 0) {
         clearInterval(countdownInterval);
         document.getElementById('countdown').remove();
-        set_first_anniv();
     } else {
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
