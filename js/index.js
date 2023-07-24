@@ -960,6 +960,7 @@ function createFallingImage() {
     image.style.left = `${Math.random() * window.innerWidth}px`;
     image.id = 'image' + imgCounter++;
     fallingArea.appendChild(image);
+    setTimeout(() => fallingArea.removeChild(image), 15000);
 
     let rotationX = 0,
     rotationY = 0,
