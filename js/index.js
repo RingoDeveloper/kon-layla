@@ -947,31 +947,38 @@ countdownInterval = setInterval(updateCountdown, 1000);
 // 初回表示のために更新
 updateCountdown();
 
-
-let fallingArea = document.querySelector('#fallingArea');
 let imgCounter = 0;
+const fallingArea = document.getElementById('fallingArea');
+let isActive = true;
+let animationFrames = [];
 
 function createFallingImage() {
+    if (!isActive) return; // 非アクティブな時は画像の生成を中止
+
     let image = document.createElement('img');
     image.src = "src/ringodev_logo_v2.jpg";
     image.style.position = 'absolute';
     image.style.width = '10px';
     image.style.height = '10px';
-    image.onclick = function() {
-        var elm = document.getElementById("thisisme");
-    elm.innerHTML = ("管理人 りんごでべろっぱ わぁ見つかっちゃったぁ！<br>君の勝ちだよ！<br>");
-    };
+    image.style.cursor = 'pointer';
+
     image.style.left = `${Math.random() * window.innerWidth}px`;
+    image.style.top = '0'; // 画面の一番上に配置
+
     image.id = 'image' + imgCounter++;
+    image.class = 'ringo_fall';
     fallingArea.appendChild(image);
-    setTimeout(() => fallingArea.removeChild(image), 15000);
+    image.addEventListener('onclick', showAns);
+    image.addEventListener('mouseover', showAns);
+    image.addEventListener('touchstart', showAns);
+    
 
     let rotationX = 0,
     rotationY = 0,
     rotationZ = 0;
     var ww = window.screen.width;
     let fallingSpeed = 2500 / ww;
-    let rotationSpeed = 2; // 回転速度を増やす
+
 
     function rotateAndFall() {
         rotationX += Math.random() * 5;
@@ -981,16 +988,29 @@ function createFallingImage() {
         image.style.top = (parseFloat(image.style.top) || 0) + fallingSpeed + 'px';
         image.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`;
 
-        if (parseFloat(image.style.top) < window.innerHeight) {
-            requestAnimationFrame(rotateAndFall);
+        if (parseFloat(image.style.top) > window.innerHeight) {
+            fallingArea.removeChild(image);
         } else {
-            setTimeout(() => fallingArea.removeChild(image), 100);
+            animationFrames[imgCounter - 1] = requestAnimationFrame(rotateAndFall);
         }
     }
 
     rotateAndFall();
 }
 
+// ページがアクティブかどうかを監視するイベントリスナーを追加
+document.addEventListener('visibilitychange', function() {
+    isActive = !document.hidden;
+});
 
+// 例として5秒ごとに画像を生成
+setInterval(function() {
+    if (isActive) {
+        createFallingImage();
+    }
+}, 10000);
 
-
+function showAns() {
+    var elm = document.getElementById("thisisme");
+    elm.innerHTML = "管理人 りんごでべろっぱ わぁ見つかっちゃったぁ！<br>君の勝ちだよ！<br>";
+}
