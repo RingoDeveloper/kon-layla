@@ -957,6 +957,10 @@ function createFallingImage() {
     image.style.position = 'absolute';
     image.style.width = '10px';
     image.style.height = '10px';
+    image.onclick = function() {
+        var elm = document.getElementById("thisisme");
+    elm.innerHTML = ("管理人 りんごでべろっぱ わぁ見つかっちゃったぁ！<br>君の勝ちだよ！<br>");
+    };
     image.style.left = `${Math.random() * window.innerWidth}px`;
     image.id = 'image' + imgCounter++;
     fallingArea.appendChild(image);
