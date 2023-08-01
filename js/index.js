@@ -31,6 +31,7 @@ var TWITCH_STATUS = false;
 const METRO_COLOR = ["#ff9500","#f62e36","#b5b5ac","#009bbf","#00bb85","#c1a470","#8f76d6","#00ac9b","#9c5e31","#f39700","#e60012","#9caeb7","#00a7db","#009944","#d7c447","#9b7cb6","#00ada9","#bb641d","#e85298","#0079c2","#6cbb5a","#b6007a","#e5171f","#522886","#0078ba","#019a66","#e44d93","#814721","#a9cc51","#ee7b1a","#00a0de",]
 const COLOR_SET1 = ["#ff4c4c", "#ff4ca5", "#ff4cff", "#a54cff", "#4c4cff", "#4ca5ff", "#4cffff", "#4cffa5", "#4cff4c", "#a5ff4c", "#ffff4c", "#ffa54c"]
 var TIMEOUT_ID1;
+var TIMEOUT_ID2
 var INTERVAL_ID;
 
 
@@ -838,10 +839,10 @@ function set_first_anniv() {
         }
         container.appendChild(tweetLink);
         reloadTwitterWidget();
-        setInterval(createFallingImage, 8000);
+        //setInterval(createFallingImage, 8000);
         //createTape();
         shower();
-        confettiAnime();
+        //confettiAnime();
         //$("#kon-layla").append('<br>Layla Magnolia 1st anniversary!!<br>レイラさん1周年おめでとう！！！'); /////
     }
 }
@@ -872,8 +873,8 @@ function runAnniv() {
             }
             container.appendChild(tweetLink);
             reloadTwitterWidget();
-            confettiAnime();
-            setInterval(createFallingImage, 8000);
+            //confettiAnime();
+            //setInterval(createFallingImage, 8000);
         }
     }
     
@@ -944,10 +945,10 @@ function formatTime(time) {
 }
 
 // カウントダウンを1秒ごとに更新
-countdownInterval = setInterval(updateCountdown, 1000);
+//countdownInterval = setInterval(updateCountdown, 1000);
 
 // 初回表示のために更新
-updateCountdown();
+//updateCountdown();
 
 let imgCounter = 0;
 const fallingArea = document.getElementById('fallingArea');
@@ -1003,23 +1004,23 @@ function createFallingImage() {
     rotateAndFall();
 }
 
-// ページがアクティブかどうかを監視するイベントリスナーを追加
+/* ページがアクティブかどうかを監視するイベントリスナーを追加
 document.addEventListener('visibilitychange', function() {
     isActive = !document.hidden;
     if (document.hidden) {
-        clearInterval(INTERVAL_ID);
+        //clearInterval(INTERVAL_ID);
         clearTimeout(TIMEOUT_ID1);
+        clearTimeout(TIMEOUT_ID2);
     }
 });
-
-// 例として5秒ごとに画像を生成
-INTERVAL_ID = setInterval(function() {
+*/
+/*
+TIMEOUT_ID2 = setTimeout(function() {
     if (isActive) {
         createFallingImage();
-    } else {
-        
     }
 }, 10000);
+*/
 
 function showAns() {
     var elm = document.getElementById("thisisme");
