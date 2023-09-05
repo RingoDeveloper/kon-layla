@@ -53,7 +53,7 @@ function showLoader(message) {
 // ロード画面を非表示にする関数
 function hideLoader() {
     document.getElementById("loader-overlay").style.display = "none";
-    set_first_anniv();
+    //set_first_anniv();
 }
 
 /// テープの演出を作成する関数

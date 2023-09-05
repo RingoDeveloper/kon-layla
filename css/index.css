@@ -836,21 +836,39 @@ input:checked ~ .circle {
 
 .links {
     margin-top: 0px;
+    margin-bottom: 10px;
     display: flex;
     width: 100%;
     justify-content: center;
     text-align:center;
-    align-items: center;
+    align-items: flex-start; /* 要素を上端に揃える */
     font-size: xx-large;
+    flex-wrap: wrap; /* 画面幅が狭くなった場合に要素を折り返す */
 }
 
-.link-logo {
+.link-logo, .link-logo-tw, .link-logo-tw-hover {
     background-color: #ffffff;
     width: 70px;
     height: 70px;
     margin: 5px;
     border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap; /* 画面幅が狭くなった場合に要素を折り返す */
 }
+
+/* ホバー時のロゴは初めは非表示 */
+.link-logo-tw-hover {
+    display: none;
+  }
+  
+  /* マウスホバー時にホバー時のロゴを表示し、通常のロゴを非表示にする */
+  .twitter-link:hover .link-logo-tw {
+    display: none;
+  }
+  
+  .twitter-link:hover .link-logo-tw-hover {
+    display: flex;
+  }
 
 #tiktok {
     background-color: black;
@@ -953,9 +971,15 @@ input:checked ~ .circle {
         width: auto;
     }
 
-    .link-logo {
-        width: 50px;
-        height: 50px;
+    .links {
+        margin-left: 20%;
+        margin-right: 20%;
+        width: 60%;
+    }
+
+    .link-logo, .link-logo-tw, .link-logo-tw-hover {
+        width: 60px;
+        height: 60px;
         margin: 5px;
         border-radius: 8px;
     }
@@ -979,6 +1003,14 @@ input:checked ~ .circle {
     }
 
     
+}
+
+@media screen and (max-width: 600px) {
+    .links {
+        margin-left: 15%;
+        margin-right: 15%;
+        width: 70%;
+    }
 }
 
 
@@ -1141,12 +1173,24 @@ input:checked ~ .circle {
         text-align: end;
     }
 
-    .link-logo {
-        width: 38px;
-        height: 38px;
+    .links {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+    }
+
+    .link-logo, .link-logo-tw, .link-logo-tw-hover {
+        width: 50px;
+        height: 50px;
         margin: 3px;
         border-radius: 5px;
     }
+
+    .link-logo a, .link-logo-tw a, .link-logo-tw-hover a {
+        flex:1;
+    }
+
+    
     
     #tiktok {
         background-color: black;
