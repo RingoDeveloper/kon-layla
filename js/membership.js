@@ -85,14 +85,6 @@ function setAPIKey(debug_mode) {
     }
 }
 const APIKEY = setAPIKey(DEBUG_MODE);
-
-function check_screen_width() {
-    var ww = window.screen.width;
-    if (ww < 500) {
-        var elm = document.getElementById("no-display-sp");
-        elm.remove();
-    }
-}
 check_screen_width()
 
 function removeDataSizeAttribute() {
