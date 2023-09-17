@@ -34,6 +34,20 @@ var TIMEOUT_ID1;
 var TIMEOUT_ID2
 var INTERVAL_ID;
 
+function toggleNav() {
+    var body = document.body;
+    var hamburger = document.getElementById('js-hamburger');
+    var blackBg = document.getElementById('js-black-bg');
+  
+    hamburger.addEventListener('click', function() {
+      body.classList.toggle('nav-open');
+    });
+    blackBg.addEventListener('click', function() {
+      body.classList.remove('nav-open');
+    });
+}
+toggleNav();
+
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
     if (localStorage.getItem('blk_api') == "true") {
