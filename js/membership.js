@@ -85,7 +85,6 @@ function setAPIKey(debug_mode) {
     }
 }
 const APIKEY = setAPIKey(DEBUG_MODE);
-check_screen_width()
 
 function removeDataSizeAttribute() {
     const tweetLinks = document.getElementsByClassName('twitter-hashtag-button');
