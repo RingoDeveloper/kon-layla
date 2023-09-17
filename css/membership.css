@@ -257,7 +257,7 @@ a {
       top: 20px;
     }
 
-    .nav_item #menu_sch { 
+    .nav_item #menu_mo { 
         color: #333;
         background-color: #FFE4C4;
     }
@@ -292,7 +292,7 @@ a {
         font-weight: 600;
     }
 
-    .nav_item #menu_sch { 
+    .nav_item #menu_mo { 
         color: #333;
         background-color: #FFE4C4;
         box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);  
