@@ -53,6 +53,9 @@ function showLoader(message) {
 // ロード画面を非表示にする関数
 function hideLoader() {
     document.getElementById("loader-overlay").style.display = "none";
+    const ENDTIME = new Date().getTime();
+    const timeDifference = ENDTIME - STARTTIME;
+    console.log(`経過時間（ミリ秒）: ${timeDifference}`);
     //set_first_anniv();
 }
 
@@ -120,11 +123,7 @@ function show_sch() {
 }
 
 function goto_mo() {
-    var target = document.getElementById("youtubeList_m");
-    target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    window.open("https://ringodeveloper.github.io/kon-layla/membership.html");
 }
 
 function excryption(string, key) {
@@ -434,6 +433,7 @@ var video_l_obj_list = []; //グローバル宣言
 var mo_list_id1 = "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx"; //メン限雑談配信リスト
 var mo_list_id2 = "PLCUfW5KwcvZEgLeXOvqy4hWkTne4SXQKI"; //メン限同時視聴リスト
 var mo_list_id3 = "PLCUfW5KwcvZHp-Jj27GkIb-UcYdiLd-C1"; //限定公開のアーカイブリスト
+const STARTTIME = new Date().getTime();
 async function push_mo_ul(video_u_obj_list) {
     try {
         //メン限雑談配信リスト取得
@@ -443,7 +443,7 @@ async function push_mo_ul(video_u_obj_list) {
             dataType: 'json',
             data: {
             part: 'snippet',
-            maxResults: 50, // 取得する動画の最大数（50まで）
+            maxResults: 3, // 取得する動画の最大数（50まで）
             playlistId: mo_list_id1,
             key: APIKEY
             }
@@ -462,7 +462,7 @@ async function push_mo_ul(video_u_obj_list) {
             dataType: 'json',
             data: {
             part: 'snippet',
-            maxResults: 50, // 取得する動画の最大数（50まで）
+            maxResults: 3, // 取得する動画の最大数（50まで）
             playlistId: mo_list_id2,
             key: APIKEY
             }
@@ -473,27 +473,7 @@ async function push_mo_ul(video_u_obj_list) {
             video_u_obj_list = await checkVideoStatus(items2[i].snippet.resourceId.videoId, true, items2[i].snippet.title, video_u_obj_list);
             //mo_videoIds.push(items[i].snippet.resourceId.videoId);
         }
-
-        //限定公開のアーカイブリスト取得
-        const response3  = await $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-            part: 'snippet',
-            maxResults: 50, // 取得する動画の最大数（50まで）
-            playlistId: mo_list_id3,
-            key: APIKEY
-            }
-        });
-        const items3 = response3.items;
-        //video_u_obj_list = await checkVideoStatus("ZxNsc2aZ7xo", true, "TEST", video_u_obj_list); debug用
-        for (var i = 0; i < items3.length; i++) {
-            video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
-            //mo_videoIds.push(items[i].snippet.resourceId.videoId);
-        }
         
-        await setMOVideo();
         await setUCVideo(video_u_obj_list);
         await setLVideo();
     } catch (error) {
@@ -631,88 +611,6 @@ async function setUCVideo(video_u_obj_list) {
             }
         }
         
-    }
-}
-
-async function setMOVideo() {
-    const THUMB_TYPES = [
-        /** w1280 */
-        'maxresdefault.jpg',
-        /** w640 */
-        'sddefault.jpg',
-        /** w480 */
-        'hqdefault.jpg',
-        /** w320 */
-        'mqdefault.jpg',
-        /** w120 */
-        'default.jpg',
-    ];
-    
-    let video_m_obj_list_sorted = video_m_obj_list.sort(
-        (a, b) => moment(b.time).diff(a.time)
-    );
-    //console.log("MOV: ", video_m_obj_list_sorted.length);
-    for (let k = 0; k < video_m_obj_list_sorted.length; k++) {
-        var ID = video_m_obj_list_sorted[k].videoid;
-        let thumb_max = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
-        var TN_URL = thumb_max; // 初期値として maxresdefault サイズのサムネイルを使用
-
-        const getYtThumbnail = async (videoId) => {
-            // 画像をロードする処理
-            const loadImage = (src) => {
-              return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.onload = (e) => resolve(img);
-                img.src = src;
-              });
-            };
-          
-            for (let i = 0; i < THUMB_TYPES.length; i++) {
-              const fileName = `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[i]}`;
-          
-              const res = await loadImage(fileName);
-          
-              // ダミー画像じゃなかったら（横幅が121px以上だったら）
-              // もしくは、これ以上小さい解像度が無かった場合は、このURLで決定
-              if (
-                !THUMB_TYPES[i + 1]
-                || (res).width > 120
-              ) {
-                return fileName;
-              }
-            }
-        };
-        
-        await (async () => {
-            // Get the largest size under sddefault.jpg.
-            TN_URL = await getYtThumbnail(ID, 'maxresdefault.jpg');
-            var DATETIME = video_m_obj_list_sorted[k].time;
-            var year = DATETIME.getFullYear();
-            var month = DATETIME.getMonth() + 1;
-            var day = DATETIME.getDate();
-            var hour = DATETIME.getHours();
-            var minute = DATETIME.getMinutes();
-            var second = DATETIME.getSeconds();
-            var dayOfWeek = DATETIME.getDay();
-            var dayOfWeekStr = ["日", "月", "火", "水", "木", "金", "土"][dayOfWeek];
-            var DATETIME_formated = `${year}/${month}/${day} (${dayOfWeekStr}) ${hour}:${minute.toString().padStart(2, '0')}`;
-            // 配信予定のアイテムを表示
-            if (checkLightMode()) {
-              // developer mode
-              // console.log("https://www.youtube.com/watch?v=" + ID);
-              await new Promise((resolve) => {
-                $("#youtubeList_m_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
-                resolve();
-              });
-            } else {
-              // nomal mode
-              await new Promise((resolve) => {
-                $("#youtubeList_m_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' + DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
-                resolve();
-              });
-            }
-          })();
-          
     }
 }
 

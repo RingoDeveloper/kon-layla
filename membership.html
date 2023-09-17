@@ -3,12 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>レイラ・マグノリア非公式ファンサイト お問い合わせフォーム</title>
-        <link rel="stylesheet" type="text/css" href="./css/qa.css">
-        <!--link rel="icon" type="image/x-icon" href="./src/layla_twitter_icon.jpg"-->
+        <title>レイラ・マグノリア非公式ファンサイト</title>
+        <link rel="stylesheet" type="text/css" href="./css/membership.css">
+        <link rel="icon" type="image/x-icon" href="./src/IMG_0285.jpg">
+        <link rel="apple-touch-icon" href="./src/apple-touch-icon.png" sizes="180x180">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJHHNYD65"></script>
+        <!--script src="https://apis.google.com/js/api.js"></script-->
+
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -26,9 +29,9 @@
             })(document);
         </script>
 
-    </head>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
 
-        
+    </head>
 
     <body>
         <header class="header">
@@ -56,10 +59,43 @@
         </header>
         
         <main class="main">
-            <div class="googleform-wrapper">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc5x0YUUmj3zxsxwLRii6lwMe4yWxv6K7-NJpM4HPwKP8o6dQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <div id="loader-overlay">
+                <div id="loader"></div>
+                <br>
+                <p id="loader-message">読み込み中...</p>
             </div>
-            
+
+            <div id="fallingArea"></div>
+                
+            <div id="link">
+                <!--a href="https://twitter.com/Layla__Magnolia?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Layla__Magnolia</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br-->
+                <a href="https://twitter.com/intent/tweet?button_hashtag=なまモクレン&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" data-lang="ja" data-show-count="false">#なまモクレンをツイートする</a>
+            </div>            
+        
+            <div class="titleScripts" id="titleScripts">
+                <h1 id="kon-layla" onclick="shower()">メンバーシップ限定コンテンツ</h1>
+            </div>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script type="text/javascript" src="config.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    
+            <div class="contents-wapper2">
+                <div id="youtubeList_l">
+                </div>
+                <div id="youtubeList_u">
+                    <h2 class="statetext" onclick="reset_tape()">配信予定</h2>
+                    <div id="youtubeList_u_inner"></div>
+                </div>
+
+                <div id="youtubeList_m">
+                    <div class="statetext">
+                        <h2 class="statetext">メンバー限定配信アーカイブ</h2>
+                    </div>
+                    <div id="youtubeList_m_inner"></div>
+                </div>
+            </div>
         </main>
         
         <footer>
@@ -68,7 +104,6 @@
                 <li><br></li>
                 <a href="https://twitter.com/_ringodev_"><li id="cc">&copy; 2023 りんごでべろっぱ All Rights Reserved.</li></a>
             </ul>
-            <script type="text/javascript" src="config.js"></script>
             <script>
                 const VERSION = config.version;
                 let elm_ver = document.getElementById("version");
@@ -76,7 +111,7 @@
             </script>
         </footer>
 
-        <script src="./js/qa.js"></script>
+        <script src="./js/membership.js"></script>
     </body>
     
 </html>

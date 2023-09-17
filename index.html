@@ -42,6 +42,7 @@
                 <nav class="nav">
                     <ul class="nav_list">
                         <li class="nav_item"><a id="menu_sch" href="https://ringodeveloper.github.io/kon-layla/">スケジュール</a></li>
+                        <li class="nav_item"><a id="menu_mo" href="https://ringodeveloper.github.io/kon-layla/membership.html">メン限</a></li>
                         <li class="nav_item"><a id="menu_ht" href="https://ringodeveloper.github.io/kon-layla/hashtags.html">ハッシュタグ</a></li>
                         <li class="nav_item"><a id="menu_poty" href="https://ringodeveloper.github.io/kon-layla/poty2022.html">POTY</a></li>
                         <li class="nav_item"><a id="menu_qa" href="https://ringodeveloper.github.io/kon-layla/qa.html">お問い合わせ</a></li>
@@ -422,24 +423,26 @@
                     </div>
                 </div>
                 <div id="youtubeList_c">
+                    <h2 class="statetext">アーカイブ</h2>
                     <div class="statetext_top">
-                        <h2 class="statetext">アーカイブ</h2>
+                            <div class="numsection">
+                                <span id="title_shownum" >表示数</span>
+                                <select id="numSelect" onchange="update_num_CV()">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
                     </div>
+
                     <form id="search_funcs">
                         <input type="text" id="searchBox" name="searchBox" placeholder="検索キーワードを入力">
                         <input type="Button" id="search-button" value="検索" onclick="search_func()">
                         <input type="button" id="reset-button" value="リセット" onclick="reset_func()">
                     </form>
-                    <div>
-                        <span id="title_shownum" >表示数</span>
-                        <select id="numSelect" onchange="update_num_CV()">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                        </select>
-                    </div>
+                    
                     <script>
                         num_cv = localStorage.getItem('num_cv');
                         if (num_cv == null) {
@@ -449,14 +452,6 @@
                     </script>
                     <div id="youtubeList_c_inner"></div>
                 </div>
-
-                <div id="youtubeList_m">
-                    <div class="statetext">
-                        <h2 class="statetext">メンバー限定配信アーカイブ</h2>
-                    </div>
-                    <div id="youtubeList_m_inner"></div>
-                </div>
-
 
 
                 <div class="develm" id="youtubeList_test">
