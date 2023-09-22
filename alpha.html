@@ -3,8 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>レイラ・マグノリア非公式ファンサイト お問い合わせフォーム</title>
-        <link rel="stylesheet" type="text/css" href="./css/qa.css">
+        <title>α版ツール</title>
+        <link rel="stylesheet" type="text/css" href="./css/alpha.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
         <!--link rel="icon" type="image/x-icon" href="./src/layla_twitter_icon.jpg"-->
 
         <!-- Google tag (gtag.js) -->
@@ -25,10 +26,7 @@
               h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
             })(document);
         </script>
-
     </head>
-
-        
 
     <body>
         <header class="header">
@@ -57,10 +55,59 @@
         </header>
         
         <main class="main">
-            <div class="googleform-wrapper">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc5x0YUUmj3zxsxwLRii6lwMe4yWxv6K7-NJpM4HPwKP8o6dQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="container">
+                <h2 id="title_text">α版ツール</h2>
+                <h3>このページでは開発段階のちょっと便利かもしれないツールを公開しております。</h3>
+
+
+                <div class="button" id="button_sch">
+                    <p><b>#01 Xでスケジュール確認</b></p>
+                    <p class="description">
+                        #***** -filter:retweetsと検索するのと同等です。URLの末尾に&f=liveをつけることでLatest（最新表示）になります。<br>
+                        アプリにバインドする場合は最新表示にならないと思います。
+                    </p>
+                    <a onclick="show_sch()">スケジュール(X版)</a>
+                </div>
+                <br>
+                <div class="reply-fin">
+                    <p><b>#02 推しからのリプライを一覧表示</b></p>
+                    <p class="description">
+                        ①from: に推しのX(Twitter)IDを設定、to: に自分のIDを設定する。<br>
+                        ②変換ボタンを押す。<br>
+                        ③表示されたURLを押す。（URLはブックマークに登録すればいつでも見れる（はず））
+                    </p>
+                    <p>From: <input id="id-from" value="@Layla__Magnolia"><br> To:<input id="id-to" placeholder="@自分のID"></p>
+                    <input type="button" onclick="convert_rep()" value="変換">
+                    <br>
+                    <p class="description"><a href="#" id="result-rep"></a></p>
+                </div>
+                <br>
+                <div class="video-tc">
+                    <p><b>#03 YoutubeのURL+タイムコード</b></p>
+                    <p>You can put timecode at youtube video url</p>
+                    <p class="description">
+                        ①元のYouTube動画のURLを入力<br>
+                        ②時間をXX:XX:XXの形式で入力<br>
+                        ③表示されたURLを押すと指定した動画の指定した時間からスタート<br>
+                        ＊ブラウザ版ではデフォルトで使えます
+                    </p>
+                    <div class="inputs"> 
+                        <p>Src URL:<input id="sorce" placeholder="https://xxxxxxx"></p>
+                        <div class="time">
+                            <p>
+                                Time:
+                                <input id="timecode_h" size="3" placeholder="0"> :
+                                <input id="timecode_m" size="2" placeholder="12"> :
+                                <input id="timecode_s" size="2" placeholder="1">
+                            </p>
+                        </div>
+                    </div>
+                    <input type="button" onclick="convert_tim()" value="変換">
+                    <p class="description"><a href="#" id="result-tim"></a></p>
+                </div>
             </div>
-            
+                
         </main>
         
         <footer>
@@ -77,7 +124,7 @@
             </script>
         </footer>
 
-        <script src="./js/qa.js"></script>
+        <script src="./js/alpha.js"></script>
     </body>
     
 </html>
