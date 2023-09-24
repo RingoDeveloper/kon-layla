@@ -232,7 +232,7 @@ function setLVideo() {
         var TITLE = video_l_obj_list[0].title;
         $("#youtubeList_l").append('<div class="statetext"><h2>配信中🎥</h2></div>');
         $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
-        if (retCheckDev()) {
+        if (false) {
             //配信中のアイテムを表示
             if (true) {
                 //light mode
@@ -247,7 +247,7 @@ function setLVideo() {
         }
     } else {
         var ID = video_l_obj_list[0].videoid;
-        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;    
+        var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`; 
         var TITLE = video_l_obj_list[0].title;
         if (retCheckDev()) {
             //配信中のアイテムを表示
@@ -335,6 +335,7 @@ async function setMOVideo() {
         var TN_URL = thumb_max; // 初期値として maxresdefault サイズのサムネイルを使用
 
         const getYtThumbnail = async (videoId) => {
+            //return `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[0]}`; //単純にしてみた（ループをなくす）
             // 画像をロードする処理
             const loadImage = (src) => {
               return new Promise((resolve, reject) => {
@@ -343,6 +344,7 @@ async function setMOVideo() {
                 img.src = src;
               });
             };
+            
           
             for (let i = 0; i < THUMB_TYPES.length; i++) {
               const fileName = `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[i]}`;
