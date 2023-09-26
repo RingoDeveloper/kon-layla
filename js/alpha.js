@@ -45,6 +45,15 @@ function convert_rep() {
   result_rep.setAttribute('href', url);
 }
 
+function convert_air_rep() {
+  let keywords = document.getElementById("keywords");
+  let result_air_rep = document.getElementById("result-air-rep");
+
+  let url = `https://twitter.com/search?q=filter%3Afollows%20${keywords.value}&src=typed_query&f=live`;
+  //result_air_rep.textContent = url;
+  //result_air_rep.setAttribute('href', url);
+  window.open(url);
+}
 
 
 function convertYouTubeURL(url) {
