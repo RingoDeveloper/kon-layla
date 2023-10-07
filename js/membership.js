@@ -119,6 +119,7 @@ var video_u_obj_list = [];
 var mo_list_id1 = "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx"; //メン限雑談配信リスト
 var mo_list_id2 = "PLCUfW5KwcvZEgLeXOvqy4hWkTne4SXQKI"; //メン限同時視聴リスト
 var mo_list_id3 = "PLCUfW5KwcvZHp-Jj27GkIb-UcYdiLd-C1"; //限定公開のアーカイブリスト
+var mo_list_id_main = "UUMOm-nZofnh3_1s_l2Gq3G1KQ"; //メンバー限定の動画
 const STARTTIME = new Date().getTime();
 async function push_mo_ul() {
     try {
@@ -140,6 +141,7 @@ async function push_mo_ul() {
             video_u_obj_list = await checkVideoStatus(items1[i].snippet.resourceId.videoId, true, items1[i].snippet.title, video_u_obj_list);
             //mo_videoIds.push(items[i].snippet.resourceId.videoId);
         }
+        
 
         //メン限同時視聴リスト取得
         const response2  = await $.ajax({
@@ -174,6 +176,7 @@ async function push_mo_ul() {
         for (var i = 0; i < items3.length; i++) {
             video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
         }
+        
         
         await setMOVideo();
         await setUCVideo(video_u_obj_list);
@@ -335,7 +338,7 @@ async function setMOVideo() {
         var TN_URL = thumb_max; // 初期値として maxresdefault サイズのサムネイルを使用
 
         const getYtThumbnail = async (videoId) => {
-            //return `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[0]}`; //単純にしてみた（ループをなくす）
+            return `https://img.youtube.com/vi/${videoId}/${THUMB_TYPES[0]}`; //単純にしてみた（ループをなくす）
             // 画像をロードする処理
             const loadImage = (src) => {
               return new Promise((resolve, reject) => {
