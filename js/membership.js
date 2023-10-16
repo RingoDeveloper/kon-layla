@@ -393,10 +393,39 @@ async function setMOVideo() {
                 resolve();
               });
             }
-          })();
+        })();
           
     }
 }
 
 push_mo_ul();
+/*
+const CHANNEL_ID = "UCm-nZofnh3_1s_l2Gq3G1KQ";
+
+async function getUpcomingLiveStreams() {
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=upcoming&type=video&key=${APIKEY}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.items;
+}
+
+async function fetchLiveStreams() {
+  try {
+    const upcomingLiveStreams = await getUpcomingLiveStreams();
+    const liveStreams = upcomingLiveStreams.map((stream) => {
+      return {
+        id: stream.id.videoId,
+        title: stream.snippet.title,
+        startAt: stream.snippet.publishTime,
+        isPrivate: false, // YouTube API では非公開のライブ配信情報を取得できないため、常に false を設定する
+      };
+    });
+    console.log(liveStreams);
+  } catch (error) {
+    console.error("Error fetching live streams:", error);
+  }
+}
+
+fetchLiveStreams();
+*/
 

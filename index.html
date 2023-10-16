@@ -220,7 +220,7 @@
                     } else {
                         $("#youtubeList_l").append('<div class="statetext"><h2>配信中🎥</h2></div>');
                         $("#youtubeList_l").append('<div id="youtubeList_l_inner"></div>');
-                        getStreamStatus();
+                        await getStreamStatus();
                         for(var i = 0; i < jsonitem_l.length; i++){
                             var ID = jsonitem_l[i].id.videoId;
                             var TITLE = jsonitem_l[i].snippet.title;
@@ -357,9 +357,13 @@
                                 );
                                 /* 平均時間計算 */
                                 var time_total = 0;
+                                if (num_cv > video_c_obj_list_sorted.length) {
+                                    num_cv = video_c_obj_list_sorted.length;
+                                }
                                 for (let k = 0; k < num_cv; k++) {
                                     time_total += video_c_obj_list_sorted[k].airtime;
                                 }
+                                console.log("表示数: " + num_cv);
                                 let time_total_ave = Math.floor(time_total / parseInt(num_cv));
                                 const time_total_sec = (time_total_ave%60).toString().padStart(2, '0');
                                 const time_total_min = (Math.floor(time_total_ave/60)%60).toString().padStart(2, '0');

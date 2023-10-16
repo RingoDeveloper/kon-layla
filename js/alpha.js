@@ -57,33 +57,54 @@ function convert_air_rep() {
 
 
 function convertYouTubeURL(url) {
-  // 1つ目のURL形式（https://www.youtube.com/watch?v=...）の正規表現
-  const pattern1 = /^https:\/\/www\.youtube\.com\/watch\?v=(\w+)/;
+  console.log("run conv func");
+  const pattern1 = /^https:\/\/www\.youtube\.com\/watch\?v=([\w-]+)/;
+  const pattern2 = /^https:\/\/youtu\.be\/([\w-]+)\?si=/;
+  const pattern3 = /^https:\/\/www\.youtube\.com\/embed\/([\w-]+)/;
+  const pattern4 = /^https:\/\/www\.youtube\.com\/live\/([\w-]+)\?si=/;
+  const pattern5 = /^https:\/\/m\.youtube\.com\/watch\?v=([\w-]+)/;
 
-  // 2つ目のURL形式（https://youtu.be/...?si=...）の正規表現
-  const pattern2 = /^https:\/\/youtu\.be\/(\w+)\?si=/;
+  const pat_list = [pattern1, pattern2, pattern3, pattern4, pattern5];
+  console.log("length of pat_list =", pat_list.length);
+debugger
+  for (let i = 0; i < pat_list.length; i++) {
+    console.log(i)
+    if (i == 0) {
+      if (pat_list[i].test(url)) {
+        return url;
+      }
+    } else {
+      let match = url.match(pat_list[i]);
+      if (match) {
+        return `https://www.youtube.com/watch?v=${match[1]}`;
+      }
+    }
+  }
 
-  // 3つ目のURL形式（https://www.youtube.com/embed/...）の正規表現
-  const pattern3 = /^https:\/\/www\.youtube\.com\/embed\/(\w+)/;
+
+  /*
+  const match = url.match(pattern2);
+  const match3 = url.match(pattern3);
 
   // 1つ目のURL形式に一致する場合、そのまま返す
   if (pattern1.test(url)) {
       return url;
-  }
+  } else if ()
 
   // 2つ目のURL形式に一致する場合、ビデオIDを取得し、1つ目の形式に変換して返す
-  const match = url.match(pattern2);
+  
   if (match) {
-      const videoId = match[1];
-      return `https://www.youtube.com/watch?v=${videoId}`;
+    const videoId = match[1];
+    return `https://www.youtube.com/watch?v=${videoId}`;
   }
 
   // 3つ目のURL形式に一致する場合、ビデオIDを取得し、1つ目の形式に変換して返す
-  const match3 = url.match(pattern3);
+  
   if (match3) {
-      const videoId = match3[1];
-      return `https://www.youtube.com/watch?v=${videoId}`;
+    const videoId = match3[1];
+    return `https://www.youtube.com/watch?v=${videoId}`;
   }
+  */
 
   // どの形式にも一致しない場合はエラーメッセージを返す
   return "無効なYouTube URL形式です";
