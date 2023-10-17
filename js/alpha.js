@@ -55,8 +55,10 @@ function convert_air_rep() {
   //result_air_rep.textContent = url;
   //result_air_rep.setAttribute('href', url);
   if (isExceptLM) {
+    console.log("except");
     window.open(url_exc);
   } else {
+    console.log("not except");
     window.open(url);
   }
 }
