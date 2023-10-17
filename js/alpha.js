@@ -54,7 +54,11 @@ function convert_air_rep() {
   let url_exc = `https://twitter.com/search?q=filter%3Afollows%20${keywords.value}%20-from%3ALayla__Magnolia&src=typed_query&f=live`;
   //result_air_rep.textContent = url;
   //result_air_rep.setAttribute('href', url);
-  isExceptLM ? window.open(url_exc) : window.open(exc);
+  if (isExceptLM) {
+    window.open(url_exc);
+  } else {
+    window.open(url);
+  }
 }
 
 
