@@ -140,6 +140,7 @@
             <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script type="text/javascript" src="config.js"></script>
+            <script type="text/javascript" src="./data/coversongs.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
             <script type="text/javascript">
             
@@ -422,10 +423,19 @@
                 </div>
                 <div class="notdevelm" id="youtubeList_singing">
                     <h2 class="statetext" id="statetext_sing">歌ってみた🎤</h2>
+                    
                     <div id="youtubeList_singing_inner">
                         <div class="iframe_wrapper_singing"><a href="https://www.youtube.com/watch?v=bXKGY6gGWaQ" target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">1周年記念 歌ってみた公開中！</h2><img class="thumb" src="https://img.youtube.com/vi/bXKGY6gGWaQ/maxresdefault.jpg"></a></div>
                         <div class="iframe_wrapper_singing"><a href="https://www.youtube.com/watch?v=mNkMnQJAfKg" target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">1000人記念 歌ってみた公開中！</h2><img class="thumb" src="https://img.youtube.com/vi/mNkMnQJAfKg/maxresdefault.jpg"></a></div>
                     </div>
+                    <script>
+                        const songs_list = songs_list_export;
+                        let html = "";
+                        for (let i = 0; i < songs_list.length; i++) {
+                            html += `<div class="iframe_wrapper_singing"><a href="https://www.youtube.com/watch?v=${songs_list[i].videoid}" target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time-long" style="color:black">${songs_list[i].title}</h2><img class="thumb" src="https://img.youtube.com/vi/${songs_list[i].videoid}/maxresdefault.jpg"></a></div>`;
+                        }
+                        document.getElementById("youtubeList_singing_inner").innerHTML = html;
+                    </script>
                 </div>
                 <div id="youtubeList_c">
                     <h2 class="statetext">アーカイブ</h2>

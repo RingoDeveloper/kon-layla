@@ -696,11 +696,14 @@ iframe {
     padding-left: 10px;
     padding-right: 10px;
     width: auto;
-    border-width: 0px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #33333300;
     border-radius: 7px;
     background-color: #ffffff;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     max-width: min-content;
+    font-size: 14px;
 }
 
 .iframe_wrapper_m {
@@ -750,6 +753,15 @@ iframe {
 h2.sc-time {
     margin-top: 5px;
     margin-bottom: 5px;
+    font-family: 'HuiFontP109', sans-serif;
+    font-size: 28px;
+}
+
+h2.sc-time-long {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'HuiFontP109', sans-serif;
+    font-size: 24px;
 }
 
 .statetext_top {
@@ -909,7 +921,12 @@ input:checked ~ .circle {
     }
 
     h2.sc-time {
-        font-size: 18px;
+        font-size: 24px;
+        width: 352px;
+    }
+
+    h2.sc-time-long {
+        font-size: 20px;
         width: 352px;
     }
 
@@ -972,9 +989,14 @@ input:checked ~ .circle {
         display: block;
     }
     h2.sc-time {
+        font-size: 20px;
+        width: 288px;
+    }
+    h2.sc-time-long {
         font-size: 16px;
         width: 288px;
     }
+    
 
     .iframe_wrapper {
         padding: 5px;
@@ -1029,6 +1051,14 @@ input:checked ~ .circle {
 
     .numsection {
        font-size: 18px;
+    }
+
+    .iframe_wrapper_singing {
+        font-size: 10px;
+    }
+
+    .ave_time {
+        font-size: medium;
     }
 
     
@@ -1179,7 +1209,7 @@ input:checked ~ .circle {
         padding: 5px;
         margin-bottom: 5px;
         margin-top: 5px;
-        box-shadow: 0 0 10px rgb(0, 179, 255);
+        font-size: xx-small;
     }
 
     #youtubeList_u {
@@ -1191,6 +1221,11 @@ input:checked ~ .circle {
     }
 
     h2.sc-time {
+        font-size: 18px;
+        width: 304px;
+        margin: auto;
+    }
+    h2.sc-time-long {
         font-size: 16px;
         width: 304px;
         margin: auto;
@@ -1240,6 +1275,7 @@ input:checked ~ .circle {
         height: 16px;
         width: auto;
         margin-top: 8px;
+        margin-bottom: 5px;
     }
 
     #searchBox {

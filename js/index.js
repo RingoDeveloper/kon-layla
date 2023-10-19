@@ -35,6 +35,7 @@ var TIMEOUT_ID2
 var INTERVAL_ID;
 
 
+
 let num_cv = check_num_cv();
 
 // 読み込み中の状態を表示する関数
@@ -532,14 +533,14 @@ function setLVideo() {
             //配信中のアイテムを表示
             if (checkLightMode()) {
                 //light mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time-long" style="color:black">' + TITLE + '</h2></a></div>'); /////
             } else {
                 //nomal mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time-long">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
             }
         } else {
             //nomal mode
-            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_m"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time-long" style="color:black">' + TITLE + '</h2></a></div>'); /////
         }
     } else {
         var ID = video_l_obj_list[0].videoid;
@@ -549,14 +550,14 @@ function setLVideo() {
             //配信中のアイテムを表示
             if (checkLightMode()) {
                 //light mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time-long" style="color:black">' + TITLE + '</h2></a></div>'); /////
             } else {
                 //nomal mode
-                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
+                $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><h2 class="sc-time-long">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
             }
         } else {
             //nomal mode
-            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' + TITLE + '</h2></a></div>'); /////
+            $("#youtubeList_l_inner").append('<div class="iframe_wrapper_l"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + TN_URL + '><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time-long" style="color:black">' + TITLE + '</h2></a></div>'); /////
         }
     }
 }
@@ -678,7 +679,7 @@ async function getStreamStatus() {
         const streamUrl = `https://www.twitch.tv/${channelName}`;
         const thumbnailUrl = data.data[0].thumbnail_url.replace('{width}x{height}', '960x540');
         console.log(streamTitle);
-        $("#youtubeList_l_inner").append('<div class="iframe_wrapper_t"><a href=' + streamUrl + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + thumbnailUrl + '><img class="inner-logo" src="./src/logo/twitch-logo.png"><h2 class="sc-time" style="color:black">' + streamTitle + '</h2></a></div>'); /////
+        $("#youtubeList_l_inner").append('<div class="iframe_wrapper_t"><a href=' + streamUrl + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + thumbnailUrl + '><img class="inner-logo" src="./src/logo/twitch-logo.png"><h2 class="sc-time-long" style="color:black">' + streamTitle + '</h2></a></div>'); /////
 
         /*
         document.getElementById('status').textContent = `${channelName} is currently streaming`;
@@ -924,3 +925,5 @@ function showAns() {
     var elm = document.getElementById("thisisme");
     elm.innerHTML = "管理人 りんごでべろっぱ わぁ見つかっちゃったぁ！<br>君の勝ちだよ！<br>";
 }
+
+
