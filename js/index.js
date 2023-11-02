@@ -120,7 +120,7 @@ function getRandomInt() {
 }
 
 function show_sch() {
-    window.open("https://www.youtube.com/@LaylaMagnolia/community?view=desktop");
+    window.open("https://twitter.com/search?q=%23%E3%83%AC%E3%82%A4%E3%83%A9%E3%81%A8%E5%A4%9C%E6%9B%B4%E3%81%8B%E3%81%97%20-filter%3Aretweets&src=typed_query&f=live");
 }
 
 function goto_mo() {
@@ -371,10 +371,13 @@ function removeDataSizeAttribute() {
 removeDataSizeAttribute(); // 初回の実行
 
 function search_func() {
+    let keyword = document.getElementById("searchBox").value;
+    window.open(`https://www.youtube.com/@LaylaMagnolia/search?query=${keyword}`);
+    /*
     if (SEACHING == true) {
         reset_func();
     }
-    let keyword = document.getElementById("searchBox").value;
+    
     let idxToShow = [];
     //console.log(idxToShow);
     //console.log(keyword);
@@ -407,6 +410,7 @@ function search_func() {
         divElement.textContent = "検索結果に一致するコンテンツがありません";
     }
     SEACHING = true;
+    */
 }
 
 function reset_func() {
@@ -574,7 +578,7 @@ async function setUCVideo(video_u_obj_list) {
     const video_u_obj_list_sorted = video_u_obj_list.sort(
         (a, b) => moment(a.time).diff(b.time)
     );
-    //console.log("UCV_sorted: ", video_u_obj_list_sorted);
+    console.log("UCV_sorted: ", video_u_obj_list_sorted);
     for (let i = 0; i < Object.keys(video_u_obj_list_sorted).length; i++) {
         var ID = video_u_obj_list_sorted[i].videoid;
         var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;

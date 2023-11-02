@@ -521,6 +521,7 @@ ul.footer_menu li {
 
 #youtubeList_l_inner {
     display:flex;
+    flex-wrap: wrap;
     justify-content: center; /* 主軸方向（横軸）の中央寄せ */
     align-items: center; /* クロス軸方向（縦軸）の中央寄せ */
 }
