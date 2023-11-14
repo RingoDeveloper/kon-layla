@@ -6,6 +6,7 @@
         <title>レイラ・マグノリア非公式ファンサイト</title>
         <link rel="stylesheet" type="text/css" href="./css/index.css">
         <link rel="icon" type="image/x-icon" href="./src/IMG_0285.jpg">
+        <link rel=”icon” href=“/src/favicon.ico”>
         <link rel="apple-touch-icon" href="./src/apple-touch-icon.png" sizes="180x180">
 
         <!-- Google tag (gtag.js) -->
@@ -358,11 +359,20 @@
                                 );
                                 /* 平均時間計算 */
                                 var time_total = 0;
+                                //var time_arc = 0;
                                 if (num_cv > video_c_obj_list_sorted.length) {
                                     num_cv = video_c_obj_list_sorted.length;
                                 }
                                 for (let k = 0; k < num_cv; k++) {
+                                    //console.log(video_c_obj_list_sorted[k]);
                                     time_total += video_c_obj_list_sorted[k].airtime;
+                                    /*
+                                    if (video_c_obj_list_sorted[k].title.includes('ARK/#ぶいARK')) {
+                                        time_arc += video_c_obj_list_sorted[k].airtime;
+                                        //console.log(video_c_obj_list_sorted[k].airtime)
+                                        //console.log(video_c_obj_list_sorted[k].title)
+                                    }
+                                    */
                                 }
                                 console.log("表示数: " + num_cv);
                                 let time_total_ave = Math.floor(time_total / parseInt(num_cv));
@@ -371,6 +381,22 @@
                                 const time_total_hour = Math.floor(time_total_ave/3600)%60;
                         
                                 time_total_ave_formated = `${time_total_hour}:${time_total_min}:${time_total_sec}`;
+                                
+                                //var hours = Math.floor(time_arc / 3600);
+                                //var minutes = Math.floor((time_arc % 3600) / 60);
+                                //var remainingSeconds = Math.floor(time_arc % 60);
+
+                                /* 
+                                var hoursStr = padZero(hours);
+                                var minutesStr = padZero(minutes);
+                                var secondsStr = padZero(remainingSeconds);
+
+                                console.log(hoursStr + ":" + minutesStr + ":" + secondsStr)
+                                function padZero(number) {
+                                    return (number < 10 ? '0' : '') + number;
+                                }
+                                */
+                
                                 
                                 $(".statetext_top").append(`<h2 class="ave_time">最近${num_cv}回の平均配信時間  ` + time_total_ave_formated + '</h2>');
 
