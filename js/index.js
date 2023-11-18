@@ -39,14 +39,14 @@ var INTERVAL_ID;
 let num_cv = check_num_cv();
 
 /* 追記コード*/
-document.getElementById("loader-overlay").style.display = "none";
+//document.getElementById("loader-overlay").style.display = "none";
 
 
 
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
     if (localStorage.getItem('blk_api') == "true") {
-        //hideLoader();
+        hideLoader();
         return;
     }
     var loaderOverlay = document.getElementById("loader-overlay");
@@ -490,7 +490,7 @@ async function push_mo_ul(video_u_obj_list) {
     } catch (error) {
         console.log('Error: Failed to retrieve member-exclusive videos.', error);
     } finally {
-        //hideLoader();
+        hideLoader();
     }
 }
 
