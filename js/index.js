@@ -38,10 +38,15 @@ var INTERVAL_ID;
 
 let num_cv = check_num_cv();
 
+/* 追記コード*/
+document.getElementById("loader-overlay").style.display = "none";
+
+
+
 // 読み込み中の状態を表示する関数
 function showLoader(message) {
     if (localStorage.getItem('blk_api') == "true") {
-        hideLoader();
+        //hideLoader();
         return;
     }
     var loaderOverlay = document.getElementById("loader-overlay");
@@ -110,7 +115,7 @@ function randomRainbowColor() {
     ]; // 虹色のリスト
     return rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
 }  
-showLoader("読み込み中...");
+//showLoader("読み込み中...");
 
 //console.log(excryption('', owner.length)); 
 //console.log(decryption('', owner.length));
@@ -372,7 +377,8 @@ removeDataSizeAttribute(); // 初回の実行
 
 function search_func() {
     let keyword = document.getElementById("searchBox").value;
-    window.open(`https://www.youtube.com/@LaylaMagnolia/search?query=${keyword}`);
+    window.open(`https://www.youtube.com/@LaylaMagnolia/search?query=${keyword}&view=desktop`, '_blank');
+    
     /*
     if (SEACHING == true) {
         reset_func();
@@ -484,7 +490,7 @@ async function push_mo_ul(video_u_obj_list) {
     } catch (error) {
         console.log('Error: Failed to retrieve member-exclusive videos.', error);
     } finally {
-        hideLoader();
+        //hideLoader();
     }
 }
 
