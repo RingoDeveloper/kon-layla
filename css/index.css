@@ -109,7 +109,6 @@ body {
 }
 
 body {
-    /*font-family: 'HuiFontP109', sans-serif;*/
     font-family: "vdl-gothicmincho", sans-serif;
     background-image: url("../src/pastel_00108.jpg"); /* 画像 */
     background-size: cover;               /* 全画面 */
