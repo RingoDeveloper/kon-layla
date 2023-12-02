@@ -120,6 +120,7 @@ var mo_list_id1 = "PLCUfW5KwcvZFZi5ytVenKhtKIJP42ZQZx"; //メン限雑談配信�
 var mo_list_id2 = "PLCUfW5KwcvZEgLeXOvqy4hWkTne4SXQKI"; //メン限同時視聴リスト
 var mo_list_id3 = "PLCUfW5KwcvZHp-Jj27GkIb-UcYdiLd-C1"; //限定公開のアーカイブリスト
 var mo_list_id_main = "UUMOm-nZofnh3_1s_l2Gq3G1KQ"; //メンバー限定の動画
+var mo_list_addition = "PLr8ceCcnwq1n4nyVEUlZAauTUzodNhu29" //追加漏れ
 const STARTTIME = new Date().getTime();
 async function push_mo_ul() {
     try {
@@ -176,7 +177,40 @@ async function push_mo_ul() {
         for (var i = 0; i < items3.length; i++) {
             video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
         }
-        
+
+        //限定公開のアーカイブリスト取得
+        const response4  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: mo_list_addition,
+            key: APIKEY
+            }
+        });
+        const items4 = response4.items;
+        for (var i = 0; i < items4.length; i++) {
+            video_u_obj_list = await checkVideoStatus(items4[i].snippet.resourceId.videoId, true, items4[i].snippet.title, video_u_obj_list);
+        }
+
+        //過去のメン限動画リスト取得（重複チェック）
+        const response5  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: mo_list_id_main,
+            key: APIKEY
+            }
+        });
+        const items5 = response5.items;
+        for (var i = 0; i < items5.length; i++) {
+            await DuplicationChecker(items5[i].snippet.resourceId.videoId, true, items5[i].snippet.title, video_u_obj_list);
+        }
         
         await setMOVideo();
         await setUCVideo(video_u_obj_list);
@@ -187,8 +221,31 @@ async function push_mo_ul() {
         hideLoader();
     }
 }
+async function DuplicationChecker(videoId, mo, title = "ERROR", videoUObjList = []) {
+    if (
+        video_m_obj_list.some(item => item.videoid === videoId) || 
+        video_l_obj_list.some(item => item.videoid === videoId) || 
+        videoUObjList.some(item => item.videoid === videoId) ||
+        title.includes("ff14") ||
+        title.includes("FF14")||
+        title.includes("【MMD】粛聖!! ロリ神レクイエム☆ / しぐれうい（9さい）")
+    ) {
+        //console.log("重複:" + "https://www.youtube.com/watch?v=" + videoId);
+    } else {
+        console.log("[追加対象]: " + title  + "https://www.youtube.com/watch?v=" + videoId);
+    }
+}
 
 async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []) {
+
+    if (
+        video_m_obj_list.some(item => item.videoid === videoId) || 
+        video_l_obj_list.some(item => item.videoid === videoId) || 
+        videoUObjList.some(item => item.videoid === videoId)
+    ) {
+        //console.log("重複:" + videoId);
+        return videoUObjList;
+    } 
     try {
         const data = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/videos',
@@ -207,7 +264,6 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_m_obj_list.push({videoid: videoId, time: startTime});
         } else if (liveStreamingDetails.actualStartTime) { //配信中のメン限配信
-            
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_l_obj_list.push({videoid: videoId, time: startTime, title: title, mo: mo});
         } else { //配信予定のメン限
@@ -331,6 +387,7 @@ async function setMOVideo() {
     let video_m_obj_list_sorted = video_m_obj_list.sort(
         (a, b) => moment(b.time).diff(a.time)
     );
+    console.log(video_m_obj_list_sorted);
     //console.log("MOV: ", video_m_obj_list_sorted.length);
     for (let k = 0; k < video_m_obj_list_sorted.length; k++) {
         var ID = video_m_obj_list_sorted[k].videoid;
