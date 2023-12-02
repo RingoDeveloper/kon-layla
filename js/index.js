@@ -484,6 +484,23 @@ async function push_mo_ul(video_u_obj_list) {
             video_u_obj_list = await checkVideoStatus(items2[i].snippet.resourceId.videoId, true, items2[i].snippet.title, video_u_obj_list);
             //mo_videoIds.push(items[i].snippet.resourceId.videoId);
         }
+
+        //追加リスト
+        const response3  = await $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/playlistItems',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            part: 'snippet',
+            maxResults: 50, // 取得する動画の最大数（50まで）
+            playlistId: mo_list_addition,
+            key: APIKEY
+            }
+        });
+        const items3 = response3.items;
+        for (var i = 0; i < items3.length; i++) {
+            video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
+        }
         
         await setUCVideo(video_u_obj_list);
         await setLVideo();
@@ -495,6 +512,14 @@ async function push_mo_ul(video_u_obj_list) {
 }
 
 async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []) {
+    if (
+        video_m_obj_list.some(item => item.videoid === videoId) || 
+        video_l_obj_list.some(item => item.videoid === videoId) || 
+        videoUObjList.some(item => item.videoid === videoId)
+    ) {
+        //console.log("重複:" + videoId);
+        return videoUObjList;
+    } 
     try {
         const data = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/videos',

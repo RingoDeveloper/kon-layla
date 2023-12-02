@@ -178,7 +178,7 @@ async function push_mo_ul() {
             video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
         }
 
-        //限定公開のアーカイブリスト取得
+        //追加リスト
         const response4  = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/playlistItems',
             type: 'GET',
