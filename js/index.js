@@ -129,7 +129,7 @@ function show_sch() {
 }
 
 function goto_mo() {
-    window.open("https://ringodeveloper.github.io/kon-layla/membership.html");
+    window.open("https://konlayla.com/membership");
 }
 
 function excryption(string, key) {
