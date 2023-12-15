@@ -900,6 +900,10 @@ input:checked ~ .circle {
     float: right;
 }
 
+.header_title{
+    font-size: x-large;
+}
+
 @media screen and (max-width: 1079px) {
     .thumb {
         width: 352px;

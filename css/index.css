@@ -609,6 +609,9 @@ ul.footer_menu li {
 
 #link {
     float: left;
+    display: flex; /* This will arrange child elements in a row */
+    align-items: center; /* This vertically centers the items in the container */
+    justify-content: space-around;
 }
 
 .ringo  {
@@ -640,6 +643,41 @@ ul.footer_menu li {
     text-align: right;
     font-size: x-large;
 }
+
+.arrow_box{
+    position:relative;
+    font-family: "hachi-maru-pop", sans-serif;
+    background:#288ae6;
+    margin-left: 20px;
+    margin-top: 25px; 
+    padding:5px 10px 5px 10px;
+    text-align:left;
+    color:#ffffff;
+    font-size:x-large;
+    font-weight:bold;
+    border-width: 2px;
+    border-color:#333;
+    border-radius:5px;
+    
+}
+.arrow_box:after{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    border-color: rgba(90, 230, 40, 0);
+    border-top-width:5px;
+    border-bottom-width:5px;
+    border-left-width:10px;
+    border-right-width:10px;
+    margin-top: -5px;
+    border-right-color:#288ae6;
+    right:100%;
+    top:50%;
+}
+
 
 
 
@@ -1085,6 +1123,12 @@ input:checked ~ .circle {
 
     h1 {
         margin: 0px;
+    }
+
+    .arrow_box{
+        font-size: 10px;
+        margin-top: 10px;
+        margin-left: 5px
     }
 
     .description_text {
