@@ -353,14 +353,14 @@ function remove_develms() {
 }
 remove_develms();
 
-function check_screen_width() {
-    var ww = window.screen.width;
-    if (ww < 500) {
-        var elm = document.getElementById("no-display-sp");
-        elm.remove();
-    }
-}
-check_screen_width()
+// function check_screen_width() {
+//     var ww = window.screen.width;
+//     if (ww < 500) {
+//         var elm = document.getElementById("no-display-sp");
+//         elm.remove();
+//     }
+// }
+// check_screen_width()
 
 function removeDataSizeAttribute() {
     const tweetLinks = document.getElementsByClassName('twitter-hashtag-button');
