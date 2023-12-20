@@ -241,6 +241,7 @@ function checkDevMode() {
         //デベロッパーモードで表示
         ringo.style.display = "flex";
         blk_api_switch.style.display = "flex";
+        hideLoader();
     } else {
         /* 本番環境 */
         //ユーザモードで消す要素

@@ -703,7 +703,6 @@ iframe {
     min-width: 608px;
     height: auto;
     margin-top: 5px;
-    object-fit: cover; /* この一行を追加するだけ！ */
     padding: 13px;
     background-color: #f3f3f3;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
@@ -1224,12 +1223,13 @@ input:checked ~ .circle {
         display: block;
     }
     .img-sch {
-        min-width: 256px;
-        width: 98%;
+        min-width: 300px;
+        width: 100%;
         height: auto;
-        margin: 2px;
         display: block;
-        padding: 7px;
+        box-sizing: content-box;
+        padding: 7px; 
+        margin: 0px;
     }
 
     .iframe_wrapper {
