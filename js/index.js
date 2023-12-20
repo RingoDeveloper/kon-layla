@@ -61,7 +61,7 @@ function hideLoader() {
     document.getElementById("loader-overlay").style.display = "none";
     const ENDTIME = new Date().getTime();
     const timeDifference = ENDTIME - STARTTIME;
-    console.log(`経過時間（ミリ秒）: ${timeDifference}`);
+    //console.log(`経過時間（ミリ秒）: ${timeDifference}`);
     //set_first_anniv();
 }
 
@@ -377,9 +377,9 @@ removeDataSizeAttribute(); // 初回の実行
 
 function search_func() {
     let keyword = document.getElementById("searchBox").value;
-    window.open(`https://www.youtube.com/@LaylaMagnolia/search?query=${keyword}&view=desktop`, '_blank');
+    //window.open(`https://www.youtube.com/@LaylaMagnolia/search?query=${keyword}&view=desktop`, '_blank');
     
-    /*
+    
     if (SEACHING == true) {
         reset_func();
     }
@@ -416,7 +416,6 @@ function search_func() {
         divElement.textContent = "検索結果に一致するコンテンツがありません";
     }
     SEACHING = true;
-    */
 }
 
 function reset_func() {
@@ -535,7 +534,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
         
         const liveStreamingDetails = data.items[0].liveStreamingDetails;
         //console.log(title, liveStreamingDetails);
-        console.log(liveStreamingDetails);
+        //console.log(liveStreamingDetails);
         if (liveStreamingDetails.actualEndTime && liveStreamingDetails.actualStartTime) { //終了済みのメン限配信
             let startTime = new Date(liveStreamingDetails.actualStartTime);
             video_m_obj_list.push({videoid: videoId, time: startTime});
@@ -611,7 +610,7 @@ async function setUCVideo(video_u_obj_list) {
     const video_u_obj_list_sorted = video_u_obj_list.sort(
         (a, b) => moment(a.time).diff(b.time)
     );
-    console.log("UCV_sorted: ", video_u_obj_list_sorted);
+    //console.log("UCV_sorted: ", video_u_obj_list_sorted);
     for (let i = 0; i < Object.keys(video_u_obj_list_sorted).length; i++) {
         var ID = video_u_obj_list_sorted[i].videoid;
         var TN_URL = `https://img.youtube.com/vi/${ID}/maxresdefault.jpg`;
@@ -638,8 +637,11 @@ async function setUCVideo(video_u_obj_list) {
                 //nomal mode
                 $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
             }
-        } else {                                    //公開コンテンツ
-            if (checkLightMode()) {
+        } else {  
+            if (ID == "eCxjwD6L7JU") {
+                continue;
+            }                                  
+            if (checkLightMode()) { //公開コンテンツ 
             //developer mode
             //console.log("https://www.youtube.com/watch?v=" + ID);
             await $("#youtubeList_u_inner").append('<div class="iframe_wrapper"><a href=' + 'https://www.youtube.com/watch?v=' + ID + ' target="_blank" rel="noopener noreferrer"><img class="inner-logo" src="./src/logo/youtube_social_icon_red.png"><h2 class="sc-time" style="color:black">' +DATETIME_formated + '</h2><img class="thumb" src=' + TN_URL + '></a></div>'); /////
@@ -715,7 +717,7 @@ async function getStreamStatus() {
         const streamTitle = data.data[0].title;
         const streamUrl = `https://www.twitch.tv/${channelName}`;
         const thumbnailUrl = data.data[0].thumbnail_url.replace('{width}x{height}', '960x540');
-        console.log(streamTitle);
+        //console.log(streamTitle);
         $("#youtubeList_l_inner").append('<div class="iframe_wrapper_t"><a href=' + streamUrl + ' target="_blank" rel="noopener noreferrer"><img class="thumb" src=' + thumbnailUrl + '><img class="inner-logo" src="./src/logo/twitch-logo.png"><h2 class="sc-time-long" style="color:black">' + streamTitle + '</h2></a></div>'); /////
 
         /*
