@@ -239,10 +239,9 @@ a {
     flex-direction: column; /* 縦方向に並べる設定 */
     justify-content: center; /* 縦方向の中央寄せ */
     align-items: center; /* 横方向の中央寄せ */
+    color:#000
 }
 .contents-container
-
-
 .section-container {
     padding: 5px;
     font-family: "hachi-maru-pop", sans-serif;
@@ -288,6 +287,7 @@ a {
     font-size: 20px;
 }
 .description-gothic {
+    color:#000;
     font-family: sans-serif;
     padding-left: 30px;
     padding-right: 30px;
