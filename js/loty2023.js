@@ -178,7 +178,7 @@ function vote(clipId, term) {
     switch (term) {
         case 1: //第一回
             if (checkTerm(1)) { // 投票期間内
-                var tweetText = `私が選んだLOTY2023はこれだ！（予選の部） https://www.youtube.com/clip/${clipId}\n\n投票はこちらから: konlayla.com/loty2023\n#れいらおぶざいやー2023予選\n#レイラマグノリア`;
+                var tweetText = `私が選んだ #LOTY2023 はこれだ！（予選の部） https://www.youtube.com/clip/${clipId}\n\n投票はこちらから: konlayla.com/loty2023\n#れいらおぶざいやー2023予選\n#レイラマグノリア`;
                 var tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(tweetText);
                 window.open(tweetUrl, '_blank');
             } else {            // 投票期間外
@@ -187,7 +187,7 @@ function vote(clipId, term) {
             break;
         case 2: //第二回
             if (checkTerm(2)) { // 投票期間内
-                var tweetText = `私が選んだLOTY2023はこれだ！（決勝の部） https://www.youtube.com/clip/${clipId}\n\n投票はこちらから: konlayla.com/loty2023\n#れいらおぶざいやー2023決勝\n#レイラマグノリア`;
+                var tweetText = `私が選んだ #LOTY2023 はこれだ！（決勝の部） https://www.youtube.com/clip/${clipId}\n\n投票はこちらから: konlayla.com/loty2023\n#れいらおぶざいやー2023決勝\n#レイラマグノリア`;
                 var tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(tweetText);
                 window.open(tweetUrl, '_blank');
                 break;
