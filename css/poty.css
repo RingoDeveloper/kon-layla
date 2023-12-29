@@ -296,6 +296,20 @@ a {
     width: fit-content;
     font-size: 18px;
 }
+.link-text {
+  color: #06c;
+  font-family: sans-serif;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: auto;
+  margin-top: 15px;
+  width: fit-content;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.link-text:hover {
+  text-decoration: underline;
+}
 
 @media screen and (max-width: 480px) {
     .title-container {
