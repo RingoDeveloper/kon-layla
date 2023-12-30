@@ -12,7 +12,7 @@ function calculateRemainTime() {
 
 /* 投票期間中かどうか返す関数 */
 function checkTerm(termId) {
-    var now = new Date('2024-01-01T00:01:00+09:00');
+    var now = new Date();
     if (termId == 1) {
         return (now > startDateV1 && now < startDateV2); //第一回投票期間かどうか？
     } else if (termId == 2) {
