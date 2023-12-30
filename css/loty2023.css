@@ -353,6 +353,9 @@ a {
     margin-top: 0px;
     margin-bottom: 20px;
 }
+.highlight {
+    color: rgb(0, 115, 255);
+}
 /* descriptionコンテナ要素 レスポンシブ */
 @media (max-width: 480px) { /* スマートフォン（小） */
     .description-container {
