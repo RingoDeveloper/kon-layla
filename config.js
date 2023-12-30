@@ -7,5 +7,5 @@ const config = {
     t_client_id: "h]4c1+`+or2e,t`cg`pm-g,,_+uc-/",
     t_client_secret: ".frflmtc\\.fl\\^-__`a1.suk_mpi4u",
     dev_key : "mdibj_`q`gjk`m0./3",
-    version : "Ver. 0.7.0",
+    version : "Ver. 0.7.1",
 }
