@@ -5,6 +5,12 @@ const laylips_nominate= [
 ]
 const laylips = [
   {
+    "title": "マリオさんのゴッ…チンコ🍄",
+    "clipId": "UgkxJIydNPHOsgxbxf8AFH_O8btQv1cORDx9",
+    "iframe": '<iframe src="https://www.youtube.com/embed/GZSlGH1-3s8?autoplay=1&vq=hd720&si=s21vsnom5wt0NYb2&amp;clip=UgkxJIydNPHOsgxbxf8AFH_O8btQv1cORDx9&amp;clipt=EKWvQBiUoEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "GZSlGH1-3s8"
+  },
+  {
     "title": "カワウソ奮闘記",
     "clipId": "UgkxriK2mUxOVmLHXRFFpxz5TEobhXhV92mE",
     "iframe": '<iframe src="https://www.youtube.com/embed/WBQJ7bEKaBI?autoplay=1&vq=hd720&si=6Pp9-7eIsr1_Z6ph&amp;clip=UgkxriK2mUxOVmLHXRFFpxz5TEobhXhV92mE&amp;clipt=EKjO7QQYkbzwBA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
