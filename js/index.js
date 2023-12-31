@@ -500,6 +500,7 @@ async function push_mo_ul(video_u_obj_list) {
         });
         const items3 = response3.items;
         for (var i = 0; i < items3.length; i++) {
+            //console.log("Mo:" +  items3[i].snippet.resourceId.videoId);
             video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
         }
         
@@ -513,14 +514,27 @@ async function push_mo_ul(video_u_obj_list) {
 }
 
 async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []) {
+    // 各リスト内でvideoIdとmoの条件をチェック
+    const updateMoIfRequired = (objList) => {
+        for (let item of objList) {
+            if (item.videoid === videoId) {
+                if (item.mo === false && mo === true) {
+                    item.mo = true; // moをtrueに更新
+                }
+                return true; // 既存のオブジェクトが見つかった
+            }
+        }
+        return false; // 見つからなかった
+    };
+
+    // どのリストにも該当するオブジェクトがない場合のみ処理を続行
     if (
-        video_m_obj_list.some(item => item.videoid === videoId) || 
-        video_l_obj_list.some(item => item.videoid === videoId) || 
-        videoUObjList.some(item => item.videoid === videoId)
+        updateMoIfRequired(video_m_obj_list) ||
+        updateMoIfRequired(video_l_obj_list) ||
+        updateMoIfRequired(videoUObjList)
     ) {
-        //console.log("重複:" + videoId);
         return videoUObjList;
-    } 
+    }
     try {
         const data = await $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/videos',
@@ -628,7 +642,7 @@ async function setUCVideo(video_u_obj_list) {
         //$("#youtubeList_u_inner").append(''); /////
 
         //配信予定のアイテムを表示
-
+        //console.log(video_u_obj_list_sorted[i]);
         if (video_u_obj_list_sorted[i].mo == true) { //メン限コンテンツ
             if (checkLightMode()) {
             //developer mode
@@ -638,7 +652,8 @@ async function setUCVideo(video_u_obj_list) {
                 //nomal mode
                 $("#youtubeList_u_inner").append('<div class="iframe_wrapper_m"><h2 class="sc-time">' +DATETIME_formated + '</h2><iframe src="https://www.youtube.com/embed/' + ID + '" frameborder="1" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-modals" allowfullscreen></iframe></div>'); /////
             }
-        } else {  
+        } else { 
+            console.log(ID);
             if (ID == "eCxjwD6L7JU") {
                 continue;
             }                                  
