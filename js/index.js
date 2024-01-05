@@ -128,6 +128,10 @@ function show_sch() {
     window.open("https://twitter.com/search?q=%23%E3%83%AC%E3%82%A4%E3%83%A9%E3%81%A8%E5%A4%9C%E6%9B%B4%E3%81%8B%E3%81%97%20-filter%3Aretweets&src=typed_query&f=live");
 }
 
+function show_loty() {
+    window.open("https://konlayla.com/loty2023");
+}
+
 function goto_mo() {
     window.open("https://konlayla.com/membership");
 }
