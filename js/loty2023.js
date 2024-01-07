@@ -108,7 +108,7 @@ laylips_nominate.forEach(clipData => {
         container.id = `container_${clipData.clipId}`;
         if (checkTerm(2)) {
             container.innerHTML = `
-                <div class="thumbnail-container" id="thumbnail_${clipData.clipId}_n">
+                <div class="thumbnail-container" id="thumbnail_${clipData.clipId}_nominate">
                     <img class="thumb-img" src="https://i.ytimg.com/vi/${clipData.videoId}/sddefault.jpg" alt="YouTube Thumbnail">
                 </div>
                 
@@ -149,8 +149,18 @@ function showIframe(clipId, erea) {
 
     // 他のすべてのiframeを元のサムネイル画像に置き換える
     allThumbnails.forEach(thumbnail => {
-        if (!thumbnail.id.includes(`thumbnail_${clipId}`)) { // idにclipIdを含まないものはすべて元に戻す
-            const baseId = thumbnail.id.replace('_n', ''); // ノミネート用のサフィックスを取り除く
+        // 同一のclipIdを持つサムネイル（ノミネート版と通常版の両方）をサムネイルに戻す
+        if (thumbnail.id === `thumbnail_${clipId}_nominate` || thumbnail.id === `thumbnail_${clipId}`) {
+            const clipData = laylips.find(clip => clip.clipId === clipId);
+            if (clipData) {
+                thumbnail.innerHTML = `
+                    <img class="thumb-img" src="https://i.ytimg.com/vi/${clipData.videoId}/sddefault.jpg" alt="YouTube Thumbnail">
+                `;
+            }
+        }
+        // その他のサムネイルを元に戻す
+        else if (!thumbnail.id.includes(`thumbnail_${clipId}`)) {
+            const baseId = thumbnail.id.replace('_nominate', '');
             const clipData = laylips.find(clip => `thumbnail_${clip.clipId}` === baseId);
             if (clipData) {
                 thumbnail.innerHTML = `
@@ -164,7 +174,7 @@ function showIframe(clipId, erea) {
         window.open(`https://www.youtube.com/clip/${clipId}`, '_blank');
     } else {
         // 選択されたコンテナのサムネイルをiframeに置き換える
-        const selectedThumbnailId = erea === 'nominate' ? `thumbnail_${clipId}_n` : `thumbnail_${clipId}`;
+        const selectedThumbnailId = erea === 'nominate' ? `thumbnail_${clipId}_nominate` : `thumbnail_${clipId}`;
         const selectedThumbnail = document.getElementById(selectedThumbnailId);
         const selectedClipData = laylips.find(clip => clip.clipId === clipId);
         if (selectedClipData) {
