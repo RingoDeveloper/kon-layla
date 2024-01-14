@@ -544,6 +544,9 @@ a {
 #wrapper-nominate {
     visibility: hidden; /* 初期は非表示 */
 }
+#wrapper-loty {
+    visibility: hidden; /* 初期は非表示 */
+}
 
 /* コンテンツコンテナ */
 .contents-container {

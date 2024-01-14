@@ -16,14 +16,16 @@ function checkTerm(termId) {
     if (termId == 1) {
         return (now > startDateV1 && now < startDateV2); //第一回投票期間かどうか？
     } else if (termId == 2) {
-        return (now > startDateV2 && now < endDateV2);; //第二回投票期間かどうか？
+        return (now > startDateV2 && now < endDateV2); //第二回投票期間かどうか？
+    } else if (termId == 3) {
+        return (now > endDateV2);// 投票終了後
     }
 }
 
 /* ノミネート表示切り替え */
 function nominateItemsController() {
     var nominate_elm = document.getElementById("wrapper-nominate");
-    if (!checkTerm(2)) {
+    if ((!checkTerm(2)) && (!checkTerm(3))) {
         console.log("delete");
         nominate_elm.remove();
     } else {
@@ -39,6 +41,24 @@ function nominateItemsController() {
 }
 nominateItemsController();
 
+/* LOTY 表示切り替え */
+function lotyItemsController() {
+    var loty_elm = document.getElementById("wrapper-loty");
+    if (!checkTerm(3)) {
+        console.log("delete");
+        loty_elm.remove();
+    } else {
+        loty_elm.style.visibility = 'visible';
+        if (loty.length == 0) { //ノミネートクリップデータの中身が空
+            var newElement = document.createElement('p'); // 新しい<p>要素を作成
+            newElement.className = 'counting';           // クラスを追加
+            newElement.textContent = '集計中';            // テキスト内容を設定
+
+            document.querySelector("#clips-loty").appendChild(newElement); // 作成した要素を追加
+        }
+    }
+}
+lotyItemsController();
 
 /* ハンバーガーメニュー開閉ボタン */
 function toggleNav() {

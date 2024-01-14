@@ -1,5 +1,6 @@
 /* videoId付きリスト */
 //追加する時はautoplay=1&vq=hd720&
+const loty = []
 const laylips_nominate= [
   {
     "title": "下乳だったらバレないか。",
