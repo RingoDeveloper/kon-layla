@@ -22,6 +22,62 @@ function checkTerm(termId) {
     }
 }
 
+/* LOTY 表示切り替え */
+function lotyItemsController() {
+    var loty_elm = document.getElementById("wrapper-loty");
+    if (!checkTerm(3)) {
+        console.log("delete");
+        loty_elm.remove();
+    } else {
+        loty_elm.style.visibility = 'visible';
+        if (loty.length == 0) { //LOTYデータの中身が空
+            var newElement = document.createElement('p'); // 新しい<p>要素を作成
+            newElement.className = 'counting';           // クラスを追加
+            newElement.textContent = '集計中';            // テキスト内容を設定
+
+            document.querySelector("#clips-loty").appendChild(newElement); // 作成した要素を追加
+        } else {
+            // LOTYデータをループして表示
+            loty.forEach((clipData, index) => {
+                const container = document.createElement('div');
+                container.className = 'clip-container';
+
+                // 背景色と称号の設定
+                let backgroundColor, title;
+                if (index === 0) {
+                    container.classList.add('gold-award');
+                    title = 'Layla of the Year';
+                } else if (index === 1) {
+                    container.classList.add('silver-award');
+                    title = 'Layla Silver Star';
+                } else {
+                    container.classList.add('bronze-award');
+                    title = 'Layla Bronze Moment';
+                }
+
+                // コンテナのHTML
+                container.innerHTML = `
+                    <h2 class="award-title">${title}</h2>
+                    <div class="thumbnail-container" id="thumbnail_${clipData.clipId}_nominate">
+                        <img class="thumb-img" src="https://i.ytimg.com/vi/${clipData.videoId}/sddefault.jpg" alt="YouTube Thumbnail">
+                    </div>
+                    <h3 class="clip-title">${clipData.title}</h3>
+                    <p class="clip-description">${clipData.discription}</p>
+                    <div class="button-container">
+                        <div class="button-play clipbutton">
+                            <a onclick="showIframe('${clipData.clipId}', 'nominate')">再生</a>
+                        </div>
+                    </div>
+                `;
+
+                // コンテナを追加
+                document.querySelector('#clips-loty').appendChild(container);
+            });
+        }
+    }
+}
+lotyItemsController();
+
 /* ノミネート表示切り替え */
 function nominateItemsController() {
     var nominate_elm = document.getElementById("wrapper-nominate");
@@ -41,24 +97,7 @@ function nominateItemsController() {
 }
 nominateItemsController();
 
-/* LOTY 表示切り替え */
-function lotyItemsController() {
-    var loty_elm = document.getElementById("wrapper-loty");
-    if (!checkTerm(3)) {
-        console.log("delete");
-        loty_elm.remove();
-    } else {
-        loty_elm.style.visibility = 'visible';
-        if (loty.length == 0) { //ノミネートクリップデータの中身が空
-            var newElement = document.createElement('p'); // 新しい<p>要素を作成
-            newElement.className = 'counting';           // クラスを追加
-            newElement.textContent = '集計中';            // テキスト内容を設定
 
-            document.querySelector("#clips-loty").appendChild(newElement); // 作成した要素を追加
-        }
-    }
-}
-lotyItemsController();
 
 /* ハンバーガーメニュー開閉ボタン */
 function toggleNav() {
@@ -144,7 +183,7 @@ laylips_nominate.forEach(clipData => {
             `;
         } else {
             container.innerHTML = `
-                <div class="thumbnail-container" id="thumbnail_${clipData.clipId}">
+                <div class="thumbnail-container" id="thumbnail_${clipData.clipId}_nominate">
                     <img class="thumb-img" src="https://i.ytimg.com/vi/${clipData.videoId}/sddefault.jpg" alt="YouTube Thumbnail">
                 </div>
                 

@@ -1,6 +1,49 @@
 /* videoId付きリスト */
 //追加する時はautoplay=1&vq=hd720&
-const loty = []
+const loty = [
+  {
+    "title": "いつまでも新人ちゃん",
+    "clipId": "UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9",
+    "iframe": '<iframe src="https://www.youtube.com/embed/f0tnG_34WWQ?autoplay=1&vq=hd720&si=-yIYl-XzePTpuoMk&amp;clip=UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9&amp;clipt=EAAY4NQD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "f0tnG_34WWQ",
+    "discription": "2023年、LOTYはこの作品！やっぱりレイラはPONだった‼️"
+  },
+  {
+    "title": "尻たすかる",
+    "clipId": "UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_",
+    "iframe": '<iframe src="https://www.youtube.com/embed/etDgfyC0m10?autoplay=1&vq=hd720&si=u_O5dEyqlSobqiD4&amp;clip=UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_&amp;clipt=ENLBnAIY_NSeAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "etDgfyC0m10",
+    "discription": "コメント編集中"
+  },
+  {
+    "title": "レイラちゃん絶対殺すマン",
+    "clipId": "Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y",
+    "iframe": '<iframe src="https://www.youtube.com/embed/VJK-pNUtZog?autoplay=1&vq=hd720&si=-0aZFQKxClKuWo-P&amp;clip=Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y&amp;clipt=EMPh9AgYstr3CA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "VJK-pNUtZog",
+    "discription": "コメント編集中"
+  },
+  {
+    "title": "ねこねこねこねこ♡・・・あぁぁぁ！！",
+    "clipId": "UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4",
+    "iframe": '<iframe src="https://www.youtube.com/embed/6yik2H_8_F0?autoplay=1&vq=hd720&si=6XM8Hv3azh0MwJo-&amp;clip=UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4&amp;clipt=EK2v4AIYhp3iAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "6yik2H_8_F0",
+    "discription": "コメント編集中"
+  },
+  {
+    "title": "例のしこしこ事件",
+    "clipId": "UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X",
+    "iframe": '<iframe src="https://www.youtube.com/embed/RYRJ6sjkxxU?autoplay=1&vq=hd720&si=SB_YBiZJ5nY8DUkL&amp;clip=UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X&amp;clipt=EO2jrgMY4texAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "RYRJ6sjkxxU",
+    "discription": "コメント編集中"
+  },
+  {
+    "title": "バカめ〜！お前マジで大丈夫なの？ばかものめ〜！",
+    "clipId": "UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI",
+    "iframe": '<iframe src="https://www.youtube.com/embed/FeNeYVDEh5I?autoplay=1&vq=hd720&si=oOl98We3BiUW5o4h&amp;clip=UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI&amp;clipt=EJHA4AcY8JTkBw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    "videoId": "FeNeYVDEh5I",
+    "discription": "コメント編集中"
+  },
+]
 const laylips_nominate= [
   {
     "title": "下乳だったらバレないか。",
@@ -8,18 +51,18 @@ const laylips_nominate= [
     "iframe": '<iframe src="https://www.youtube.com/embed/hTv-I_wFyq0?autoplay=1&vq=hd720&si=5NeAPoznrR_FmwMa&amp;clip=UgkxzNNH8QWzdrxr1bn07lcViIJb-ARRLrJI&amp;clipt=ELr91QQY1bLYBA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     "videoId": "hTv-I_wFyq0"
   },
-  {
-    "title": "いつまでも新人ちゃん",
-    "clipId": "UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9",
-    "iframe": '<iframe src="https://www.youtube.com/embed/f0tnG_34WWQ?autoplay=1&vq=hd720&si=-yIYl-XzePTpuoMk&amp;clip=UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9&amp;clipt=EAAY4NQD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "f0tnG_34WWQ"
-  },
-  {
-    "title": "レイラちゃん絶対殺すマン",
-    "clipId": "Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y",
-    "iframe": '<iframe src="https://www.youtube.com/embed/VJK-pNUtZog?autoplay=1&vq=hd720&si=-0aZFQKxClKuWo-P&amp;clip=Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y&amp;clipt=EMPh9AgYstr3CA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "VJK-pNUtZog"
-  },
+  // {
+  //   "title": "いつまでも新人ちゃん",
+  //   "clipId": "UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/f0tnG_34WWQ?autoplay=1&vq=hd720&si=-yIYl-XzePTpuoMk&amp;clip=UgkxnMp1L42uA_8ILJNz_yOYAYj4wNzJ4dQ9&amp;clipt=EAAY4NQD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "f0tnG_34WWQ"
+  // },
+  // {
+  //   "title": "レイラちゃん絶対殺すマン",
+  //   "clipId": "Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/VJK-pNUtZog?autoplay=1&vq=hd720&si=-0aZFQKxClKuWo-P&amp;clip=Ugkx0-052Sg2oj3tCm8-iYSx1sPVpOdq4g3y&amp;clipt=EMPh9AgYstr3CA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "VJK-pNUtZog"
+  // },
   {
     "title": "白味噌",
     "clipId": "UgkxvRW4WMLW9gRcqJ5gF9WwRweeeGe2om3l",
@@ -44,48 +87,48 @@ const laylips_nominate= [
     "iframe": '<iframe src="https://www.youtube.com/embed/-fSf8uyRBMk?autoplay=1&vq=hd720&si=Q9066zUGwpTM6eZ6&amp;clip=UgkxSPbvLQQ47PXx1oOOpXdi055m-kS8g6dE&amp;clipt=EKDlpgMY_7mqAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     "videoId": "-fSf8uyRBMk"
   },
-  {
-    "title": "ねこねこねこねこ♡・・・あぁぁぁ！！",
-    "clipId": "UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4",
-    "iframe": '<iframe src="https://www.youtube.com/embed/6yik2H_8_F0?autoplay=1&vq=hd720&si=6XM8Hv3azh0MwJo-&amp;clip=UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4&amp;clipt=EK2v4AIYhp3iAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "6yik2H_8_F0"
-  },
+  // {
+  //   "title": "ねこねこねこねこ♡・・・あぁぁぁ！！",
+  //   "clipId": "UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/6yik2H_8_F0?autoplay=1&vq=hd720&si=6XM8Hv3azh0MwJo-&amp;clip=UgkxI_nNBNzcPdadt3kiWm7QUz50Xdd7NrJ4&amp;clipt=EK2v4AIYhp3iAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "6yik2H_8_F0"
+  // },
   {
     "title": "デカい音にびっくり",
     "clipId": "UgkxGszKJOYA2Ez7-sxhCjK85pXSHn2UhlOK",
     "iframe": '<iframe src="https://www.youtube.com/embed/a6AS9IVmLrU?autoplay=1&vq=hd720&si=8x0y7ChBNfAJRdwF&amp;clip=UgkxGszKJOYA2Ez7-sxhCjK85pXSHn2UhlOK&amp;clipt=EIGpyAMYl6DKAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     "videoId": "a6AS9IVmLrU"
   },
-  {
-    "title": "例のしこしこ事件",
-    "clipId": "UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X",
-    "iframe": '<iframe src="https://www.youtube.com/embed/RYRJ6sjkxxU?autoplay=1&vq=hd720&si=SB_YBiZJ5nY8DUkL&amp;clip=UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X&amp;clipt=EO2jrgMY4texAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "RYRJ6sjkxxU"
-  },
+  // {
+  //   "title": "例のしこしこ事件",
+  //   "clipId": "UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/RYRJ6sjkxxU?autoplay=1&vq=hd720&si=SB_YBiZJ5nY8DUkL&amp;clip=UgkxX1z7Y5-2WUvGsVCihqdEBlwv2fvXZQ5X&amp;clipt=EO2jrgMY4texAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "RYRJ6sjkxxU"
+  // },
   {
     "title": "時々妖怪化するレイラちゃん",
     "clipId": "UgkxSfI_xIt0qlnth15IlPF0j8tgaTyaXO35",
     "iframe": '<iframe src="https://www.youtube.com/embed/aKc5gCu6GPg?autoplay=1&vq=hd720&si=np0qVYxi88BiQqb4&amp;clip=UgkxSfI_xIt0qlnth15IlPF0j8tgaTyaXO35&amp;clipt=EMn0vwMYqMnDAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     "videoId": "aKc5gCu6GPg"
   },
-  {
-    "title": "尻たすかる",
-    "clipId": "UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_",
-    "iframe": '<iframe src="https://www.youtube.com/embed/etDgfyC0m10?autoplay=1&vq=hd720&si=u_O5dEyqlSobqiD4&amp;clip=UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_&amp;clipt=ENLBnAIY_NSeAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "etDgfyC0m10"
-  },
+  // {
+  //   "title": "尻たすかる",
+  //   "clipId": "UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/etDgfyC0m10?autoplay=1&vq=hd720&si=u_O5dEyqlSobqiD4&amp;clip=UgkxgswlxwA1ag8JQt3gvyvrNQfFZTZh-9k_&amp;clipt=ENLBnAIY_NSeAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "etDgfyC0m10"
+  // },
   {
     "title": "カワウソ奮闘記",
     "clipId": "UgkxriK2mUxOVmLHXRFFpxz5TEobhXhV92mE",
     "iframe": '<iframe src="https://www.youtube.com/embed/WBQJ7bEKaBI?autoplay=1&vq=hd720&si=6Pp9-7eIsr1_Z6ph&amp;clip=UgkxriK2mUxOVmLHXRFFpxz5TEobhXhV92mE&amp;clipt=EKjO7QQYkbzwBA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     "videoId": "WBQJ7bEKaBI"
   },
-  {
-    "title": "バカめ〜！お前マジで大丈夫なの？ばかものめ〜！",
-    "clipId": "UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI",
-    "iframe": '<iframe src="https://www.youtube.com/embed/FeNeYVDEh5I?autoplay=1&vq=hd720&si=oOl98We3BiUW5o4h&amp;clip=UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI&amp;clipt=EJHA4AcY8JTkBw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    "videoId": "FeNeYVDEh5I"
-  },
+  // {
+  //   "title": "バカめ〜！お前マジで大丈夫なの？ばかものめ〜！",
+  //   "clipId": "UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI",
+  //   "iframe": '<iframe src="https://www.youtube.com/embed/FeNeYVDEh5I?autoplay=1&vq=hd720&si=oOl98We3BiUW5o4h&amp;clip=UgkxOFZjvkooKZRPXMgljM7kFFh8bqq1Z6qI&amp;clipt=EJHA4AcY8JTkBw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+  //   "videoId": "FeNeYVDEh5I"
+  // },
   {
     "title": "ぶっ〇してやる助かる",
     "clipId": "Ugkxmj7Dweg27GyNQ0m5fakr3D7YkumDVJq6",
