@@ -456,6 +456,10 @@ async function setMOVideo() {
 }
 
 push_mo_ul();
+
+function joinMember() {
+    window.open("https://www.youtube.com/@LaylaMagnolia/join");
+}
 /*
 const CHANNEL_ID = "UCm-nZofnh3_1s_l2Gq3G1KQ";
 

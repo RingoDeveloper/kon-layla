@@ -504,7 +504,6 @@ async function push_mo_ul(video_u_obj_list) {
         });
         const items3 = response3.items;
         for (var i = 0; i < items3.length; i++) {
-            //console.log("Mo:" +  items3[i].snippet.resourceId.videoId);
             video_u_obj_list = await checkVideoStatus(items3[i].snippet.resourceId.videoId, true, items3[i].snippet.title, video_u_obj_list);
         }
         
@@ -552,7 +551,7 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
         });
         
         const liveStreamingDetails = data.items[0].liveStreamingDetails;
-        //console.log(title, liveStreamingDetails);
+        console.log(title, liveStreamingDetails);
         //console.log(liveStreamingDetails);
         if (liveStreamingDetails.actualEndTime && liveStreamingDetails.actualStartTime) { //終了済みのメン限配信
             let startTime = new Date(liveStreamingDetails.actualStartTime);
@@ -563,6 +562,8 @@ async function checkVideoStatus(videoId, mo, title = "ERROR", videoUObjList = []
             video_l_obj_list.push({videoid: videoId, time: startTime, title: title, mo: mo});
         } else { //配信予定のメン限
             let startTime = new Date(liveStreamingDetails.scheduledStartTime);
+            console.log(liveStreamingDetails);
+            console.log(videoUObjList);
             videoUObjList.push({videoid: videoId, time: startTime, mo: mo});
         }
         return videoUObjList;
