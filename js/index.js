@@ -659,7 +659,7 @@ async function setUCVideo(video_u_obj_list) {
             }
         } else { 
             console.log(ID);
-            if (ID == "eCxjwD6L7JU") {
+            if (ID == "2mGQjbXK5ro") {
                 continue;
             }                                  
             if (checkLightMode()) { //公開コンテンツ 
