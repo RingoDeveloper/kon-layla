@@ -180,3 +180,6 @@ Ver. 0.7.6
 
 Ver. 0.7.7
 ・スケジュールURL変更対応
+
+Ver. 0.7.8
+・Creatia対応、Fanbox削除
