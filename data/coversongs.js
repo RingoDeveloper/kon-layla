@@ -13,5 +13,10 @@ const FiguAtMate = {
     "videoid" : "jVPTUy0uS4I"
 };
 
-const songs_list_export = [Cinderella, ILove, FiguAtMate];
+const FantasticFuture = {
+    "title" : "Fantastic future/レイラ・マグノリア(cover)",
+    "videoid" : "ewnE98q3tIA"
+};
+
+const songs_list_export = [Cinderella, ILove, FiguAtMate, FantasticFuture];
 

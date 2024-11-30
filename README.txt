@@ -183,3 +183,6 @@ Ver. 0.7.7
 
 Ver. 0.7.8
 ・Creatia対応、Fanbox削除
+
+Ver. 0.7.9
+・歌みた追加
